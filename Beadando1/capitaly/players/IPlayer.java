@@ -1,9 +1,5 @@
 package capitaly.players;
 
-import Integer;
-import void;
-import Boolean;
-
 public interface IPlayer {
 
   public void step();
@@ -15,5 +11,5 @@ public interface IPlayer {
   public void removeMoney(Integer amount);
 
   public Boolean isInGame();
-
+  
 }

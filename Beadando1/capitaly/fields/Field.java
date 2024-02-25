@@ -1,7 +1,4 @@
 package capitaly.fields;
-
-import Integer;
-import void;
 import capitaly.players.IPlayer;
 
 public abstract class Field implements IField {
@@ -9,25 +6,35 @@ public abstract class Field implements IField {
   private IField next;
 
   protected Integer value;
-
+  
   private Integer id;
 
-  private static Integer createdFields;
+  private static Integer createdFields = 0;
 
   protected Field(Integer value) {
+    createdFields++;
+    id = createdFields;
+    this.next = null;
+    this.value = value;
   }
 
-  public Integer getId() {
-  return null;
+  @Override
+  public Integer getId()
+  {
+    return id;
   }
 
+  @Override
   public IField getNext() {
-  return null;
+    return next;
   }
 
+  @Override
   public void setNext(IField next) {
+    this.next = next;
   }
 
+  @Override
   public abstract void onSteppedByPlayer(IPlayer player);
 
 }

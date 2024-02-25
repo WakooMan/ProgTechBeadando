@@ -1,7 +1,4 @@
 package capitaly.fields;
-
-import Integer;
-import void;
 import capitaly.players.IPlayer;
 
 public interface IField {

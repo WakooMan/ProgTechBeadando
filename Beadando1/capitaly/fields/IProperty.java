@@ -1,8 +1,4 @@
 package capitaly.fields;
-
-import Integer;
-import void;
-import Boolean;
 import capitaly.players.IPlayer;
 
 public interface IProperty {

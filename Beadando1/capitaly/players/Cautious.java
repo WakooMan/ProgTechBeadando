@@ -1,16 +1,27 @@
 package capitaly.players;
 
-import void;
-import capitaly.Player;
-import String;
 import capitaly.fields.IField;
+import capitaly.fields.Property;
 
 public class Cautious extends Player {
 
   public Cautious(String name, IField currentField) {
+    super(name, currentField);
   }
 
-  protected void strategy() {
+  @Override
+  public void strategy() {
+    if(currentField instanceof Property property)
+    {
+      if(!property.hasOwner() && property.getPropertyValue() <= money/2)
+      {
+        buy(property);
+      }
+      else if(properties.contains(property) && property.getHouseValue() <= money/2)
+      {
+        upgrade(property);
+      }
+    }
   }
 
 }
