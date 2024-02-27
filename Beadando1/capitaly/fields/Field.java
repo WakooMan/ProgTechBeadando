@@ -1,4 +1,6 @@
 package capitaly.fields;
+import capitaly.exceptions.NegativeAmountException;
+import capitaly.exceptions.PlayerNotInGameException;
 import capitaly.players.IPlayer;
 
 public abstract class Field implements IField {
@@ -35,6 +37,6 @@ public abstract class Field implements IField {
   }
 
   @Override
-  public abstract void onSteppedByPlayer(IPlayer player);
+  public abstract void onSteppedByPlayer(IPlayer player) throws PlayerNotInGameException, NegativeAmountException;
 
 }

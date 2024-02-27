@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+import capitaly.exceptions.NotEnoughTestRandomNumberException;
+import capitaly.exceptions.PlayerNotInGameException;
+import capitaly.exceptions.WrongTableException;
 import capitaly.fields.*;
 import capitaly.generators.*;
 import capitaly.players.*;
@@ -36,32 +39,58 @@ public class Game {
   }
 
   public void start(String file) {
+    try{
     readFromFile(file);
     isGameOver = false;
     gameLoop();
+    }
+    catch(FileNotFoundException ex)
+    {
+      System.out.println("Input file: " + file + " is not found!");
+    }
+    catch(IOException ex)
+    {
+      System.out.println("Error occured, when reading file: " + file);
+    }
+    catch(WrongTableException ex)
+    {
+      System.out.println(ex.getMessage());
+    }
   }
 
   public IRandomGenerator getRandomGenerator() {
     return randomGenerator;
   }
 
-  private void readFromFile(String file) {
+  private void readFromFile(String file) throws FileNotFoundException, IOException, WrongTableException {
     try (FileReader fr = new FileReader(file);
          BufferedReader br = new BufferedReader(fr))
     {
       readTable(br);
+      if(!checkIfTableContains(Property.class) || !checkIfTableContains(Service.class) || !checkIfTableContains(Luck.class))
+      {
+        throw new WrongTableException("The table should contain at least one Property, one Service and one Luck field.");
+      }
       readPlayers(br);
       List<Integer> randomNumbers = readGeneratedNumbers(br);
       randomGenerator = (randomNumbers.size() > 0) ? new FileRandomGenerator(randomNumbers): new RandomGenerator(); 
     }
-    catch(FileNotFoundException ex)
-    {
+  }
 
-    }
-    catch(IOException ex)
-    {
+  private Boolean checkIfTableContains(Class<? extends Field> fieldType) {
+    IField currField = startField;
 
+    do
+    {
+      if(fieldType.isInstance(currField))
+      {
+        return true;
+      }
+      currField = currField.getNext();
     }
+    while(currField != startField);
+
+    return false;
   }
 
   private void readTable(BufferedReader br) throws IOException
@@ -87,7 +116,7 @@ public class Game {
           field = new Service(serviceValue);
           break;
         default:
-          throw new IllegalArgumentException("");
+          throw new IllegalArgumentException("Input file is wrong! Field amount number is bigger, than the actual field count!");
       }
       if(previousField == null)
       {
@@ -123,7 +152,7 @@ public class Game {
           players.add(new Tactician(name, startField));
           break;
         default:
-          throw new IllegalArgumentException("");
+          throw new IllegalArgumentException("Input file is wrong! Player amount number is bigger, than the actual player count!");
       }
     }
   }
@@ -149,7 +178,19 @@ public class Game {
       for (IPlayer player : players) {
         if(player.isInGame())
         {
-          player.step();
+          try{
+            player.step();
+          }
+          catch(NotEnoughTestRandomNumberException ex)
+          {
+            System.out.println(ex.getMessage());
+            isGameOver = true;
+            break;
+          }
+          catch(PlayerNotInGameException ex)
+          {
+            System.out.println(ex.getMessage());
+          }
           if(!player.isInGame() && players.stream().filter(pl -> pl.isInGame()).count() < 2)
           {
             isGameOver = true;

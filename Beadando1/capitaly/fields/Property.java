@@ -1,4 +1,9 @@
 package capitaly.fields;
+import capitaly.exceptions.NegativeAmountException;
+import capitaly.exceptions.PlayerNotInGameException;
+import capitaly.exceptions.PropertyAlreadyHasOwnerException;
+import capitaly.exceptions.PropertyIsNotOwnedByPlayerException;
+import capitaly.exceptions.PropertyIsNotOwnedException;
 import capitaly.players.IPlayer;
 
 public class Property extends Field implements IProperty {
@@ -12,7 +17,7 @@ public class Property extends Field implements IProperty {
   }
 
   @Override
-  public void onSteppedByPlayer(IPlayer player) {
+  public void onSteppedByPlayer(IPlayer player) throws PlayerNotInGameException, NegativeAmountException {
     if(owner == null || owner == player)
     {
       return;
@@ -27,10 +32,10 @@ public class Property extends Field implements IProperty {
   }
 
   @Override
-  public void onBoughtByPlayer(IPlayer player) {
+  public void onBoughtByPlayer(IPlayer player) throws PropertyAlreadyHasOwnerException, PlayerNotInGameException, NegativeAmountException {
     if(owner != null)
     {
-      throw new IllegalStateException("The player cannot buy the property, because the property is already bought.");
+      throw new PropertyAlreadyHasOwnerException("The player cannot buy the property, because the property is already bought.");
     }
     player.removeMoney(getPropertyValue());
     owner = player;
@@ -38,14 +43,14 @@ public class Property extends Field implements IProperty {
   }
 
   @Override
-  public void onUpgradedByPlayer(IPlayer player) {
+  public void onUpgradedByPlayer(IPlayer player) throws PropertyIsNotOwnedException, PropertyIsNotOwnedByPlayerException, PlayerNotInGameException, NegativeAmountException {
     if(owner == null)
     {
-      throw new IllegalStateException("The player cannot upgrade the property, because the property is not bought yet.");
+      throw new PropertyIsNotOwnedException("The player cannot upgrade the property, because the property is not bought yet.");
     }
     if(owner != player)
     {
-      throw new IllegalStateException("The player cannot upgrade the property, because the player is not the owner.");
+      throw new PropertyIsNotOwnedByPlayerException("The player cannot upgrade the property, because the player is not the owner.");
     }
     player.removeMoney(getHouseValue());
     value = 2000;

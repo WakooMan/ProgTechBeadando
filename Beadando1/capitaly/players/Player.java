@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import capitaly.Game;
+import capitaly.exceptions.NegativeAmountException;
+import capitaly.exceptions.NotEnoughMoneyException;
+import capitaly.exceptions.NotEnoughTestRandomNumberException;
+import capitaly.exceptions.PlayerNotInGameException;
+import capitaly.exceptions.PropertyAlreadyHasOwnerException;
+import capitaly.exceptions.PropertyIsNotOwnedByPlayerException;
 
 public abstract class Player implements IPlayer {
 
@@ -34,53 +40,59 @@ public abstract class Player implements IPlayer {
   }
 
   @Override
-  public void step() {
+  public void step() throws PlayerNotInGameException, NotEnoughTestRandomNumberException {
     if(!isInGame())
     {
-      throw new IllegalStateException("The player is not in the game!");
+      throw new PlayerNotInGameException("The player is not in the game!");
     }
     Integer value = throwDice();
     for(int i=0; i < value; i++)
     {
       currentField = currentField.getNext();
     }
-    currentField.onSteppedByPlayer(this);
-    strategy();
+    try{
+      currentField.onSteppedByPlayer(this);
+      strategy();
+    }
+    catch(Exception ex)
+    {
+      System.out.println("At" + getName() + "Player's step: " + ex.getMessage());      
+    }
   }
 
   @Override
-  public void payTo(IPlayer player, Integer amount) {
+  public void payTo(IPlayer player, Integer amount) throws PlayerNotInGameException, NegativeAmountException{
     if(!isInGame())
     {
-      throw new IllegalStateException("The player is not in the game!");
+      throw new PlayerNotInGameException("The player is not in the game!");
     }
     removeMoney(amount);
     player.addMoney(amount);
   }
 
   @Override
-  public void addMoney(Integer amount) {
+  public void addMoney(Integer amount) throws PlayerNotInGameException, NegativeAmountException {
     if(!isInGame())
     {
-      throw new IllegalStateException("The player is not in the game!");
+      throw new PlayerNotInGameException("The player is not in the game!");
     }
     if(amount <= 0)
     {
-      throw new IllegalArgumentException("Cannot add a negative amount of money.");
+      throw new NegativeAmountException("Cannot add a negative amount of money.");
     }
 
     money += amount;
   }
 
   @Override
-  public void removeMoney(Integer amount) {
+  public void removeMoney(Integer amount) throws PlayerNotInGameException, NegativeAmountException {
     if(!isInGame())
     {
-      throw new IllegalStateException("The player is not in the game!");
+      throw new PlayerNotInGameException("The player is not in the game!");
     }
     if(amount <= 0)
     {
-      throw new IllegalArgumentException("Cannot remove a negative amount of money.");
+      throw new NegativeAmountException("Cannot remove a negative amount of money.");
     }
 
     money -= amount;
@@ -121,34 +133,47 @@ public abstract class Player implements IPlayer {
     return sb.toString();
   }
 
-  protected void buy(IProperty property) {
+  protected void buy(IProperty property) throws PropertyAlreadyHasOwnerException, NotEnoughMoneyException {
     if(property.hasOwner())
     {
-      throw new IllegalStateException("Cannot buy the property, because it already has an owner.");
+      throw new PropertyAlreadyHasOwnerException("Cannot buy the property, because it already has an owner.");
     }
     if(money < property.getPropertyValue())
     {
-      throw new IllegalStateException("Cannot buy the property, because the player does not have money for it.");
+      throw new NotEnoughMoneyException("Cannot buy the property, because the player does not have money for it.");
     }
-    property.onBoughtByPlayer(this);
-    properties.add(property);
+
+    try{
+      property.onBoughtByPlayer(this);
+      properties.add(property);
+    }
+    catch(Exception ex)
+    {
+      System.out.println(ex.getMessage());
+    }
   }
 
-  protected void upgrade(IProperty property) {
+  protected void upgrade(IProperty property) throws PropertyIsNotOwnedByPlayerException, NotEnoughMoneyException {
     if(!properties.contains(property))
     {
-      throw new IllegalStateException("Cannot upgrade the property, because it is not the player's property.");
+      throw new PropertyIsNotOwnedByPlayerException("Cannot upgrade the property, because it is not the player's property.");
     }
     if(money < property.getHouseValue())
     {
-      throw new IllegalStateException("Cannot upgrade the property, because the player does not have money for it.");
+      throw new NotEnoughMoneyException("Cannot upgrade the property, because the player does not have money for it.");
     }
-    property.onUpgradedByPlayer(this);
+    try{
+      property.onUpgradedByPlayer(this);
+    }
+    catch(Exception ex)
+    {
+      System.out.println(ex.getMessage());
+    }
   }
   
-  protected abstract void strategy();
+  protected abstract void strategy() throws PropertyAlreadyHasOwnerException, NotEnoughMoneyException, PropertyIsNotOwnedByPlayerException;
 
-  private Integer throwDice() {
+  private Integer throwDice() throws NotEnoughTestRandomNumberException {
     Integer value = Game.getInstance().getRandomGenerator().generate();
     System.out.println(getName() + "thrown: " + value);
     return value;
