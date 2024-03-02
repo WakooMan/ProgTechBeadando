@@ -1,9 +1,11 @@
-8
+10
 Property
 Luck 500
+Service 5000
 Property
 Property
 Luck 1500
+Service 5000
 Property
 Luck 500
 Property

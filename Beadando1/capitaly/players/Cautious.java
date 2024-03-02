@@ -4,7 +4,7 @@ import capitaly.exceptions.NotEnoughMoneyException;
 import capitaly.exceptions.PropertyAlreadyHasOwnerException;
 import capitaly.exceptions.PropertyIsNotOwnedByPlayerException;
 import capitaly.fields.IField;
-import capitaly.fields.Property;
+import capitaly.fields.IProperty;
 
 public class Cautious extends Player {
 
@@ -14,7 +14,7 @@ public class Cautious extends Player {
 
   @Override
   public void strategy() throws PropertyAlreadyHasOwnerException, NotEnoughMoneyException, PropertyIsNotOwnedByPlayerException {
-    if(currentField instanceof Property property)
+    if(currentField instanceof IProperty property)
     {
       if(!property.hasOwner() && property.getPropertyValue() <= money/2)
       {
