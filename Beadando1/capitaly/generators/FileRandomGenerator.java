@@ -9,7 +9,7 @@ public class FileRandomGenerator implements IRandomGenerator {
   private Queue<Integer> numbers;
 
   public FileRandomGenerator(Collection<Integer> numbers) {
-    this.numbers = new PriorityQueue<Integer>(numbers);
+    this.numbers = new LinkedList<Integer>(numbers);
   }
 
   @Override

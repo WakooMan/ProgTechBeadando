@@ -19,7 +19,7 @@ public class Tactician extends Player {
   public void strategy() throws PropertyAlreadyHasOwnerException, NotEnoughMoneyException, PropertyIsNotOwnedByPlayerException {
     if(currentField instanceof IProperty property)
     {
-      if(!property.hasOwner() && property.getPropertyValue() <= money)
+      if(!property.hasOwner() && property.getPropertyValue() < money)
       {
         if(buyingChance % 2 == 0)
         {
@@ -27,7 +27,7 @@ public class Tactician extends Player {
         }
         buyingChance++;
       }
-      else if(properties.contains(property) && property.getHouseValue() <= money)
+      else if(properties.contains(property) && property.getHouseValue() < money && property.canUpgrade())
       {
         if(buyingChance % 2 == 0)
         {

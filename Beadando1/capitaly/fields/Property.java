@@ -32,6 +32,11 @@ public class Property extends Field implements IProperty {
   }
 
   @Override
+  public Boolean canUpgrade() {
+    return hasOwner() && 4000 > value;
+  }
+
+  @Override
   public void onBoughtByPlayer(IPlayer player) throws PropertyAlreadyHasOwnerException, PlayerNotInGameException, NegativeAmountException {
     if(owner != null)
     {
@@ -39,7 +44,7 @@ public class Property extends Field implements IProperty {
     }
     player.removeMoney(getPropertyValue());
     owner = player;
-    value = 500;
+    value = 1000;
   }
 
   @Override
@@ -53,18 +58,18 @@ public class Property extends Field implements IProperty {
       throw new PropertyIsNotOwnedByPlayerException("The player cannot upgrade the property, because the player is not the owner.");
     }
     player.removeMoney(getHouseValue());
-    value = 2000;
+    value = 4000;
 
   }
 
   @Override
   public Integer getPropertyValue() {
-    return 1000;
+    return 500;
   }
 
   @Override
   public Integer getHouseValue() {
-    return 4000;
+    return 2000;
   }
 
   @Override
@@ -77,7 +82,7 @@ public class Property extends Field implements IProperty {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("\tId: " + getId() + System.lineSeparator());
-    sb.append("\tHasHouse: " + (value == getHouseValue()) + System.lineSeparator());
+    sb.append("\tHasHouse: " + (value == 4000) + System.lineSeparator());
     sb.append("\tValue: " + value + System.lineSeparator());
     return sb.toString();
   }

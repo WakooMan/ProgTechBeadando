@@ -1,0 +1,13 @@
+3
+Service 12000
+Property
+Luck 1000
+2
+Moho Greedy
+Ovatos Cautious
+1
+2
+3
+3
+3
+1

@@ -14,6 +14,8 @@ public interface IProperty {
 
   public Boolean hasOwner();
 
+  public Boolean canUpgrade();
+
   public Integer getPropertyValue();
 
   public Integer getHouseValue();

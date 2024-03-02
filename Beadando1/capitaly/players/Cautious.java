@@ -20,7 +20,7 @@ public class Cautious extends Player {
       {
         buy(property);
       }
-      else if(properties.contains(property) && property.getHouseValue() <= money/2)
+      else if(properties.contains(property) && property.getHouseValue() <= money/2 && property.canUpgrade())
       {
         upgrade(property);
       }

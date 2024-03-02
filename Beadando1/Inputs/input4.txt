@@ -1,0 +1,12 @@
+3
+Property
+Service 10000
+Luck 1000
+4
+Ovatos Cautious
+Moho Greedy
+Taktikus Tactician
+Nyertes Tactician
+1
+1
+1

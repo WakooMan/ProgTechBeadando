@@ -1,0 +1,7 @@
+3
+Service 12000
+Service 1000
+Luck 1000
+2
+Moho Greedy
+Ovatos Cautious

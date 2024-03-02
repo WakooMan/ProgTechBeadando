@@ -1,0 +1,12 @@
+3
+Service 10000
+Property
+Luck 1000
+2
+Taktikus Tactician
+Ovatos Cautious
+1
+2
+3
+1
+2

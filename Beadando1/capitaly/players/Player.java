@@ -138,7 +138,7 @@ public abstract class Player implements IPlayer {
     {
       throw new PropertyAlreadyHasOwnerException("Cannot buy the property, because it already has an owner.");
     }
-    if(money < property.getPropertyValue())
+    if(money <= property.getPropertyValue())
     {
       throw new NotEnoughMoneyException("Cannot buy the property, because the player does not have money for it.");
     }
@@ -158,7 +158,7 @@ public abstract class Player implements IPlayer {
     {
       throw new PropertyIsNotOwnedByPlayerException("Cannot upgrade the property, because it is not the player's property.");
     }
-    if(money < property.getHouseValue())
+    if(money <= property.getHouseValue())
     {
       throw new NotEnoughMoneyException("Cannot upgrade the property, because the player does not have money for it.");
     }

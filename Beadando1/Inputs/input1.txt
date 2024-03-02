@@ -1,0 +1,22 @@
+5
+Property
+Property
+Property
+Service 4499
+Luck 1000
+2
+Moho Greedy
+Ovatos Cautious
+1
+1
+1
+1
+1
+2
+3
+5
+1
+5
+3
+5
+3
