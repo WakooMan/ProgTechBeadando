@@ -1,0 +1,58 @@
+1. round's end state:
+-------------------------------
+Name: Moho
+IsInGame: true
+Money: 9500
+CurrentField: 2
+Properties:
+        Id: 2
+        HasHouse: false
+        Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 11000
+CurrentField: 3
+Properties:
+-------------------------------
+2. round's end state:
+-------------------------------
+Name: Moho
+IsInGame: true
+Money: 7500
+CurrentField: 2
+Properties:
+        Id: 2
+        HasHouse: true
+        Value: 4000
+
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 12000
+CurrentField: 3
+Properties:
+-------------------------------
+3. round's end state:
+-------------------------------
+Name: Moho
+IsInGame: true
+Money: 7500
+CurrentField: 2
+Properties:
+        Id: 2
+        HasHouse: true
+        Value: 4000
+
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: false
+Money: 0
+CurrentField: null
+Properties:
+-------------------------------
+Game is over!

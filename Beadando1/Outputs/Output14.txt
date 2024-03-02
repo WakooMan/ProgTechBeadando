@@ -1,0 +1,1 @@
+The table should contain at least one Property, one Service and one Luck field.

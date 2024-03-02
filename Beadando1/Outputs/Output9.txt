@@ -1,0 +1,1 @@
+A Luck field's value should not be a negative number!

@@ -1,0 +1,123 @@
+1. round's end state:
+-------------------------------
+Name: Taktikus
+IsInGame: true
+Money: 9500
+CurrentField: 2
+Properties:
+        Id: 2
+        HasHouse: false
+        Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 11000
+CurrentField: 5
+Properties:
+-------------------------------
+2. round's end state:
+-------------------------------
+Name: Taktikus
+IsInGame: true
+Money: 9500
+CurrentField: 3
+Properties:
+        Id: 2
+        HasHouse: false
+        Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 12000
+CurrentField: 5
+Properties:
+-------------------------------
+3. round's end state:
+-------------------------------
+Name: Taktikus
+IsInGame: true
+Money: 9000
+CurrentField: 1
+Properties:
+        Id: 2
+        HasHouse: false
+        Value: 1000
+
+        Id: 1
+        HasHouse: false
+        Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 13000
+CurrentField: 5
+Properties:
+-------------------------------
+4. round's end state:
+-------------------------------
+Name: Taktikus
+IsInGame: true
+Money: 9000
+CurrentField: 2
+Properties:
+        Id: 2
+        HasHouse: false
+        Value: 1000
+
+        Id: 1
+        HasHouse: false
+        Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 14000
+CurrentField: 5
+Properties:
+-------------------------------
+5. round's end state:
+-------------------------------
+Name: Taktikus
+IsInGame: true
+Money: 7000
+CurrentField: 1
+Properties:
+        Id: 2
+        HasHouse: false
+        Value: 1000
+
+        Id: 1
+        HasHouse: true
+        Value: 4000
+
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 15000
+CurrentField: 5
+Properties:
+-------------------------------
+6. round's end state:
+-------------------------------
+Name: Taktikus
+IsInGame: false
+Money: -3000
+CurrentField: null
+Properties:
+-------------------------------
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 15000
+CurrentField: 5
+Properties:
+-------------------------------
+Game is over!

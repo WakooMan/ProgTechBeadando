@@ -175,7 +175,6 @@ public abstract class Player implements IPlayer {
 
   private Integer throwDice() throws NotEnoughTestRandomNumberException {
     Integer value = Game.getInstance().getRandomGenerator().generate();
-    System.out.println(getName() + "thrown: " + value);
     return value;
   }
 

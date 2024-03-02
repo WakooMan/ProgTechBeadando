@@ -93,7 +93,7 @@ public class Game {
     return false;
   }
 
-  private void readTable(BufferedReader br) throws IOException
+  private void readTable(BufferedReader br) throws IOException, WrongTableException
   {
     String line = br.readLine();
     int tableLength = Integer.parseInt(line);
@@ -109,10 +109,18 @@ public class Game {
           break;
           case "Luck":
           Integer luckValue = Integer.parseInt(splittedLine[1]);
+          if(luckValue < 0)
+          {
+            throw new WrongTableException("A Luck field's value should not be a negative number!");
+          }
           field = new Luck(luckValue);
           break;
           case "Service":
           Integer serviceValue = Integer.parseInt(splittedLine[1]);
+          if(serviceValue < 0)
+          {
+            throw new WrongTableException("A Service field's value should not be a negative number!");
+          }
           field = new Service(serviceValue);
           break;
         default:
@@ -185,7 +193,7 @@ public class Game {
           {
             System.out.println(ex.getMessage());
             isGameOver = true;
-            break;
+            return;
           }
           catch(PlayerNotInGameException ex)
           {

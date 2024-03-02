@@ -1,0 +1,59 @@
+1. round's end state:
+-------------------------------
+Name: Ovatos
+IsInGame: true
+Money: 11000
+CurrentField: 3
+Properties:
+-------------------------------
+-------------------------------
+Name: Moho
+IsInGame: true
+Money: 11000
+CurrentField: 3
+Properties:
+-------------------------------
+-------------------------------
+Name: Taktikus
+IsInGame: true
+Money: 11000
+CurrentField: 3
+Properties:
+-------------------------------
+-------------------------------
+Name: Nyertes
+IsInGame: true
+Money: 11000
+CurrentField: 3
+Properties:
+-------------------------------
+2. round's end state:
+-------------------------------
+Name: Ovatos
+IsInGame: false
+Money: 0
+CurrentField: null
+Properties:
+-------------------------------
+-------------------------------
+Name: Moho
+IsInGame: false
+Money: 0
+CurrentField: null
+Properties:
+-------------------------------
+-------------------------------
+Name: Taktikus
+IsInGame: false
+Money: 0
+CurrentField: null
+Properties:
+-------------------------------
+-------------------------------
+Name: Nyertes
+IsInGame: true
+Money: 11000
+CurrentField: 3
+Properties:
+-------------------------------
+Game is over!
