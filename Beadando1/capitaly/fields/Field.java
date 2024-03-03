@@ -3,6 +3,9 @@ import capitaly.exceptions.NegativeAmountException;
 import capitaly.exceptions.PlayerNotInGameException;
 import capitaly.players.IPlayer;
 
+/**
+ * An abstract Field class, which implements the IField interface.
+ */
 public abstract class Field implements IField {
 
   private IField next;
@@ -13,6 +16,11 @@ public abstract class Field implements IField {
 
   private static Integer createdFields = 0;
 
+  /**
+   * Protected constructor to create a field object.
+   * Only used in derived classes.
+   * @param value the initial value for the field.
+   */
   protected Field(Integer value) {
     createdFields++;
     id = createdFields;

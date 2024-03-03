@@ -14,6 +14,9 @@ import capitaly.exceptions.PlayerNotInGameException;
 import capitaly.exceptions.PropertyAlreadyHasOwnerException;
 import capitaly.exceptions.PropertyIsNotOwnedByPlayerException;
 
+/**
+ * Abstract class, which represents a player. Implements IPlayer interface.
+ */
 public abstract class Player implements IPlayer {
 
   protected Integer money;
@@ -24,6 +27,11 @@ public abstract class Player implements IPlayer {
 
   private String name;
 
+  /**
+   * Protected constructor, which can be used in derived class. Instantiates the money, name and currentField attribute of the player.
+   * @param name name of the player.
+   * @param currentField field, where the player is instantiated.
+   */
   protected Player(String name, IField currentField) {
     this.name = name;
     money = 10000;
@@ -31,10 +39,18 @@ public abstract class Player implements IPlayer {
     this.currentField = currentField;
   }
 
+  /**
+   * Gets the name of the player.
+   * @return name of the player.
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the money of the player.
+   * @return money of the player.
+   */
   public Integer getMoney() {
     return money;
   }
@@ -133,6 +149,12 @@ public abstract class Player implements IPlayer {
     return sb.toString();
   }
 
+  /**
+   * Buys the given property. Used in derives class.
+   * @param property property to buy.
+   * @throws PropertyAlreadyHasOwnerException thrown, if property already has an owner.
+   * @throws NotEnoughMoneyException thrown, if player does not have enough money to buy the property.
+   */
   protected void buy(IProperty property) throws PropertyAlreadyHasOwnerException, NotEnoughMoneyException {
     if(property.hasOwner())
     {
@@ -153,6 +175,12 @@ public abstract class Player implements IPlayer {
     }
   }
 
+  /**
+   * Upgrades the given property. Used in derived class.
+   * @param property property to upgrade.
+   * @throws PropertyIsNotOwnedByPlayerException thrown if property is not owned by the player.
+   * @throws NotEnoughMoneyException thrown if player does not have enough money to upgrade the property.
+   */
   protected void upgrade(IProperty property) throws PropertyIsNotOwnedByPlayerException, NotEnoughMoneyException {
     if(!properties.contains(property))
     {
@@ -171,8 +199,20 @@ public abstract class Player implements IPlayer {
     }
   }
   
+  /**
+   * Strategy for the player, which is implemented in derived class.
+   * It is called in step method.
+   * @throws PropertyAlreadyHasOwnerException thrown, if property already has an owner, but player attempts to buy it.
+   * @throws NotEnoughMoneyException thrown if player does not have enough money to upgrade or buy the property, but attempts the action.
+   * @throws PropertyIsNotOwnedByPlayerException thrown if property is not owned by the player, but the player attempts to upgrade it.
+   */
   protected abstract void strategy() throws PropertyAlreadyHasOwnerException, NotEnoughMoneyException, PropertyIsNotOwnedByPlayerException;
 
+  /**
+   * Player throws with the dice and returns it back.
+   * @return the thrown value.
+   * @throws NotEnoughTestRandomNumberException thrown, if not enough random test number is available.
+   */
   private Integer throwDice() throws NotEnoughTestRandomNumberException {
     Integer value = Game.getInstance().getRandomGenerator().generate();
     return value;

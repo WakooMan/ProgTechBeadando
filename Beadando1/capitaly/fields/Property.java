@@ -6,10 +6,17 @@ import capitaly.exceptions.PropertyIsNotOwnedByPlayerException;
 import capitaly.exceptions.PropertyIsNotOwnedException;
 import capitaly.players.IPlayer;
 
+/**
+ * Property class, which is a Field. When a player steps on it, the player will pay to the owner player of this field.
+ * This field can be bought by a player.
+ */
 public class Property extends Field implements IProperty {
 
   private IPlayer owner;
 
+  /**
+   * Public constructor for Property object instantiation.
+   */
   public Property() {
     super(0);
     owner = null;

@@ -13,6 +13,11 @@ import capitaly.fields.*;
 import capitaly.generators.*;
 import capitaly.players.*;
 
+/**
+ * Represents the capitaly game.
+ * This class is responsible for reading the table with fields 
+ * and initialize the game, then control the game until it ends.
+ */
 public class Game {
 
   private static Game instance;
@@ -25,11 +30,18 @@ public class Game {
 
   private IRandomGenerator randomGenerator;
 
+  /**
+   * Private constructor in order to enforce Singleton pattern.
+   */
   private Game() {
     players = new ArrayList<IPlayer>();
     isGameOver = true;
   }
 
+  /**
+   * Returns an instance of the game.
+   * @return Game instance.
+   */
   public static Game getInstance() {
     if(instance == null)
     {
@@ -38,6 +50,10 @@ public class Game {
     return instance;
   }
 
+  /**
+   * Initializes the Game by reading an input file, then starts a game loop until the game ends.
+   * @param file input file
+   */
   public void start(String file) {
     try{
     readFromFile(file);
@@ -58,10 +74,21 @@ public class Game {
     }
   }
 
+  /**
+   * Gets the random generator created during initialization.
+   * @return IRandomGenerator object.
+   */
   public IRandomGenerator getRandomGenerator() {
     return randomGenerator;
   }
 
+  /**
+   * reads the input file and initiates the table and the players based on it.
+   * @param file input file.
+   * @throws FileNotFoundException thrown, if file is not found.
+   * @throws IOException thrown, if error happens during reading the file.
+   * @throws WrongTableException thrown, if built table is wrong.
+   */
   private void readFromFile(String file) throws FileNotFoundException, IOException, WrongTableException {
     try (FileReader fr = new FileReader(file);
          BufferedReader br = new BufferedReader(fr))
@@ -93,6 +120,12 @@ public class Game {
     return false;
   }
 
+  /**
+   * Reads the fields from the input file.
+   * @param br buffered reader.
+   * @throws IOException thrown, if error happens during reading the file.
+   * @throws WrongTableException thrown, if built table is wrong.
+   */
   private void readTable(BufferedReader br) throws IOException, WrongTableException
   {
     String line = br.readLine();
@@ -140,6 +173,11 @@ public class Game {
     previousField.setNext(startField);
   }
 
+  /**
+   * Reads the players from the input file.
+   * @param br buffered reader.
+   * @throws IOException thrown, if error happens during reading the file.
+   */
   private void readPlayers(BufferedReader br) throws IOException
   {
     String line = br.readLine();
@@ -165,6 +203,12 @@ public class Game {
     }
   }
 
+  /**
+   * Reads the random test numbers from the input file if there is any, else returns an empty list.
+   * @param br buffered reader.
+   * @return random test numbers in a list.
+   * @throws IOException thrown, if error happens during reading the file.
+   */
   private List<Integer> readGeneratedNumbers(BufferedReader br) throws IOException
   {
     List<Integer> randomNumbers = new ArrayList<Integer>();
@@ -179,6 +223,9 @@ public class Game {
     return randomNumbers;
   }
 
+  /**
+   * Runs the game loop until the game ends and writes out the state of the players after each round.
+   */
   private void gameLoop() {
     int round = 1;
     while(!isGameOver)

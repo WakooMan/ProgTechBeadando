@@ -6,8 +6,17 @@ import capitaly.exceptions.PropertyIsNotOwnedByPlayerException;
 import capitaly.fields.IField;
 import capitaly.fields.IProperty;
 
+/**
+ * Represents the Greedy player in the game.
+ * The greedy player buys or upgrades the property, whenever it is possible.
+ */
 public class Greedy extends Player {
 
+  /**
+   * Instantiates a Greedy player object.
+   * @param name name of the player.
+   * @param currentField starting field.
+   */
   public Greedy(String name, IField currentField) {
     super(name, currentField);
   }
