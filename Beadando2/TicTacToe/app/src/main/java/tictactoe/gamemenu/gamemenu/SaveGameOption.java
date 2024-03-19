@@ -2,7 +2,7 @@ package tictactoe.gamemenu.gamemenu;
 import tictactoe.gamemenu.IMenuOption;
 import tictactoe.gamecontrol.Match;
 import tictactoe.gamecontrol.ISaveHandler;
-import tictactoe.gamecontrol.ObjectComponentUtils;
+import tictactoe.ObjectComponentUtils;
 
 public class SaveGameOption implements IMenuOption {
 
@@ -18,6 +18,11 @@ public class SaveGameOption implements IMenuOption {
   @Override
   public void doOption() {
       saveHandler.save(match);
+  }
+  
+  @Override
+  public String getTitle(){
+      return "Save Game";
   }
 
 }

@@ -3,8 +3,9 @@ package tictactoe.applicationstates;
 import tictactoe.gamecontrol.Match;
 import tictactoe.gamemenu.IMenu;
 import tictactoe.gamemenu.gamemenu.GameMenu;
+import tictactoe.views.View;
 
-public class InGameMenu implements IApplicationState {
+public class InGameMenu extends ApplicationState {
 
   private final IMenu gameMenu;
 
@@ -13,8 +14,8 @@ public class InGameMenu implements IApplicationState {
   }
 
   @Override
-  public void doAction() {
-      
+  public View getView() {
+    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
   }
 
 }

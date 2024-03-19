@@ -1,7 +1,13 @@
 package tictactoe.applicationstates;
 
-public interface IApplicationState {
+import tictactoe.views.View;
 
-  public void doAction();
+public interface IApplicationState {
+    
+  public View getView();
+    
+  public void onStateInitialize();
+          
+  public void onStateDestroy();
 
 }

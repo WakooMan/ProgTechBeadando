@@ -10,4 +10,9 @@ public class ResumeGameOption implements IMenuOption {
   public void doOption() {
   }
 
+  @Override
+  public String getTitle(){
+      return "Resume Game";
+  }
+  
 }

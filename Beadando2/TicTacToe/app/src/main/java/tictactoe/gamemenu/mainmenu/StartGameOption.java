@@ -1,19 +1,20 @@
 package tictactoe.gamemenu.mainmenu;
+import tictactoe.applicationstates.ApplicationStateManager;
+import tictactoe.applicationstates.InInitializeGameMenu;
 import tictactoe.gamemenu.IMenuOption;
-import tictactoe.gamecontrol.IMatchFactory;
-import tictactoe.gamecontrol.ObjectComponentUtils;
 
 public class StartGameOption implements IMenuOption {
-
-   private final IMatchFactory matchFactory;
     
   public StartGameOption() {
-    this.matchFactory = ObjectComponentUtils.getDefaultMatchFactory();
   }
 
   @Override
   public void doOption() {
-      //Set next state to TicTacToe with created match.
+     ApplicationStateManager.getInstance().changeState(new InInitializeGameMenu());
   }
-
+  
+  @Override
+  public String getTitle(){
+      return "Start Game";
+  }
 }

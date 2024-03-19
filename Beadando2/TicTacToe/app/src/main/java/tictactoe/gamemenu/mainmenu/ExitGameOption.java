@@ -10,5 +10,10 @@ public class ExitGameOption implements IMenuOption {
   public void doOption() {
       System.exit(0);
   }
+  
+  @Override
+  public String getTitle(){
+      return "Exit Game";
+  }
 
 }

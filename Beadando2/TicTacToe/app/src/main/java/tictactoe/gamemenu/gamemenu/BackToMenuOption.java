@@ -9,5 +9,10 @@ public class BackToMenuOption implements IMenuOption {
   @Override
   public void doOption() {
   }
+  
+  @Override
+  public String getTitle(){
+      return "Back To Menu";
+  }
 
 }
