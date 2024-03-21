@@ -48,5 +48,10 @@ public class Match {
   public Table getTable() {
     return table;
   }
+  
+  public List<Player> getPlayers()
+  {
+      return players;
+  }
 
 }

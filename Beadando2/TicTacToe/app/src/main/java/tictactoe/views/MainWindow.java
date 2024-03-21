@@ -22,6 +22,7 @@ public class MainWindow extends JFrame {
        setLayout(cl);
        this.add(ObjectComponentUtils.getMainMenuView(), ObjectComponentUtils.getMainMenuView().getViewName());
        this.add(ObjectComponentUtils.getInitializeGameMenuView(), ObjectComponentUtils.getInitializeGameMenuView().getViewName());
+       this.add(ObjectComponentUtils.getTicTacToeGameView(), ObjectComponentUtils.getTicTacToeGameView().getViewName());
        
    }
    

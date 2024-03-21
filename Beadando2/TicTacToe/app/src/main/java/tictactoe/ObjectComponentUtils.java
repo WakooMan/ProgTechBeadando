@@ -7,6 +7,7 @@ import tictactoe.gamecontrol.SaveHandler;
 import tictactoe.views.View;
 import tictactoe.views.initializegameview.InitializeGameView;
 import tictactoe.views.mainmenu.MainMenuView;
+import tictactoe.views.tictactoeview.TicTacToeGameView;
 
 public class ObjectComponentUtils {
     
@@ -17,6 +18,8 @@ public class ObjectComponentUtils {
   private static View mainMenuView;
   
   private static View initializeGameMenuView;
+  
+  private static View ticTacToeGameView;
 
   public static IMatchFactory getDefaultMatchFactory() {
     if(matchFactory == null)
@@ -48,6 +51,14 @@ public class ObjectComponentUtils {
        initializeGameMenuView = new InitializeGameView();
     }
     return initializeGameMenuView;
+   }
+   
+   public static View getTicTacToeGameView() {
+   if(ticTacToeGameView == null)
+    {
+       ticTacToeGameView = new TicTacToeGameView();
+    }
+    return ticTacToeGameView;
    }
 
 }
