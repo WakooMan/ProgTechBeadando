@@ -7,7 +7,6 @@ import tictactoe.gamecontrol.Player;
 import tictactoe.gamemenu.IMenuOption;
 import tictactoe.gamemenu.TicTacToeMenuOption;
 import tictactoe.table.Field;
-import tictactoe.table.Table;
 import tictactoe.views.View;
 
 public class TicTacToe extends ApplicationState {
@@ -18,15 +17,6 @@ public class TicTacToe extends ApplicationState {
   public TicTacToe(Match match) {
       this.gameMenuOption = new TicTacToeMenuOption(match);
       this.match = match;
-  }
-  
-   @Override
-  public void onStateInitialize() {
-      super.onStateInitialize();
-      //while(!match.isGameOver())
-      //{
-        //  match.stepWithCurrentPlayer();
-      //}
   }
 
     public IMenuOption getGameMenuOption()
@@ -57,5 +47,15 @@ public class TicTacToe extends ApplicationState {
     public int getM()
     {
         return this.match.getTable().getM();
+    }
+    
+    public Player getCurrentPlayer()
+    {
+        return this.match.getCurrentPlayer();
+    }
+    
+    public void throwWithCurrentPlayerAt(int column)
+    {
+        this.match.stepWithCurrentPlayer(column);
     }
 }

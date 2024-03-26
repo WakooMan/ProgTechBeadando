@@ -5,7 +5,7 @@ import java.util.*;
 import tictactoe.table.Signal;
 
 public class Match {
-
+  
   private final String name;
     
   private final Table table;
@@ -36,9 +36,16 @@ public class Match {
       tableObserver = new TableObserver(table);
   }
 
-  public void stepWithCurrentPlayer() {
-      players.get(currentPlayer).doCommand().execute(table);
+  public void stepWithCurrentPlayer(int column) {
+      players.get(currentPlayer).doCommand(column).execute(table);
+      players.get(currentPlayer).afterPlayerStepped();
       currentPlayer = (currentPlayer == 0) ? 1 : 0;
+      players.get(currentPlayer).onPlayerTurn();
+      
+      if(isGameOver())
+      {
+          // should be changed to GameOver state.
+      }
   }
 
   public Boolean isGameOver() {
@@ -52,6 +59,16 @@ public class Match {
   public List<Player> getPlayers()
   {
       return players;
+  }
+  
+  public Player getCurrentPlayer()
+  {
+      return players.get(currentPlayer);
+  }
+  
+  public String getName()
+  {
+      return this.name;
   }
 
 }
