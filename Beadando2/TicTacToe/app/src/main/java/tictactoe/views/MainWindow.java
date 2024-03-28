@@ -2,7 +2,6 @@ package tictactoe.views;
 
 import java.awt.CardLayout;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import tictactoe.ObjectComponentUtils;
 import tictactoe.applicationstates.ApplicationStateManager;
 
@@ -10,7 +9,7 @@ import tictactoe.applicationstates.ApplicationStateManager;
 public class MainWindow extends JFrame {
    
    private static MainWindow instance;
-   private CardLayout cl;
+   private final CardLayout cl;
    
    private MainWindow()
    {

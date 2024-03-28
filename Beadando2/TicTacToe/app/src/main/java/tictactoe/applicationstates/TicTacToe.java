@@ -6,23 +6,31 @@ import tictactoe.gamecontrol.Match;
 import tictactoe.gamecontrol.MatchListener;
 import tictactoe.gamecontrol.Player;
 import tictactoe.gamemenu.IMenuOption;
-import tictactoe.gamemenu.TicTacToeMenuOption;
+import tictactoe.gamemenu.tictactoemenu.TicTacToeMenuOption;
+import tictactoe.gamemenu.tictactoemenu.TicTacToeNewGameOption;
 import tictactoe.table.Field;
 import tictactoe.views.View;
 
 public class TicTacToe extends ApplicationState {
 
   private final Match match;
-  private final IMenuOption gameMenuOption;
+  private final IMenuOption menuOption;
+  private final IMenuOption newGameOption;
 
   public TicTacToe(Match match) {
-      this.gameMenuOption = new TicTacToeMenuOption(match);
+      this.menuOption = new TicTacToeMenuOption();
+      this.newGameOption = new TicTacToeNewGameOption();
       this.match = match;
   }
 
-    public IMenuOption getGameMenuOption()
+    public IMenuOption getMenuOption()
     {
-        return gameMenuOption;
+        return menuOption;
+    }
+    
+    public IMenuOption getNewGameOption()
+    {
+        return newGameOption;
     }
   
     @Override

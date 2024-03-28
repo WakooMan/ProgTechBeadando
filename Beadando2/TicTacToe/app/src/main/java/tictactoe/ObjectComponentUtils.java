@@ -1,9 +1,7 @@
 package tictactoe;
 
 import tictactoe.gamecontrol.IMatchFactory;
-import tictactoe.gamecontrol.ISaveHandler;
 import tictactoe.gamecontrol.MatchFactory;
-import tictactoe.gamecontrol.SaveHandler;
 import tictactoe.views.View;
 import tictactoe.views.initializegameview.InitializeGameView;
 import tictactoe.views.mainmenu.MainMenuView;
@@ -12,8 +10,6 @@ import tictactoe.views.tictactoeview.TicTacToeGameView;
 public class ObjectComponentUtils {
     
   private static IMatchFactory matchFactory;
-
-  private static ISaveHandler saveHandler;
   
   private static View mainMenuView;
   
@@ -27,14 +23,6 @@ public class ObjectComponentUtils {
        matchFactory = new MatchFactory();
     }
     return matchFactory;
-  }
-
-  public static ISaveHandler getDefaultSaveHandler() {
-    if(saveHandler == null)
-    {
-       saveHandler = new SaveHandler("saves");
-    }
-    return saveHandler;
   }
   
    public static View getMainMenuView() {

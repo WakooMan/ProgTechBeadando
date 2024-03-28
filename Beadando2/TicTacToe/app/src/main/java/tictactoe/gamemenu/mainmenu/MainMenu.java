@@ -11,7 +11,6 @@ public class MainMenu implements IMenu {
   public MainMenu() {
       this.mainMenuOptions = new ArrayList<>();
       this.mainMenuOptions.add(new StartGameOption());
-      this.mainMenuOptions.add(new LoadGameOption());
       this.mainMenuOptions.add(new ExitGameOption());
   }
 

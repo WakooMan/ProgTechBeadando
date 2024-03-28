@@ -2,33 +2,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package tictactoe.gamemenu;
+package tictactoe.gamemenu.tictactoemenu;
 
 import tictactoe.applicationstates.ApplicationStateManager;
-import tictactoe.applicationstates.InGameMenu;
-import tictactoe.gamecontrol.Match;
+import tictactoe.applicationstates.InMainMenu;
+import tictactoe.gamemenu.IMenuOption;
 
 /**
  *
  * @author vitya
  */
 public class TicTacToeMenuOption implements IMenuOption {
-
-    private final Match match;
     
-    public TicTacToeMenuOption(Match match)
-    {
-        this.match = match;
-    }
+    public TicTacToeMenuOption()
+    {}
     
     @Override
     public void doOption() {
-        ApplicationStateManager.getInstance().changeState(new InGameMenu(match));
+        ApplicationStateManager.getInstance().changeState(new InMainMenu());
     }
 
     @Override
     public String getTitle() {
-        return "GameMenu";
+        return "Menu";
     }
     
 }

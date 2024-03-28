@@ -42,7 +42,8 @@ public class TicTacToeGameView extends View<TicTacToe>{
         c.fill = GridBagConstraints.BOTH;
         add(bottomPanel, c);
         
-        topPanel.add(new MainMenuButton(state.getGameMenuOption()));
+        topPanel.add(new MainMenuButton(state.getMenuOption()));
+        topPanel.add(new MainMenuButton(state.getNewGameOption()));
         for(Player player : state.getPlayers())
         {
             topPanel.add(new PlayerPanel(player, state.getCurrentPlayer() == player));
