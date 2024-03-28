@@ -105,7 +105,7 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
         
         topPanel.add(new JLabel("Match Name"));
         topPanel.add(matchNametf);
-        topPanel.add(new JLabel("Table size"));
+        topPanel.add(new JLabel("Column Number X Row Number"));
         topPanel.add(sizePanel);
         topPanel.add(new JLabel("Player 1"));
         topPanel.add(player1tf);

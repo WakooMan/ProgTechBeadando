@@ -3,6 +3,7 @@ package tictactoe.applicationstates;
 import java.util.List;
 import tictactoe.ObjectComponentUtils;
 import tictactoe.gamecontrol.Match;
+import tictactoe.gamecontrol.MatchListener;
 import tictactoe.gamecontrol.Player;
 import tictactoe.gamemenu.IMenuOption;
 import tictactoe.gamemenu.TicTacToeMenuOption;
@@ -39,14 +40,14 @@ public class TicTacToe extends ApplicationState {
         return this.match.getPlayers();
     }
     
-    public int getN()
+    public int getColumnNum()
     {
-        return this.match.getTable().getN();
+        return this.match.getTable().getColumnNum();
     }
     
-    public int getM()
+    public int getRowNum()
     {
-        return this.match.getTable().getM();
+        return this.match.getTable().getRowNum();
     }
     
     public Player getCurrentPlayer()
@@ -58,4 +59,16 @@ public class TicTacToe extends ApplicationState {
     {
         this.match.stepWithCurrentPlayer(column);
     }
+    
+    public void clearMatch()
+    {
+        this.match.clear();
+    }
+    
+    public void addMatchListener(MatchListener listener)
+    {
+        this.match.addMatchListener(listener);
+    }
+    
+    
 }

@@ -4,17 +4,17 @@ import java.util.*;
 
 public class Table extends AbstractList<Column> {
 
-  private final int n;
-  private final int m;
+  private final int columnNum;
+  private final int rowNum;
   private final List<Column> columns;
   
-  public Table(int n, int m) {
-      this.n = n;
-      this.m = m;
+  public Table(int columnNum, int rowNum) {
+      this.columnNum = columnNum;
+      this.rowNum = rowNum;
       columns = new ArrayList<>();
-      for(int i = 0; i < n; i++)
+      for(int i = 0; i < columnNum; i++)
       {
-        columns.add(new Column(m));
+        columns.add(new Column(rowNum));
       }
   }
 
@@ -23,16 +23,26 @@ public class Table extends AbstractList<Column> {
   return columns.get(index);
   }
   
-  public Field get(int i, int j) {
-  return columns.get(i).get(j);
+  public Field get(int column, int row) {
+  return columns.get(column).get(row);
   }
   
-  public int getN() {
-    return n;
+  public int getColumnNum() {
+    return columnNum;
   }
   
-  public int getM() {
-      return m;
+  public int getRowNum() {
+      return rowNum;
+  }
+  
+  public void clearTable() {
+      for(int column = 0; column < columnNum; column++)
+      {
+        for(int row = 0; row < rowNum; row++)
+        {
+            get(column,row).setSignal(Signal.Empty);
+        }
+      }
   }
 
   @Override
