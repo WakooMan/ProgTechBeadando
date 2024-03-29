@@ -2,17 +2,15 @@ package tictactoe.views.tictactoeview;
 
 import java.awt.Color;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import tictactoe.gamecontrol.Player;
 import tictactoe.gamecontrol.PlayerListener;
 
-public class PlayerPanel extends JPanel {
-    private final JButton button;
+public class PlayerPanel extends JButton {
            
    public PlayerPanel(Player player, boolean isCurrent)
    {
-       button = new JButton(player.getSignal() + " - " + player.getName());
-       button.setEnabled(false);
+       super(player.getSignal() + " - " + player.getName());
+       setEnabled(false);
        if(isCurrent)
        {
            onPlayerTurnAction();
@@ -21,7 +19,6 @@ public class PlayerPanel extends JPanel {
        {
            afterPlayerSteppedAction();
        }
-       add(button);
        player.addPlayerListener(new PlayerListener() {
         @Override
         public void onPlayerTurn()
@@ -39,12 +36,12 @@ public class PlayerPanel extends JPanel {
    
    private void onPlayerTurnAction()
    {
-       button.setBackground(Color.green);
+       setBackground(Color.green);
    }
    
    private void afterPlayerSteppedAction()
    {
-       button.setBackground(Color.white);
+       setBackground(Color.white);
    }
     
     

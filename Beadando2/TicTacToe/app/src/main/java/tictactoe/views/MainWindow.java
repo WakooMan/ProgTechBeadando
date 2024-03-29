@@ -1,6 +1,7 @@
 package tictactoe.views;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import javax.swing.JFrame;
 import tictactoe.ObjectComponentUtils;
 import tictactoe.applicationstates.ApplicationStateManager;
@@ -14,9 +15,11 @@ public class MainWindow extends JFrame {
    private MainWindow()
    {
        setTitle("TicTacToe");
-       setSize(500,500);
+       setSize(1280,1024);
        setLocationRelativeTo(null);
        setVisible(true);
+       setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+       setResizable(false);
        cl = new CardLayout();
        setLayout(cl);
        this.add(ObjectComponentUtils.getMainMenuView(), ObjectComponentUtils.getMainMenuView().getViewName());

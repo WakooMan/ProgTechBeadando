@@ -29,7 +29,7 @@ public class FieldButton extends JButton {
         setEnabled(false);
         setBackground(Color.white);
         setBorder(new LineBorder(Color.black));
-        setFont(new Font("Arial", Font.PLAIN, 30));
+        setFont(new Font("Arial", Font.PLAIN, 80));
         field.addListener((signal) -> setText(signalMap.get(signal)));
     }
     

@@ -10,4 +10,6 @@ package tictactoe.gamecontrol;
  */
 public interface MatchListener {
     void onGameOver(Player player);
+    void onColumnFilled(int column);
+    void onColumnCleared(int column);
 }

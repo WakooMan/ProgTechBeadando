@@ -8,6 +8,8 @@ public interface ITableObserver {
   
   public boolean isTableFull();
   
+  public boolean isColumnFull(int column);
+  
   public MatchResult getMatchResult();
 
 }

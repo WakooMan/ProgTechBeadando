@@ -1,5 +1,6 @@
-package tictactoe.views.mainmenu;
+package tictactoe.views;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,19 +9,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import tictactoe.gamemenu.IMenuOption;
 
-public class MainMenuButton extends JPanel implements ActionListener {
-    private final JButton button;
+public class MenuButton extends JButton implements ActionListener {
     private final IMenuOption menuOption;
     
-    public MainMenuButton(IMenuOption menuOption)
+    public MenuButton(IMenuOption menuOption)
     {
-        super(new FlowLayout(FlowLayout.CENTER));
+        super(menuOption.getTitle());
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.menuOption = menuOption;
-        button = new JButton(menuOption.getTitle());
-        button.addActionListener(this);
-        button.setSize(100, 100);
-        add(button);
-        setSize(100,100);
+        this.addActionListener(this);
         setBorder(new EmptyBorder(50,0,50,0));
     }
 

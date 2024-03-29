@@ -46,6 +46,16 @@ public class Match {
   public void stepWithCurrentPlayer(int column) {
       players.get(currentPlayer).doCommand(column).execute(table);
       players.get(currentPlayer).afterPlayerStepped();
+      for(int i=0; i < table.getColumnNum(); i++)
+      {
+          if(this.tableObserver.isColumnFull(i))
+          {
+              for(MatchListener listener : listeners)
+              {
+                  listener.onColumnFilled(i);
+              }
+          }
+      }
       currentPlayer = (currentPlayer == Signal.O) ? Signal.X : Signal.O;
       players.get(currentPlayer).onPlayerTurn();
       if(isGameOver())
@@ -92,13 +102,21 @@ public class Match {
   
   public void clear()
   {
-      table.clearTable();
-      if(currentPlayer == Signal.X)
-      {
-          players.get(currentPlayer).afterPlayerStepped();
-          currentPlayer = Signal.O;
-          players.get(currentPlayer).onPlayerTurn();
-      }
+    table.clearTable();
+    for(int i=0; i < table.getColumnNum(); i++)
+    {
+        for(MatchListener listener : listeners)
+        {
+          listener.onColumnCleared(i);
+        }
+    }
+    
+    if(currentPlayer == Signal.X)
+    {
+        players.get(currentPlayer).afterPlayerStepped();
+        currentPlayer = Signal.O;
+        players.get(currentPlayer).onPlayerTurn();
+    }
   }
 
 }

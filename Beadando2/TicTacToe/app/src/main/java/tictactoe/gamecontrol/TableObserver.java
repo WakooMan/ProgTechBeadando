@@ -65,6 +65,19 @@ public class TableObserver implements ITableObserver {
         matchResult = MatchResult.Draw;
         return true;
     }
+    
+    @Override
+    public boolean isColumnFull(int column) {
+        for(int j = 0; j < table.getRowNum(); j++)
+        {
+            Field field = table.get(column, j);
+            if(field.getSignal() == Signal.Empty)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public MatchResult getMatchResult() {

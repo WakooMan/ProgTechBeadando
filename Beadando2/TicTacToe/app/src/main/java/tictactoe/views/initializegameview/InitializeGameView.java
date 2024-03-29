@@ -1,6 +1,11 @@
 package tictactoe.views.initializegameview;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,23 +16,37 @@ import tictactoe.exceptions.FieldNumberOutOfRangeException;
 import tictactoe.exceptions.StringIsNotValidException;
 import tictactoe.gamemenu.IMenuOption;
 import tictactoe.views.View;
-import tictactoe.views.mainmenu.MainMenuButton;
+import tictactoe.views.MenuButton;
 
 public class InitializeGameView extends View<InInitializeGameMenu> {
     
     private final JPanel topPanel;
     private final JPanel bottomPanel;
+    private final Font textBoxFont;
+    private final Font labelFont;
     
     public InitializeGameView()
     {
         super();
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        textBoxFont = new Font("Arial", Font.PLAIN, 30);
+        labelFont = new Font("Arial", Font.PLAIN, 50);
+        setLayout(new GridBagLayout());
         topPanel = new JPanel();
         bottomPanel = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridy = 0;
+        c.gridx = 0;
+        c.weighty = 0.8;
+        c.weightx = 1;
+        c.fill = GridBagConstraints.BOTH;
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
-        add(topPanel);
-        add(bottomPanel);
+        topPanel.setBackground(this.getBackground());
+        bottomPanel.setLayout(new GridBagLayout());
+        bottomPanel.setBackground(this.getBackground());
+        add(topPanel, c);
+        c.gridy++;
+        c.weighty = 0.2;
+        add(bottomPanel, c);
     }
     
     @Override
@@ -44,6 +63,7 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
                 field.setBorder(new LineBorder(Color.red, 1));
             }
         }));
+        matchNametf.setFont(this.textBoxFont);
         matchNametf.setText("MatchName");
         JTextField player1tf = new JTextField(20);
         player1tf.getDocument().addDocumentListener(new JTextFieldListener(player1tf,(field) -> 
@@ -56,6 +76,7 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
                 field.setBorder(new LineBorder(Color.red, 1));
             }
         }));
+        player1tf.setFont(this.textBoxFont);
         player1tf.setText("Player1");
         JTextField player2tf = new JTextField(20);
         player2tf.getDocument().addDocumentListener(new JTextFieldListener(player2tf,(field) -> 
@@ -68,6 +89,7 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
                 field.setBorder(new LineBorder(Color.red, 1));
             }
         }));
+        player2tf.setFont(this.textBoxFont);
         player2tf.setText("Player2");
         JTextField ntf = new JTextField();
         ntf.getDocument().addDocumentListener(new JTextFieldListener(ntf,(field) -> 
@@ -82,6 +104,7 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
             }
             
         }));
+        ntf.setFont(this.textBoxFont);
         ntf.setText("4");
         JTextField mtf = new JTextField();
         mtf.getDocument().addDocumentListener(new JTextFieldListener(mtf,(field) -> 
@@ -96,24 +119,47 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
                 field.setBorder(new LineBorder(Color.red, 1));
             }
         }));
+        mtf.setFont(this.textBoxFont);
         mtf.setText("4");
         JPanel sizePanel = new JPanel();
+        sizePanel.setBackground(this.getBackground());
         sizePanel.setLayout(new BoxLayout(sizePanel, BoxLayout.X_AXIS));
         sizePanel.add(ntf);
-        sizePanel.add(new JLabel(" X "));
+        JLabel xLabel = new JLabel(" X ");
+        xLabel.setFont(this.labelFont);
+        sizePanel.add(xLabel);
         sizePanel.add(mtf);
         
-        topPanel.add(new JLabel("Match Name"));
+        JLabel matchLabel = new JLabel("Match Name");
+        matchLabel.setFont(this.labelFont);
+        topPanel.add(matchLabel);
         topPanel.add(matchNametf);
-        topPanel.add(new JLabel("Column Number X Row Number"));
+        JLabel tableLabel = new JLabel("Column Number X Row Number");
+        tableLabel.setFont(this.labelFont);
+        topPanel.add(tableLabel);
         topPanel.add(sizePanel);
-        topPanel.add(new JLabel("Player 1"));
+        JLabel player1Label = new JLabel("Player 1");
+        player1Label.setFont(this.labelFont);
+        topPanel.add(player1Label);
         topPanel.add(player1tf);
-        topPanel.add(new JLabel("Player 2"));
+        JLabel player2Label = new JLabel("Player 2");
+        player2Label.setFont(this.labelFont);
+        topPanel.add(player2Label);
         topPanel.add(player2tf);
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridy = 0;
+        c.gridx = 0;
+        c.weighty = 1;
+        c.weightx = 0.5;
         for(IMenuOption menuOption : state.getInitializeGameMenu().getOptions())
         {
-            bottomPanel.add(new MainMenuButton(menuOption));
+            MenuButton button = new MenuButton(menuOption);
+            button.setPreferredSize(new Dimension(100, 50));
+            button.setBackground(Color.cyan);
+            button.setFont(new Font("Arial", Font.PLAIN, 20));
+            bottomPanel.add(button, c);
+            c.gridx++;
         }
     }
 

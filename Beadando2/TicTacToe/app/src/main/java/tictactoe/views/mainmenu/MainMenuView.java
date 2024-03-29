@@ -1,6 +1,12 @@
 package tictactoe.views.mainmenu;
 
-import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import tictactoe.views.MenuButton;
 import tictactoe.applicationstates.InMainMenu;
 import tictactoe.gamemenu.IMenuOption;
 import tictactoe.views.View;
@@ -9,18 +15,24 @@ public class MainMenuView extends View<InMainMenu>{
     public MainMenuView()
     {
         super();
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new GridBagLayout());
     }
 
     @Override
     public void initialize(InMainMenu state) {
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridy = 0;
+        c.gridx = 0;
+        c.weighty = 0.5;
         for(IMenuOption menuOption : state.getMainMenu().getOptions())
         {
-            System.out.println("Add button:" + menuOption.getTitle());
-            this.add(new MainMenuButton(menuOption));
+            MenuButton button = new MenuButton(menuOption);
+            button.setPreferredSize(new Dimension(800, 200));
+            button.setBackground(Color.cyan);
+            button.setFont(new Font("Arial", Font.PLAIN, 50));
+            this.add(button, c);
+            c.gridy++;
         }
-        //this.repaint();
-        //this.revalidate();
     }
 
     @Override
