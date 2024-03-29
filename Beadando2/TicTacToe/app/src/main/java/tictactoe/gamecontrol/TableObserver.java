@@ -21,11 +21,11 @@ public class TableObserver implements ITableObserver {
     {
         AtomicInteger count = new AtomicInteger(1);
         int column = 0;
-        Signal currentSignal = table.get(column, row).getSignal();
+        SignalContainer currentSignalContainer = new SignalContainer(table.get(column, row).getSignal());
         for(column = 1; column < table.getColumnNum(); column++)
         {
             Field field = table.get(column, row);
-            if(checkField(field, currentSignal, count))
+            if(checkField(field, currentSignalContainer, count))
             {
                 return 1;
             }
@@ -36,12 +36,12 @@ public class TableObserver implements ITableObserver {
 
   @Override
   public int checkDiagonal() {
-    if(checkDiagonally(true))
+    if(checkDiagonallyToDown())
     {
         return 1;
     }
     
-    if(checkDiagonally(false))
+    if(checkDiagonallyToUp())
     {
         return 1;
     }
@@ -84,94 +84,82 @@ public class TableObserver implements ITableObserver {
         return matchResult;
     }
     
-    private boolean checkDiagonally(boolean isVertical)
+    private boolean checkDiagonallyToDown()
     {
-        int num = 0;
-        int maxNum = (isVertical)? table.getColumnNum(): table.getRowNum();
-        while(num < maxNum)
+        for(int column = table.getColumnNum() - 1; column >= 0; column--)
         {
-            // Check diagonally to the right.
-            if((isVertical && checkDiagonallyVertically(num, false)) || (!isVertical && checkDiagonallyHorizontally(num, false)))
+            if(checkDiagonally(column, 0, true))
             {
                 return true;
             }
-            
-            // Check diagonally to the left.
-            if((isVertical && checkDiagonallyVertically(num, true)) || (!isVertical && checkDiagonallyHorizontally(num, true)))
+        }
+        
+        for(int row = 0; table.getRowNum() > row; row++)
+        {
+            if(checkDiagonally(0, row, true))
             {
                 return true;
             }
-            num++;
         }
         return false;
     }
     
-    private boolean checkDiagonallyVertically(int column, boolean toRight)
-    {
-        int row = 0;
-        int columnIndex = column;
-        int addition = (toRight) ? 1 : -1;
-        AtomicInteger count = new AtomicInteger(1);
-        Signal currentSignal = table.get(columnIndex, row).getSignal();
-        System.out.println("Checking vertically column:" + column);
-        row++;
-        columnIndex += addition;
-        while(row < table.getRowNum() && columnIndex >= 0 && columnIndex < table.getColumnNum())
+    private boolean checkDiagonallyToUp()
+    {   
+        for(int row = 0; table.getRowNum() > row; row++)
         {
-            System.out.println("Checking vertically (" + columnIndex + "," + row + ")");
-            
-            if(checkField(table.get(columnIndex, row), currentSignal, count))
+            if(checkDiagonally(0, row, false))
             {
                 return true;
             }
-            
-            row++;
-            columnIndex += addition;
+        }
+        
+        for(int column = 0; table.getColumnNum() > column; column++)
+        {
+            if(checkDiagonally(column, table.getRowNum() - 1, false))
+            {
+                return true;
+            }
         }
         
         return false;
     }
     
-    private boolean checkDiagonallyHorizontally(int row, boolean toDown)
+    private boolean checkDiagonally(int column, int row, boolean toDown)
     {
-        int column = 0;
-        int rowIndex = row;
         int addition = (toDown) ? 1 : -1;
         AtomicInteger count = new AtomicInteger(1);
-        Signal currentSignal = table.get(column, rowIndex).getSignal();
-        System.out.println("Checking horizontally row:" + row);
+        SignalContainer currentSignalContainer = new SignalContainer(table.get(column, row).getSignal());
         column++;
-        rowIndex += addition;
-        while(column < table.getColumnNum()&& rowIndex >= 0 && rowIndex < table.getRowNum())
+        row += addition;
+        while(column < table.getColumnNum() && row >= 0 && row < table.getRowNum())
         {
-            System.out.println("Checking horizontally (" + column + "," + rowIndex + ")");
-            
-            if(checkField(table.get(column, rowIndex), currentSignal, count))
+            if(checkField(table.get(column, row), currentSignalContainer, count))
             {
                 return true;
             }
             
             column++;
-            rowIndex += addition;
+            row += addition;
         }
         
         return false;
     }
     
-    
-    private boolean checkField(Field field, Signal currentSignal, AtomicInteger count)
+    private boolean checkField(Field field, SignalContainer signalContainer, AtomicInteger count)
     {
-        if(field.getSignal() != currentSignal)
+        if(field.getSignal() != signalContainer.getSignal())
         {
             count.set(1);
-            currentSignal = field.getSignal();
+            signalContainer.setSignal(field.getSignal());
         }
-        else if(currentSignal != Signal.Empty)
+        else if(signalContainer.getSignal() != Signal.Empty)
         {
             count.set(count.get() + 1);
+            System.out.println("Count: " + count.get());
             if(count.get() >= 4)
             {
-                if(currentSignal == Signal.O)
+                if(signalContainer.getSignal() == Signal.O)
                 {
                     matchResult = MatchResult.O;
                 }
