@@ -78,6 +78,7 @@ public class TicTacToeGameView extends View<TicTacToe>{
             for(int j=0; j < state.getColumnNum() ; j++)
             {
                 FieldButton button = new FieldButton(state.getField(j, i));
+                button.setFont(new Font("Arial", Font.PLAIN, 400/Math.min(state.getColumnNum(), state.getRowNum())));
                 bottomPanel.add(button);
             }
         }
