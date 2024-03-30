@@ -7,6 +7,9 @@ import static tictactoe.gamecontrol.MatchResult.O;
 import static tictactoe.gamecontrol.MatchResult.X;
 import tictactoe.table.Signal;
 
+/**
+ * Represents a match in the tictactoe game.
+ */
 public class Match {
   
   private final List<MatchListener> listeners;
@@ -21,17 +24,14 @@ public class Match {
 
   private final ITableObserver tableObserver;
 
-  public Match(String name, Table table, Player player1, Player player2, Signal currentPlayer) {
-      this.listeners = new ArrayList<>();
-      this.name = name;
-      this.table = table;
-      this.players = new HashMap<>();
-      players.put(player1.getSignal(), player1);
-      players.put(player2.getSignal(), player2);
-      this.currentPlayer = currentPlayer;
-      tableObserver = new TableObserver(table);
-  }
-
+  /**
+   * Constructor.
+   * @param name name of match.
+   * @param columnNum column number.
+   * @param rowNum row number.
+   * @param player1 player1's name.
+   * @param player2 player2's name.
+   */
   public Match(String name, int columnNum, int rowNum, String player1, String player2) {
       this.listeners = new ArrayList<>();
       this.name = name;
@@ -43,6 +43,10 @@ public class Match {
       tableObserver = new TableObserver(table);
   }
 
+  /**
+   * Steps, with the current player at the specified column.
+   * @param column column.
+   */
   public void stepWithCurrentPlayer(int column) {
       players.get(currentPlayer).doCommand(column).execute(table);
       players.get(currentPlayer).afterPlayerStepped();
@@ -72,34 +76,61 @@ public class Match {
       }
   }
 
+  /**
+   * Gets if the game is over based on the table's state.
+   * @return True if game is over, else false.
+   */
   public Boolean isGameOver() {
       return tableObserver.checkDiagonal() == 1 || tableObserver.checkRows() == 1 || tableObserver.isTableFull();
   }
 
+  /**
+   * Gets the table in the match.
+   * @return table.
+   */
   public Table getTable() {
       return table;
   }
   
+  /**
+   * Gets the players in the match.
+   * @return Player list.
+   */
   public List<Player> getPlayers()
   {
       return new ArrayList<>(players.values());
   }
   
+  /**
+   * Gets the current player.
+   * @return Current player.
+   */
   public Player getCurrentPlayer()
   {
       return players.get(currentPlayer);
   }
   
+  /**
+   * Gets the name of the match.
+   * @return Name of the match.
+   */
   public String getName()
   {
       return this.name;
   }
   
+  /**
+   * Adds a match listener.
+   * @param listener MatchListener object.
+   */
   public void addMatchListener(MatchListener listener)
   {
       listeners.add(listener);
   }
   
+  /**
+   * Clears the match.
+   */
   public void clear()
   {
     table.clearTable();

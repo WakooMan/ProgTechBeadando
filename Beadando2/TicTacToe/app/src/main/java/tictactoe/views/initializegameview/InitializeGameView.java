@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,6 +17,9 @@ import tictactoe.gamemenu.IMenuOption;
 import tictactoe.views.View;
 import tictactoe.views.MenuButton;
 
+/**
+ * Represents the view for initializing the game in the Tic Tac Toe application.
+ */
 public class InitializeGameView extends View<InInitializeGameMenu> {
     
     private final JPanel topPanel;
@@ -25,6 +27,9 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
     private final Font textBoxFont;
     private final Font labelFont;
     
+    /**
+     * Constructs a new instance of the InitializeGameView class.
+     */
     public InitializeGameView()
     {
         super();
@@ -49,6 +54,10 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
         add(bottomPanel, c);
     }
     
+    /**
+     * Initializes the view with the specified application state.
+     * @param state The application state to initialize the view with.
+     */
     @Override
     public void initialize(InInitializeGameMenu state) {
         
@@ -96,7 +105,7 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
         {
             try{
                 int number = Integer.parseInt(field.getText());
-                state.setN(number);
+                state.setColumnNum(number);
                 field.setBorder(new LineBorder(Color.green, 1));
             }catch(NumberFormatException | FieldNumberOutOfRangeException ex)
             {
@@ -111,7 +120,7 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
         {
             try{
                 int number = Integer.parseInt(field.getText());
-                state.setM(number);
+                state.setRowNum(number);
                 field.setBorder(new LineBorder(Color.green, 1));
             }catch(NumberFormatException | FieldNumberOutOfRangeException ex)
             {
@@ -163,12 +172,19 @@ public class InitializeGameView extends View<InInitializeGameMenu> {
         }
     }
 
+    /**
+     * Clears the view, resetting it to its initial state.
+     */
     @Override
     public void clear() {
         topPanel.removeAll();
         bottomPanel.removeAll();
     }
 
+    /**
+     * Gets the name of the view.
+     * @return The name of the view.
+     */
     @Override
     public String getViewName() {
         return "InitializeGameView";

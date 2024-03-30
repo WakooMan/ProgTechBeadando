@@ -18,10 +18,16 @@ import tictactoe.gamecontrol.Player;
 import tictactoe.views.View;
 import tictactoe.views.MenuButton;
 
+/**
+ * Represents the view for the Tic Tac Toe game.
+ */
 public class TicTacToeGameView extends View<TicTacToe>{
 
     private final List<ThrowButton> throwButtons;
     
+    /**
+     * Constructs a new instance of TicTacToeGameView.
+     */
     public TicTacToeGameView()
     {
         super();
@@ -29,6 +35,10 @@ public class TicTacToeGameView extends View<TicTacToe>{
         setLayout(new GridBagLayout());
     }
     
+    /**
+     * Initializes the Tic Tac Toe game view with the specified state.
+     * @param state The Tic Tac Toe game state.
+     */
     @Override
     public void initialize(TicTacToe state) {
         JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -123,12 +133,19 @@ public class TicTacToeGameView extends View<TicTacToe>{
         });
     }
 
+    /**
+     * Clears the Tic Tac Toe game view.
+     */
     @Override
     public void clear() {
         removeAll();
         throwButtons.clear();
     }
 
+    /**
+     * Gets the name of the Tic Tac Toe game view.
+     * @return The name of the view.
+     */
     @Override
     public String getViewName() {
         return "TicTacToeGameView";

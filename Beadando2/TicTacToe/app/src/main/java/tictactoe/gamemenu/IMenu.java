@@ -2,10 +2,21 @@ package tictactoe.gamemenu;
 
 import java.util.*;
 
+/**
+ * Abstract interface for menu.
+ */
 public interface IMenu {
 
-  public List<IMenuOption> getOptions();
+    /**
+     * Gets the menu options.
+     * @return menu options.
+     */
+    public List<IMenuOption> getOptions();
 
-  public void doOption(int index);
+    /**
+     * Invokes the doOption method of the index. menu option.
+     * @param index 
+     */
+    public void doOption(int index);
 
 }

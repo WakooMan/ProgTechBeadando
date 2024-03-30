@@ -1,14 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tictactoe.gamecontrol;
 
 /**
- *
- * @author vitya
+ * Player listener, which has 2 events: onPlayerTurn, afterPlayerStepped
  */
 public interface PlayerListener {
+    /**
+     * Invoked, when player turn comes.
+     */
     void onPlayerTurn();
+    
+    /**
+     * Invoked, after player is stepped.
+     */
     void afterPlayerStepped();
 }

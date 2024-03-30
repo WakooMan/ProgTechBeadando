@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tictactoe.views.tictactoeview;
 
 import java.awt.Color;
@@ -10,53 +6,64 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 /**
- *
- * @author vitya
+ * Represents a button used for throwing the token in the Tic Tac Toe game.
  */
 public class ThrowButton extends JButton {
-    public ThrowButton(ActionListener actionListener)
-    {
-        super();
-        addActionListener(actionListener);
-        setBackground(Color.cyan);
-        this.setBorder(new LineBorder(Color.GREEN, 5));
-        setInvisible();
+    
+    /**
+     * Constructs a new instance of the ThrowButton class.
+     * @param actionListener The ActionListener to handle button clicks.
+     */
+    public ThrowButton(ActionListener actionListener) {
+        super(); // Call superclass constructor
+        addActionListener(actionListener); // Add action listener to handle button clicks
+        setBackground(Color.cyan); // Set background color
+        this.setBorder(new LineBorder(Color.GREEN, 5)); // Set border color and thickness
+        setInvisible(); // Set button initially invisible
+        // Add mouse listener to show button when mouse hovers over
         addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                setVisible();
+                setVisible(); // Show button
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                setInvisible();
+                setInvisible(); // Hide button
             }
         });
     }
     
-    public void onColumnFilled()
-    {
-        setEnabled(false);
-        setBorder(new LineBorder(Color.RED, 5));
-        setInvisible();
+    /**
+     * Disables the button and changes its appearance when the corresponding column is filled.
+     */
+    public void onColumnFilled() {
+        setEnabled(false); // Disable button
+        setBorder(new LineBorder(Color.RED, 5)); // Change border color to indicate filled column
+        setInvisible(); // Hide button
     }
     
-    public void onColumnCleared()
-    {
-        setEnabled(true);
-        setBorder(new LineBorder(Color.GREEN, 5));
+    /**
+     * Enables the button and restores its appearance when the corresponding column is cleared.
+     */
+    public void onColumnCleared() {
+        setEnabled(true); // Enable button
+        setBorder(new LineBorder(Color.GREEN, 5)); // Restore original border color
     }
     
-    private void setVisible()
-    {
-        if(this.isEnabled())
-        {
-            setContentAreaFilled(true);
+    /**
+     * Makes the button visible if it is enabled.
+     */
+    private void setVisible() {
+        if (this.isEnabled()) { // Check if button is enabled
+            setContentAreaFilled(true); // Make button visible
         }
     }
     
-    private void setInvisible()
-    {
-        setContentAreaFilled(false);
+    /**
+     * Makes the button invisible.
+     */
+    private void setInvisible() {
+        setContentAreaFilled(false); // Make button invisible
     }
 }

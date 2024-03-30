@@ -5,16 +5,26 @@ import tictactoe.table.Signal;
 import tictactoe.table.Table;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Implements ITableObserver interface and it is responsible for checking the table.
+ */
 public class TableObserver implements ITableObserver {
 
   private final Table table;
   private MatchResult matchResult;
 
+  /**
+   * Constructor for creating TableObserver object.
+   * @param table table of the match.
+   */
   public TableObserver(Table table) {
       this.table = table;
       this.matchResult = MatchResult.Ongoing;
   }
   
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public int checkRows() {
     for(int row = 0; row < table.getRowNum(); row++)
@@ -34,6 +44,9 @@ public class TableObserver implements ITableObserver {
     return 0;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public int checkDiagonal() {
     if(checkDiagonallyToDown())
@@ -49,6 +62,9 @@ public class TableObserver implements ITableObserver {
     return 0;
   }
 
+   /**
+   * {@inheritDoc}
+   */
     @Override
     public boolean isTableFull() {
         for(int j = 0; j < table.getRowNum(); j++)
@@ -66,6 +82,9 @@ public class TableObserver implements ITableObserver {
         return true;
     }
     
+    /**
+    * {@inheritDoc}
+    */
     @Override
     public boolean isColumnFull(int column) {
         for(int j = 0; j < table.getRowNum(); j++)
@@ -79,6 +98,9 @@ public class TableObserver implements ITableObserver {
         return true;
     }
 
+    /**
+    * {@inheritDoc}
+    */
     @Override
     public MatchResult getMatchResult() {
         return matchResult;
