@@ -1,0 +1,542 @@
+1. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 11500
+CurrentField: 6
+Properties:
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 5000
+CurrentField: 3
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 5000
+CurrentField: 3
+Properties:
+-------------------------------
+2. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 12000
+CurrentField: 9
+Properties:
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 6500
+CurrentField: 6
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 4500
+CurrentField: 5
+Properties:
+	Id: 5
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+3. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 11500
+CurrentField: 10
+Properties:
+	Id: 10
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 5500
+CurrentField: 10
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 5000
+CurrentField: 9
+Properties:
+	Id: 5
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+4. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 11000
+CurrentField: 1
+Properties:
+	Id: 10
+	HasHouse: false
+	Value: 1000
+
+	Id: 1
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 7000
+CurrentField: 6
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 3000
+CurrentField: 5
+Properties:
+	Id: 5
+	HasHouse: true
+	Value: 4000
+
+-------------------------------
+5. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 10500
+CurrentField: 4
+Properties:
+	Id: 10
+	HasHouse: false
+	Value: 1000
+
+	Id: 1
+	HasHouse: false
+	Value: 1000
+
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 6000
+CurrentField: 10
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 3500
+CurrentField: 9
+Properties:
+	Id: 5
+	HasHouse: true
+	Value: 4000
+
+-------------------------------
+6. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 8500
+CurrentField: 10
+Properties:
+	Id: 10
+	HasHouse: true
+	Value: 4000
+
+	Id: 1
+	HasHouse: false
+	Value: 1000
+
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 1000
+CurrentField: 3
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: false
+Money: -500
+CurrentField: null
+Properties:
+-------------------------------
+7. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 6500
+CurrentField: 1
+Properties:
+	Id: 10
+	HasHouse: true
+	Value: 4000
+
+	Id: 1
+	HasHouse: true
+	Value: 4000
+
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 1500
+CurrentField: 9
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: false
+Money: -500
+CurrentField: null
+Properties:
+-------------------------------
+8. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 1500
+CurrentField: 3
+Properties:
+	Id: 10
+	HasHouse: true
+	Value: 4000
+
+	Id: 1
+	HasHouse: true
+	Value: 4000
+
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: false
+Money: -2500
+CurrentField: null
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: false
+Money: -500
+CurrentField: null
+Properties:
+-------------------------------
+Game is over!
+1. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 9500
+CurrentField: 4
+Properties:
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 9000
+CurrentField: 4
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 9500
+CurrentField: 5
+Properties:
+	Id: 5
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+2. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 8500
+CurrentField: 5
+Properties:
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 8500
+CurrentField: 10
+Properties:
+	Id: 10
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 11000
+CurrentField: 6
+Properties:
+	Id: 5
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+3. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 9000
+CurrentField: 9
+Properties:
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 3500
+CurrentField: 3
+Properties:
+	Id: 10
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 10500
+CurrentField: 1
+Properties:
+	Id: 5
+	HasHouse: false
+	Value: 1000
+
+	Id: 1
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+4. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 8000
+CurrentField: 1
+Properties:
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 5000
+CurrentField: 6
+Properties:
+	Id: 10
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 12000
+CurrentField: 6
+Properties:
+	Id: 5
+	HasHouse: false
+	Value: 1000
+
+	Id: 1
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+5. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 3000
+CurrentField: 7
+Properties:
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 4000
+CurrentField: 1
+Properties:
+	Id: 10
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 12500
+CurrentField: 2
+Properties:
+	Id: 5
+	HasHouse: false
+	Value: 1000
+
+	Id: 1
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+6. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 2500
+CurrentField: 8
+Properties:
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+	Id: 8
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: true
+Money: 4500
+CurrentField: 2
+Properties:
+	Id: 10
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 10500
+CurrentField: 5
+Properties:
+	Id: 5
+	HasHouse: true
+	Value: 4000
+
+	Id: 1
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+7. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: true
+Money: 3000
+CurrentField: 9
+Properties:
+	Id: 4
+	HasHouse: false
+	Value: 1000
+
+	Id: 8
+	HasHouse: false
+	Value: 1000
+
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: false
+Money: -500
+CurrentField: null
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 8500
+CurrentField: 1
+Properties:
+	Id: 5
+	HasHouse: true
+	Value: 4000
+
+	Id: 1
+	HasHouse: true
+	Value: 4000
+
+-------------------------------
+8. round's end state:
+-------------------------------
+Name: Andreas
+IsInGame: false
+Money: -1000
+CurrentField: null
+Properties:
+-------------------------------
+-------------------------------
+Name: Sebastian
+IsInGame: false
+Money: -500
+CurrentField: null
+Properties:
+-------------------------------
+-------------------------------
+Name: Victor
+IsInGame: true
+Money: 8500
+CurrentField: 1
+Properties:
+	Id: 5
+	HasHouse: true
+	Value: 4000
+
+	Id: 1
+	HasHouse: true
+	Value: 4000
+
+-------------------------------
+Game is over!
