@@ -2,7 +2,8 @@ package labirinth.model.map;
 
 public class Road extends Block {
 
-  public Road() {
+  public Road(Position upperLeftPoint) {
+      super(upperLeftPoint);
   }
 
   @Override

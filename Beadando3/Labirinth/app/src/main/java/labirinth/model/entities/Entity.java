@@ -48,7 +48,7 @@ public class Entity implements IEntityStepper {
         {
             Position oldPosition = this.position;
             this.position = newPosition;
-            this.entityListener.onPositionChanged(oldPosition, newPosition);
+            this.entityListener.onPositionChanged(this, oldPosition, newPosition);
         }
         else
         {

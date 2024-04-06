@@ -2,7 +2,8 @@ package labirinth.model.map;
 
 public class Wall extends Block {
 
-  public Wall() {
+  public Wall(Position upperLeftPoint) {
+      super(upperLeftPoint);
   }
 
   @Override

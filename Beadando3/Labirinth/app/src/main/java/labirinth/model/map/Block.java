@@ -4,9 +4,11 @@ import labirinth.model.entities.Entity;
 
 public abstract class Block {
 
+  private final Position upperLeftPoint;
   private Entity entity;
 
-  protected Block() {
+  protected Block(Position upperLeftPoint) {
+      this.upperLeftPoint = upperLeftPoint;
       this.entity = null;
   }
 
@@ -20,6 +22,16 @@ public abstract class Block {
 
   public int getSize() {
   return MapConfiguration.getInstance().getBlockSize();
+  }
+  
+  public Position getUpperLeftPoint()
+  {
+      return this.upperLeftPoint;
+  }
+  
+  public Position getCenter()
+  {
+      return this.upperLeftPoint.addX(getSize() / 2).addY(getSize() / 2);
   }
 
   public abstract boolean canStepOn();
