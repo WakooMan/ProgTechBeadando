@@ -16,10 +16,11 @@ import labirinth.model.map.MapGeneratorFactory;
 
 public class Game {
 
-  private PlayerRepresentation playerRepresentation;
+  private final PlayerRepresentation playerRepresentation;
 
   private Map map;
 
+  private boolean wonMaze = false;
   private final IMapGenerator mapGenerator;
   private final IPositionValidator positionValidator;
   private final IEntityListener entityListener;
@@ -29,27 +30,13 @@ public class Game {
   private final List<IGameListener> gameListeners;
 
   public Game() {
+        this.playerRepresentation = new PlayerRepresentation();
         this.steppers = new ArrayList<>();
         this.gameListeners = new ArrayList<>();
         IMapGeneratorFactory factory = new MapGeneratorFactory();
         this.mapGenerator = factory.create();
-        positionValidator = (dir, fromPos, toPos) -> 
-        { 
-            Block fromBlock = this.map.getBlock(fromPos);
-            Block toBlock = this.map.getBlock(toPos);
-            return fromBlock.canStepTo(toBlock, dir);
-        };
-        entityListener = (entity ,oldPos, newPos)-> 
-        {
-            Block oldBlock = this.map.getBlock(oldPos);
-            Block newBlock = this.map.getBlock(newPos);
-            if(oldBlock != newBlock)
-            {
-                oldBlock.setEntity(null);
-                newBlock.setEntity(entity);
-            }
-
-        };
+        positionValidator = new PositionValidator(this);
+        entityListener = new EntityListener(this);
   }
 
   public Map getMap() {
@@ -77,13 +64,14 @@ public class Game {
     }, () -> 
     {
         this.playerRepresentation.increaseMapCount();
-        startMapGame();
+        wonMaze = true;
     }));
     this.playerRepresentation.setPlayerEntity(playerEntity);
     startMapGame();
   }
   
-  public void startMapGame() {
+  private void startMapGame() {
+        wonMaze = false;
         steppers.clear();
         this.map = this.mapGenerator.generateMap();
         this.spawnEntity(this.getPlayerRepresentation().getPlayerEntity(), this.map.getPlayerSpawn());
@@ -98,6 +86,10 @@ public class Game {
   }
 
   public void onTick() {
+      if(wonMaze)
+      {
+        startMapGame();
+      }
       for(IEntityStepper stepper : steppers)
       {
           stepper.step();

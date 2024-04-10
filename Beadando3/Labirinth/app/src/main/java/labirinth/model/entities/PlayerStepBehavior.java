@@ -13,7 +13,7 @@ public class PlayerStepBehavior extends StepBehavior {
   public PlayerStepBehavior(PlayerEntity player) {
       super(player);
       IKeyHandlerFactory factory = new KeyHandlerFactory();
-      keyHandler = factory.create();
+      keyHandler = factory.createHandler();
   }
 
   @Override

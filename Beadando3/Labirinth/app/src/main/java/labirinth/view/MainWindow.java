@@ -1,11 +1,9 @@
 package labirinth.view;
 
 import javax.swing.JFrame;
-import labirinth.model.map.IMapGenerator;
-import labirinth.model.map.IMapGeneratorFactory;
+import labirinth.model.gamecontrol.Game;
 import labirinth.model.map.MapConfiguration;
-import labirinth.model.map.MapGeneratorFactory;
-import labirinth.view.game.GamePanel;
+import labirinth.model.utilities.KeyHandlerFactory;
 import labirinth.view.game.MapRenderer;
 
 public class MainWindow extends JFrame{
@@ -14,13 +12,12 @@ public class MainWindow extends JFrame{
         super();
         int mapSize = 500;
         setTitle("Labirinth");
-        setSize(mapSize, mapSize);
+        setSize(mapSize + 100, mapSize + 100);
         setLocationRelativeTo(null);
         setResizable(false);
+        addKeyListener(new KeyHandlerFactory().createListener());
         MapConfiguration.getInstance().setMapSize(mapSize);
-        IMapGeneratorFactory factory = new MapGeneratorFactory();
-        IMapGenerator gen = factory.create();
-        add(new MapRenderer(gen.generateMap()));
+        add(new MapRenderer(new Game()));
         setVisible(true);
     }
 }

@@ -10,11 +10,15 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 import labirinth.model.entities.Direction;
+import labirinth.model.entities.Entity;
+import labirinth.model.gamecontrol.Game;
+import labirinth.model.gamecontrol.IGameListener;
 import labirinth.model.map.Block;
-import labirinth.model.map.Map;
 import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.Position;
 
@@ -24,11 +28,16 @@ import labirinth.model.map.Position;
  */
 public class MapRenderer extends JComponent implements ActionListener {
     private int x;        
-    private final Map map;
-    public MapRenderer(Map map) {
-        this.map = map;
-        //Timer timer = new Timer(1000/60, this);
-        //timer.start();
+    private final Game game;
+    
+    public MapRenderer(Game game) {
+        Timer timer = new Timer(1000/60, this);
+        this.game = game;
+        this.game.addGameListener(() -> {
+            timer.stop();
+        });
+        game.startGame();
+        timer.start();
         x = 0;
     }
 
@@ -37,11 +46,12 @@ public class MapRenderer extends JComponent implements ActionListener {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.black);
-        for(int i = 0;i < map.getBlockNum(); i++)
+        List<Entity> entities = new ArrayList<>();
+        for(int i = 0;i < game.getMap().getBlockNum(); i++)
         {
-            for(int j = 0;j < map.getBlockNum(); j++)
+            for(int j = 0;j < game.getMap().getBlockNum(); j++)
             {
-                Block block = map.getBlock(i, j);
+                Block block = game.getMap().getBlock(i, j);
                 g2.setStroke(new BasicStroke(1));
                 g2.setColor(Color.GREEN);
                 g2.fillRect(block.getUpperLeftPoint().getX(), block.getUpperLeftPoint().getY(), block.getSize(), block.getSize());
@@ -61,7 +71,16 @@ public class MapRenderer extends JComponent implements ActionListener {
                 {
                     drawLine(g2, block.getBottomLeftPoint(), block.getBottomRightPoint());   
                 }
+                if(block.getEntity() != null)
+                {
+                    entities.add(block.getEntity());
+                }
             }
+        }
+        for(Entity entity : entities)
+        {
+            int entitySize = MapConfiguration.getInstance().getEntitySize();
+            g.drawOval(entity.getPosition().getX() - entitySize/2, entity.getPosition().getY() - entitySize/2, entitySize, entitySize);
         }
     }
     
@@ -78,6 +97,7 @@ public class MapRenderer extends JComponent implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        game.onTick();
         update();
         repaint();      
     }

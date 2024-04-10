@@ -48,9 +48,6 @@ public class MazeGenerator {
                         }
 			if (between(nPos.getI(), blockNum) && between(nPos.getJ(), blockNum)
 					&& inInitialState(cells[nPos.getI()][nPos.getJ()])) {
-                                System.out.println("New");
-                                System.out.println(cPos.getI() + " " + cPos.getJ());
-                                System.out.println(nPos.getI() + " " + nPos.getJ());
                                 Cell cell = cells[cPos.getI()][cPos.getJ()];
 				CellWall wall = cell.getWall(dir);
                                 cell.removeWall(dir);

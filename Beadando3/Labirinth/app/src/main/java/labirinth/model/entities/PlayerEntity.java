@@ -11,9 +11,25 @@ public class PlayerEntity extends Entity {
       this.stepBehavior = new PlayerStepBehavior(this);
       this.playerEntityListener = null;
   }
+  
+  @Override
+  public void die()
+  {
+      playerEntityListener.onPlayerDies();
+  }
+  
+  public void win()
+  {
+      playerEntityListener.onPlayerWins();
+  }
 
   public void setPlayerEntityListener(IPlayerEntityListener playerEntityListener) {
       this.playerEntityListener = playerEntityListener;
   }
+
+    @Override
+    public void onEntitySteppedNearby(Entity entity) {
+        die();
+    }
 
 }

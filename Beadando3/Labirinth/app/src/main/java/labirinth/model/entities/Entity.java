@@ -4,7 +4,7 @@ import java.util.List;
 import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.Position;
 
-public class Entity implements IEntityStepper {
+public abstract class Entity implements IEntityStepper {
 
   private final List<IEntityBehavior> behaviors;
 
@@ -44,7 +44,7 @@ public class Entity implements IEntityStepper {
       };
     if(newPosition != null)
     {
-        if(this.positionValidator.isValidPosition(direction, position, newPosition))
+        if(this.positionValidator.isValidPositionChange(direction, position, newPosition))
         {
             Position oldPosition = this.position;
             this.position = newPosition;
@@ -56,6 +56,10 @@ public class Entity implements IEntityStepper {
         }
     }
   }
+  
+  public abstract void onEntitySteppedNearby(Entity entity);
+  
+  public void die() {}
 
   public void initialize(Position position, IPositionValidator positionValidator, IEntityListener entityListener) {
       this.position = position;

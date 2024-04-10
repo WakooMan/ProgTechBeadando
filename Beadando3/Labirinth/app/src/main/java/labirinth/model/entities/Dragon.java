@@ -9,4 +9,9 @@ public class Dragon extends Entity {
       this.stepBehavior = new DragonStepBehavior(this);
   }
 
+    @Override
+    public void onEntitySteppedNearby(Entity entity) {
+        die();
+    }
+
 }

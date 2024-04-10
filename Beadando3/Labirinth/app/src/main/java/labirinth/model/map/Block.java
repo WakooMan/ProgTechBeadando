@@ -31,6 +31,10 @@ public class Block {
   return MapConfiguration.getInstance().getBlockSize();
   }
   
+  public int getWallSize() {
+  return MapConfiguration.getInstance().getWallSize();
+  }
+  
   public Position getUpperLeftPoint()
   {
       return this.upperLeftPoint;
@@ -59,6 +63,32 @@ public class Block {
   public boolean canStepTo(Block block, Direction direction)
   {
       return this == block || cell.getWall(direction) == null;
+  }
+  
+  public boolean canStepTo(Position pos)
+  {
+      Position realUpperLeftPoint = getUpperLeftPoint();
+      Position realBottomRightPoint = getBottomRightPoint();
+      if(cell.getWall(Direction.Up) != null)
+      {
+           realUpperLeftPoint = realUpperLeftPoint.addY(getWallSize());
+      }
+      if(cell.getWall(Direction.Left) != null)
+      {
+           realUpperLeftPoint = realUpperLeftPoint.addX(getWallSize());
+      }
+      if(cell.getWall(Direction.Down) != null)
+      {
+           realBottomRightPoint = realBottomRightPoint.addY(-getWallSize());
+      }
+      if(cell.getWall(Direction.Right) != null)
+      {
+           realBottomRightPoint = realBottomRightPoint.addX(-getWallSize());
+      }
+      return realUpperLeftPoint.getX() <= pos.getX() && 
+             pos.getX() <= realBottomRightPoint.getX() &&
+             realUpperLeftPoint.getY() <= pos.getY() && 
+             pos.getY() <= realBottomRightPoint.getY();
   }
 
 }

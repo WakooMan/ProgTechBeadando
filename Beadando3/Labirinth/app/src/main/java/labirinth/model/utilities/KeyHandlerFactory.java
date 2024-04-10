@@ -1,13 +1,22 @@
 package labirinth.model.utilities;
 
+import java.awt.event.KeyListener;
+
 public class KeyHandlerFactory implements IKeyHandlerFactory {
 
+  private static final KeyHandler keyHandler = new KeyHandler();
+    
   public KeyHandlerFactory() {
   }
 
   @Override
-  public IKeyHandler create() {
-    return new KeyHandler();
+  public IKeyHandler createHandler() {
+    return keyHandler;
   }
+
+    @Override
+    public KeyListener createListener() {
+        return keyHandler;
+    }
 
 }

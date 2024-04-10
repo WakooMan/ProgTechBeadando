@@ -30,9 +30,13 @@ public class MapConfiguration {
   public int getWallSize() {
     return getBlockSize()/ 5;
   }
+  
+  public int getEntitySize() {
+    return getBlockSize()/ 5;
+  }
 
   public int getStepSize() {
-    return getBlockSize() / 5;
+    return getBlockSize() / 10;
   }
 
   public int getMapSize() {
