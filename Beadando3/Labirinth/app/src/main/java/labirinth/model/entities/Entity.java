@@ -44,7 +44,7 @@ public class Entity implements IEntityStepper {
       };
     if(newPosition != null)
     {
-        if(this.positionValidator.isValidPosition(newPosition))
+        if(this.positionValidator.isValidPosition(direction, position, newPosition))
         {
             Position oldPosition = this.position;
             this.position = newPosition;

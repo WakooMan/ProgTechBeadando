@@ -1,19 +1,26 @@
 package labirinth.model.map;
 
+import labirinth.model.entities.Direction;
 import labirinth.model.entities.Entity;
 
-public abstract class Block {
+public class Block {
 
   private final Position upperLeftPoint;
   private Entity entity;
+  private final Cell cell;
 
-  protected Block(Position upperLeftPoint) {
+  public Block(Position upperLeftPoint, Cell cell) {
       this.upperLeftPoint = upperLeftPoint;
+      this.cell = cell;
       this.entity = null;
   }
 
   public Entity getEntity() {
   return entity;
+  }
+  
+  public Cell getCell() {
+  return cell;
   }
   
   public void setEntity(Entity entity) {
@@ -29,11 +36,29 @@ public abstract class Block {
       return this.upperLeftPoint;
   }
   
+  public Position getUpperRightPoint()
+  {
+      return this.upperLeftPoint.addX(getSize());
+  }
+  
+  public Position getBottomLeftPoint()
+  {
+      return this.upperLeftPoint.addY(getSize());
+  }
+  
+  public Position getBottomRightPoint()
+  {
+      return this.upperLeftPoint.addX(getSize()).addY(getSize());
+  }
+  
   public Position getCenter()
   {
       return this.upperLeftPoint.addX(getSize() / 2).addY(getSize() / 2);
   }
-
-  public abstract boolean canStepOn();
+  
+  public boolean canStepTo(Block block, Direction direction)
+  {
+      return this == block || cell.getWall(direction) == null;
+  }
 
 }

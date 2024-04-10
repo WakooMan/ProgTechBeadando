@@ -1,22 +1,20 @@
 package labirinth.model.map;
 
-import java.util.List;
-
 public class Map {
 
   private final Block dragonSpawn;
 
   private final Block playerSpawn;
-  private List<Block> blocks;
+  private final Block[][] blocks;
 
-  public Map(List<Block> blocks, int dragonSpawnIndex, int playerSpawnIndex) {
+  public Map(Block[][] blocks, CellPosition dragonSpawn, CellPosition playerSpawn) {
       this.blocks = blocks;
-      dragonSpawn = blocks.get(dragonSpawnIndex);
-      playerSpawn = blocks.get(playerSpawnIndex);
+      this.dragonSpawn = blocks[dragonSpawn.getI()][dragonSpawn.getJ()];
+      this.playerSpawn = blocks[playerSpawn.getI()][playerSpawn.getJ()];
   }
 
   public Block getBlock(int i, int j) {
-    return null;
+    return blocks[i][j];
   }
 
   public Block getPlayerSpawn() {
@@ -33,6 +31,10 @@ public class Map {
 
   public int getSize() {
     return MapConfiguration.getInstance().getMapSize();
+  }
+  
+  public int getBlockNum() {
+    return MapConfiguration.getInstance().getBlockNum();
   }
 
 }

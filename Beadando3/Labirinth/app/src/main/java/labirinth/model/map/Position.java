@@ -2,28 +2,28 @@ package labirinth.model.map;
 
 public class Position {
 
-  private final double x;
+  private final int x;
 
-  private final double y;
+  private final int y;
 
-  public Position(double x, double y) {
+  public Position(int x, int y) {
       this.x = x;
       this.y = y;
   }
 
-  public double getX() {
+  public int getX() {
     return x;
   }
 
-  public double getY() {
+  public int getY() {
     return y;
   }
 
-  public Position addY(double addition) {
+  public Position addY(int addition) {
     return new Position(x, y + addition);
   }
 
-  public Position addX(double addition) {
+  public Position addX(int addition) {
     return new Position(x + addition, y);
   }
 

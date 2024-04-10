@@ -33,9 +33,11 @@ public class Game {
         this.gameListeners = new ArrayList<>();
         IMapGeneratorFactory factory = new MapGeneratorFactory();
         this.mapGenerator = factory.create();
-        positionValidator = (position) -> 
+        positionValidator = (dir, fromPos, toPos) -> 
         { 
-            return this.map.getBlock(position).canStepOn();
+            Block fromBlock = this.map.getBlock(fromPos);
+            Block toBlock = this.map.getBlock(toPos);
+            return fromBlock.canStepTo(toBlock, dir);
         };
         entityListener = (entity ,oldPos, newPos)-> 
         {

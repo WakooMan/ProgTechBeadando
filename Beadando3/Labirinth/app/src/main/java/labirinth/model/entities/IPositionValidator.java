@@ -4,6 +4,6 @@ import labirinth.model.map.Position;
 
 public interface IPositionValidator {
 
-  public boolean isValidPosition(Position newPosition);
+  public boolean isValidPosition(Direction direction, Position oldPosition, Position newPosition);
 
 }

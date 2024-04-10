@@ -2,7 +2,7 @@ package labirinth.model.map;
 
 public class MapConfiguration {
 
-  private final int blockNum = 100;
+  private final int blockNum = 15;
 
   private int mapSize;
 
@@ -25,6 +25,10 @@ public class MapConfiguration {
 
   public int getBlockSize() {
     return mapSize / blockNum;
+  }
+  
+  public int getWallSize() {
+    return getBlockSize()/ 5;
   }
 
   public int getStepSize() {
