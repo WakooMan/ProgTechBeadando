@@ -1,14 +1,20 @@
 package labirinth.model.map;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapConfiguration {
 
   private final int blockNum = 15;
 
-  private int mapSize;
+  private Position mapSize;
+  
+  private final List<IMapConfigurationListener> listeners;
 
   private static MapConfiguration instance;
 
   private MapConfiguration() {
+      listeners = new ArrayList<>();
   }
 
   public static MapConfiguration getInstance() {
@@ -22,29 +28,42 @@ public class MapConfiguration {
   public int getBlockNum() {
     return blockNum;
   }
-
-  public int getBlockSize() {
-    return mapSize / blockNum;
+  
+  public Position getBlockSize() {
+    return new Position(mapSize.getX() / blockNum, mapSize.getY() / blockNum);
   }
   
-  public int getWallSize() {
-    return getBlockSize()/ 5;
+  public Position getWallSize() {
+    return new Position(getBlockSize().getX() / 5, getBlockSize().getY() / 5);
   }
   
-  public int getEntitySize() {
-    return getBlockSize()/ 5;
+  public Position getEntitySize() {
+    return new Position(getBlockSize().getX() / 2, getBlockSize().getY() / 2);
   }
 
-  public int getStepSize() {
-    return getBlockSize() / 10;
+  public Position getStepSize() {
+    return new Position(getBlockSize().getX() / 10, getBlockSize().getY() / 10);
+  }
+  
+  public int getPlayerSight() {
+    return Math.min(getBlockSize().getX(), getBlockSize().getY()) * 3;
   }
 
-  public int getMapSize() {
+  public Position getMapSize() {
     return mapSize;
   }
 
-  public void setMapSize(int mapSize) {
+  public void setMapSize(Position mapSize) {
       this.mapSize = mapSize;
+      for(IMapConfigurationListener listener : listeners)
+      {
+          listener.onMapSizeChanged();
+      }
+  }
+  
+  public void addMapConfigurationListener(IMapConfigurationListener listener)
+  {
+      listeners.add(listener);
   }
 
 }

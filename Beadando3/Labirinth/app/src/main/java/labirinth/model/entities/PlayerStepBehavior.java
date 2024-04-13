@@ -26,7 +26,7 @@ public class PlayerStepBehavior extends StepBehavior {
      return Direction.Right;
     if(keyHandler.isLeftKeyDown())
      return Direction.Left;
-    return Direction.None;
+    return null;
 
   }
 

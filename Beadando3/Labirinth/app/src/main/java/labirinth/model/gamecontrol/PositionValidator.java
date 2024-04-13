@@ -4,10 +4,11 @@
  */
 package labirinth.model.gamecontrol;
 
+import java.util.HashSet;
 import labirinth.model.entities.Direction;
 import labirinth.model.entities.IPositionValidator;
 import labirinth.model.map.Block;
-import labirinth.model.map.Position;
+import labirinth.model.map.Rectangle;
 
 /**
  *
@@ -22,18 +23,17 @@ public class PositionValidator implements IPositionValidator{
     }
     
     @Override
-    public boolean isValidPositionChange(Direction direction, Position oldPosition, Position newPosition) {
-        Block fromBlock = game.getMap().getBlock(oldPosition);
-        Block toBlock = game.getMap().getBlock(newPosition);
-        if(fromBlock == null || toBlock == null)
+    public boolean isValidPositionChange(Direction direction, Rectangle oldPosition, Rectangle newPosition) {
+        
+        HashSet<Block> blocks = game.getMap().getBlocks(newPosition);
+        for(Block block : blocks)
         {
-            return false;
+            if(block.collidesWithWall(newPosition))
+            {
+                return false;
+            }
         }
-        if(fromBlock == toBlock && fromBlock.getCell().getWall(direction) != null)
-        {
-            return fromBlock.canStepTo(newPosition);
-        }
-        return fromBlock.canStepTo(toBlock, direction) && toBlock.canStepTo(newPosition);
+        return true;
     }
     
 }

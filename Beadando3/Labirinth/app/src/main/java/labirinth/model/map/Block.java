@@ -1,18 +1,21 @@
 package labirinth.model.map;
 
+import java.util.HashMap;
 import labirinth.model.entities.Direction;
 import labirinth.model.entities.Entity;
 
 public class Block {
 
-  private final Position upperLeftPoint;
+  private Rectangle rectangle;
+  private final HashMap<Direction,Rectangle> walls;
   private Entity entity;
   private final Cell cell;
 
   public Block(Position upperLeftPoint, Cell cell) {
-      this.upperLeftPoint = upperLeftPoint;
+      this.walls = new HashMap<>();
       this.cell = cell;
       this.entity = null;
+      setRectangle(upperLeftPoint);
   }
 
   public Entity getEntity() {
@@ -27,68 +30,63 @@ public class Block {
   this.entity = entity;
   }
 
-  public int getSize() {
+  public final Position getSize() {
   return MapConfiguration.getInstance().getBlockSize();
   }
   
-  public int getWallSize() {
+  public final Position getWallSize() {
   return MapConfiguration.getInstance().getWallSize();
   }
   
-  public Position getUpperLeftPoint()
+  public Rectangle getRectangle()
   {
-      return this.upperLeftPoint;
+      return rectangle;
   }
   
-  public Position getUpperRightPoint()
+  public final void setRectangle(Position upperLeftPoint)
   {
-      return this.upperLeftPoint.addX(getSize());
-  }
-  
-  public Position getBottomLeftPoint()
-  {
-      return this.upperLeftPoint.addY(getSize());
-  }
-  
-  public Position getBottomRightPoint()
-  {
-      return this.upperLeftPoint.addX(getSize()).addY(getSize());
-  }
-  
-  public Position getCenter()
-  {
-      return this.upperLeftPoint.addX(getSize() / 2).addY(getSize() / 2);
-  }
-  
-  public boolean canStepTo(Block block, Direction direction)
-  {
-      return this == block || cell.getWall(direction) == null;
-  }
-  
-  public boolean canStepTo(Position pos)
-  {
-      Position realUpperLeftPoint = getUpperLeftPoint();
-      Position realBottomRightPoint = getBottomRightPoint();
-      if(cell.getWall(Direction.Up) != null)
+      Double ratioX = null;
+      Double ratioY = null;
+      if(this.entity != null)
       {
-           realUpperLeftPoint = realUpperLeftPoint.addY(getWallSize());
+          ratioX = (double)(entity.getPosition().getUpperLeftPoint().getX() - rectangle.getUpperLeftPoint().getX()) / (double)(rectangle.getBottomRightPoint().getX() - rectangle.getUpperLeftPoint().getX());
+          ratioY = (double)(entity.getPosition().getUpperLeftPoint().getY() - rectangle.getUpperLeftPoint().getY()) / (double)(rectangle.getBottomRightPoint().getY() - rectangle.getUpperLeftPoint().getY());
       }
-      if(cell.getWall(Direction.Left) != null)
+      this.rectangle = new Rectangle(upperLeftPoint, getSize().getX(), getSize().getY());
+      setWallRectangles();
+      if(entity != null)
       {
-           realUpperLeftPoint = realUpperLeftPoint.addX(getWallSize());
+        int x = (int)((rectangle.getBottomRightPoint().getX() - rectangle.getUpperLeftPoint().getX()) * ratioX);
+        int y = (int)((rectangle.getBottomRightPoint().getY() - rectangle.getUpperLeftPoint().getY()) * ratioY);
+        Position entitySize = MapConfiguration.getInstance().getEntitySize();
+        entity.setPosition(new Rectangle(rectangle.getUpperLeftPoint().addX(x).addY(y), entitySize.getX(), entitySize.getY()));
       }
-      if(cell.getWall(Direction.Down) != null)
+  }
+  
+  public boolean collidesWithWall(Rectangle rectangle)
+  {
+      Direction[] dirs = Direction.values();
+      for(Direction dir : dirs)
       {
-           realBottomRightPoint = realBottomRightPoint.addY(-getWallSize());
+          if(collidesWithWall(rectangle, dir))
+          {
+              return true;
+          }
       }
-      if(cell.getWall(Direction.Right) != null)
-      {
-           realBottomRightPoint = realBottomRightPoint.addX(-getWallSize());
-      }
-      return realUpperLeftPoint.getX() <= pos.getX() && 
-             pos.getX() <= realBottomRightPoint.getX() &&
-             realUpperLeftPoint.getY() <= pos.getY() && 
-             pos.getY() <= realBottomRightPoint.getY();
+      return false;
   }
 
+  private void setWallRectangles()
+  {
+      walls.put(Direction.Up,(cell.getWall(Direction.Up) != null) ? new Rectangle(new Position(rectangle.getUpperLeftPoint()),getSize().getX(),getWallSize().getY()) : null);
+      walls.put(Direction.Down,(cell.getWall(Direction.Down) != null) ? new Rectangle(new Position(rectangle.getBottomLeftPoint().addY(-getWallSize().getY())),getSize().getX(),getWallSize().getY()) : null);
+      walls.put(Direction.Right,(cell.getWall(Direction.Right) != null) ? new Rectangle(new Position(rectangle.getUpperRightPoint().addX(-getWallSize().getX())),getWallSize().getX(),getSize().getY()) : null);
+      walls.put(Direction.Left,(cell.getWall(Direction.Left) != null) ? new Rectangle(new Position(rectangle.getUpperLeftPoint()),getWallSize().getX(),getSize().getY()) : null);
+  }
+  
+  private boolean collidesWithWall(Rectangle rect, Direction dir)
+  {
+      return rect.collidesWith(walls.get(dir));
+  }
+  
 }

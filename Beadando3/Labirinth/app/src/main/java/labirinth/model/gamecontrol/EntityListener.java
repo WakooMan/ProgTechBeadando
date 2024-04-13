@@ -8,6 +8,7 @@ import labirinth.model.entities.Entity;
 import labirinth.model.entities.IEntityListener;
 import labirinth.model.map.Block;
 import labirinth.model.map.Position;
+import labirinth.model.map.Rectangle;
 
 /**
  *
@@ -23,14 +24,14 @@ public class EntityListener implements IEntityListener {
     }
     
     @Override
-    public void onPositionChanged(Entity entity, Position oldPosition, Position newPosition) {
-        Block oldBlock = game.getMap().getBlock(oldPosition);
-        Block newBlock = game.getMap().getBlock(newPosition);
+    public void onPositionChanged(Entity entity, Rectangle oldPosition, Rectangle newPosition) {
+        Block oldBlock = game.getMap().getBlock(oldPosition.getCenter());
+        Block newBlock = game.getMap().getBlock(newPosition.getCenter());
         if(oldBlock != null && newBlock != null && oldBlock != newBlock)
         {
             oldBlock.setEntity(null);
             newBlock.setEntity(entity);
-            if(entity == game.getPlayerRepresentation().getPlayerEntity() && newBlock == game.getMap().getDragonSpawn())
+            if(entity == game.getPlayerRepresentation().getPlayerEntity() && newBlock == game.getMap().getWinBlock())
             {
                 game.getPlayerRepresentation().getPlayerEntity().win();
             }

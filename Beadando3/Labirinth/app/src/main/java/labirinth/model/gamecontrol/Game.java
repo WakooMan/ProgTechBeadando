@@ -12,6 +12,7 @@ import labirinth.model.map.Block;
 import labirinth.model.map.Map;
 import labirinth.model.map.IMapGenerator;
 import labirinth.model.map.IMapGeneratorFactory;
+import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.MapGeneratorFactory;
 
 public class Game {
@@ -28,8 +29,11 @@ public class Game {
   private final List<IEntityStepper> steppers;
   
   private final List<IGameListener> gameListeners;
+  
+  private Dragon dragon;
 
   public Game() {
+        this.dragon = null;
         this.playerRepresentation = new PlayerRepresentation();
         this.steppers = new ArrayList<>();
         this.gameListeners = new ArrayList<>();
@@ -37,6 +41,13 @@ public class Game {
         this.mapGenerator = factory.create();
         positionValidator = new PositionValidator(this);
         entityListener = new EntityListener(this);
+        MapConfiguration.getInstance().addMapConfigurationListener(()-> 
+        {
+            if(map != null)
+            {
+                map.onMapSizeChanged();
+            }
+        });
   }
 
   public Map getMap() {
@@ -75,12 +86,17 @@ public class Game {
         steppers.clear();
         this.map = this.mapGenerator.generateMap();
         this.spawnEntity(this.getPlayerRepresentation().getPlayerEntity(), this.map.getPlayerSpawn());
-        this.spawnEntity(new Dragon(), this.map.getDragonSpawn());
+        this.dragon = new Dragon();
+        this.spawnEntity(dragon, this.map.getDragonSpawn());
+        for(IGameListener gameListener : gameListeners)
+        {
+            gameListener.onGameStarted();
+        }
   }
   
   private void spawnEntity(Entity entity, Block block)
   {
-    entity.initialize(block.getCenter(), positionValidator, entityListener);
+    entity.initialize(block, positionValidator, entityListener);
     block.setEntity(entity);
     steppers.add(entity);
   }
@@ -94,6 +110,11 @@ public class Game {
       {
           stepper.step();
       }
+  }
+  
+  public Dragon getDragon()
+  {
+      return dragon;
   }
 
 }

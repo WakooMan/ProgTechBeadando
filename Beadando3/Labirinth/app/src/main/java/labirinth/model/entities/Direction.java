@@ -9,7 +9,4 @@ public enum Direction {
   Down,
 
   Left,
-
-  None;
-
 }
