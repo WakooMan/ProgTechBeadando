@@ -4,8 +4,10 @@
  */
 package labirinth.model.map;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import labirinth.model.entities.Direction;
 
@@ -64,15 +66,22 @@ public class MazeGenerator {
         AtomicInteger count;
         do{
             count = new AtomicInteger(0);
-            CellPosition nearest = countRoadsBetween(count, new boolean[blockNum][blockNum], cells[blockNum - 1][0].getPosition(), cells[0][blockNum - 1].getPosition());
-            removeRandomRoad(nearest);
+            List<CellPosition> positions = new ArrayList<>();
+            countRoadsBetween(count, new boolean[blockNum][blockNum], cells[blockNum - 1][0].getPosition(), cells[0][blockNum - 1].getPosition(), positions);
+            if(positions.isEmpty())
+            {
+                System.out.println("Empty");
+                break;
+            }
+            Collections.shuffle(positions);
+            CellPosition chosen = positions.get(0);
+            removeRandomRoad(chosen);
         }while(count.get() < requiredCount);
         
     }
     
-    private CellPosition countRoadsBetween(AtomicInteger count, boolean[][] visited, CellPosition pos, CellPosition destination)
+    private void countRoadsBetween(AtomicInteger count, boolean[][] visited, CellPosition pos, CellPosition destination, List<CellPosition> positions)
     {
-        CellPosition nearest = null;
         Direction[] dirs = Direction.values();
         Cell cell = cells[pos.getI()][pos.getJ()];
         visited[pos.getI()][pos.getJ()] = true;
@@ -80,7 +89,7 @@ public class MazeGenerator {
         {
             count.set(count.get() + 1);
             visited[pos.getI()][pos.getJ()] = false;
-            return nearest;
+            return;
         }
         int dirCount = 0;
         for (Direction dir : dirs) {
@@ -91,18 +100,13 @@ public class MazeGenerator {
                             continue;
                         }
 			dirCount++;
-                        CellPosition tmp = countRoadsBetween(count, visited,nPos, destination);
-                        if(nearest == null || tmp.getLengthBetween(destination) < nearest.getLengthBetween(destination))
-                        {
-                            nearest = tmp;
-                        }
+                        countRoadsBetween(count, visited, nPos, destination, positions);
 		}
         if(dirCount == 0)
         {
-            nearest = pos;
+            positions.add(pos);
         }
         visited[pos.getI()][pos.getJ()] = false;
-        return nearest;
     }
     
     private void removeRandomRoad(CellPosition position)

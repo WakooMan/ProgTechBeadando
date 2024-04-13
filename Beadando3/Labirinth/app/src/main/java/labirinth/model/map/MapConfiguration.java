@@ -7,7 +7,7 @@ public class MapConfiguration {
 
   private final int blockNum = 15;
   
-  private int roadNumber = 4;
+  private int roadNumber = 3;
 
   private Position mapSize;
   
