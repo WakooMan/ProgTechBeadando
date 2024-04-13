@@ -57,5 +57,12 @@ public class CellPosition {
       }
       return null;
   }
+  
+  public int getLengthBetween(CellPosition p2)
+  {
+      int a = i - p2.i;
+      int b = j - p2.j;
+      return (int)Math.sqrt((a*a) + (b*b));
+  }
 
 }

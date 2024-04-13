@@ -6,6 +6,8 @@ import java.util.List;
 public class MapConfiguration {
 
   private final int blockNum = 15;
+  
+  private int roadNumber = 4;
 
   private Position mapSize;
   
@@ -27,6 +29,14 @@ public class MapConfiguration {
 
   public int getBlockNum() {
     return blockNum;
+  }
+  
+  public int getRoadNumber() {
+    return roadNumber;
+  }
+  
+  public void setRoadNumber(int roadNumber) {
+    this.roadNumber = roadNumber;
   }
   
   public Position getBlockSize() {

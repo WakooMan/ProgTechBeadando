@@ -26,7 +26,6 @@ public class AnimationLoader {
             try
             {
                 String resource = animation + i + ".png";
-                System.out.println(resource);
                 Image image = ResourceLoader.loadImage(resource);
                 frames.add(new AnimationFrame(image, entity));
             }

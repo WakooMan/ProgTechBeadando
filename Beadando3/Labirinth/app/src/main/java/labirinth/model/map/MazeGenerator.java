@@ -6,6 +6,7 @@ package labirinth.model.map;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicInteger;
 import labirinth.model.entities.Direction;
 
 /**
@@ -33,6 +34,7 @@ public class MazeGenerator {
     public Cell[][] generateMaze()
     {
         generateMazeRecursive(cells[0][0].getPosition());
+        generateRoads(MapConfiguration.getInstance().getRoadNumber());
         return cells;
     }
     
@@ -56,6 +58,76 @@ public class MazeGenerator {
 			}
 		}
 	}
+    
+    private void generateRoads(int requiredCount)
+    {
+        AtomicInteger count;
+        do{
+            count = new AtomicInteger(0);
+            CellPosition nearest = countRoadsBetween(count, new boolean[blockNum][blockNum], cells[blockNum - 1][0].getPosition(), cells[0][blockNum - 1].getPosition());
+            removeRandomRoad(nearest);
+        }while(count.get() < requiredCount);
+        
+    }
+    
+    private CellPosition countRoadsBetween(AtomicInteger count, boolean[][] visited, CellPosition pos, CellPosition destination)
+    {
+        CellPosition nearest = null;
+        Direction[] dirs = Direction.values();
+        Cell cell = cells[pos.getI()][pos.getJ()];
+        visited[pos.getI()][pos.getJ()] = true;
+        if(pos.getI() == destination.getI() && pos.getJ() == destination.getJ())
+        {
+            count.set(count.get() + 1);
+            visited[pos.getI()][pos.getJ()] = false;
+            return nearest;
+        }
+        int dirCount = 0;
+        for (Direction dir : dirs) {
+                        
+			CellPosition nPos = pos.getCellPosition(dir);
+                        if(nPos == null || cell.getWall(dir) != null || visited[nPos.getI()][nPos.getJ()])
+                        {
+                            continue;
+                        }
+			dirCount++;
+                        CellPosition tmp = countRoadsBetween(count, visited,nPos, destination);
+                        if(nearest == null || tmp.getLengthBetween(destination) < nearest.getLengthBetween(destination))
+                        {
+                            nearest = tmp;
+                        }
+		}
+        if(dirCount == 0)
+        {
+            nearest = pos;
+        }
+        visited[pos.getI()][pos.getJ()] = false;
+        return nearest;
+    }
+    
+    private void removeRandomRoad(CellPosition position)
+    {
+        Direction[] dirs = Direction.values();
+        Collections.shuffle(Arrays.asList(dirs));
+        for (Direction dir : dirs) {        
+            CellPosition nPos = position.getCellPosition(dir);
+            if(nPos == null)
+            {
+                continue;
+            }
+            if (between(nPos.getI(), blockNum) && between(nPos.getJ(), blockNum)) {
+                    Cell cell = cells[position.getI()][position.getJ()];
+                    CellWall wall = cell.getWall(dir);
+                    if(wall != null)
+                    {
+                        cell.removeWall(dir);
+                        cells[nPos.getI()][nPos.getJ()].removeWall(wall.getOpposite().getDirection());
+                        break;
+                    }
+            }
+			
+		}
+    }
     
     private boolean between(int v, int upper) {
 		return (v >= 0) && (v < upper);

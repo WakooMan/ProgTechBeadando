@@ -43,7 +43,6 @@ public class MapRenderer extends JComponent implements ActionListener {
         listener.getDragonDrawer().draw(dms, g2);
         listener.getPlayerDrawer().draw(dms, g2);
         listener.getSightDrawer().draw(dms, g2);
-        
     }
 
     private void update() {

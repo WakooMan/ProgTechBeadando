@@ -56,7 +56,6 @@ public class Map {
     result.add(getBlock(position.getUpperRightPoint()));
     result.add(getBlock(position.getBottomLeftPoint()));
     result.add(getBlock(position.getBottomRightPoint()));
-    System.out.println(result.size());
     return result;
   }
   
