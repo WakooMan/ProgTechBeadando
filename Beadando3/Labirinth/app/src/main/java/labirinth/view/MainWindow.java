@@ -1,42 +1,58 @@
 package labirinth.view;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import javax.swing.BoxLayout;
+import java.awt.CardLayout;
+import java.util.HashMap;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import labirinth.model.gamecontrol.Game;
 import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.Position;
 import labirinth.model.utilities.KeyHandlerFactory;
-import labirinth.view.game.MapRenderer;
+import labirinth.view.game.GamePanel;
+import labirinth.view.mainmenu.MainMenuPanel;
+import labirinth.view.startgamemenu.StartGameMenuPanel;
 
 public class MainWindow extends JFrame{
+    private final CardLayout cl;
+    private final HashMap<String, CardPanel> cardPanels;
+    private CardPanel currentPanel;
+    
     public MainWindow()
     {
         super();
-        int mapSize = 500;
+        cardPanels = new HashMap<>();
+        currentPanel = null;
+        int mapSize = 800;
         setTitle("Labirinth");
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setBackground(Color.black);
-        panel.addComponentListener(new ComponentAdapter() 
-        {
-            @Override
-            public void componentResized(ComponentEvent evt) {
-            Component c = (Component)evt.getSource();
-            MapConfiguration.getInstance().setMapSize(new Position((int)(c.getWidth() * 0.99), c.getHeight()));
-            }
-        });
         setSize(mapSize, mapSize);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setResizable(true);
+        cl = new CardLayout();
+        setLayout(cl);
         addKeyListener(new KeyHandlerFactory().createListener());
         MapConfiguration.getInstance().setMapSize(new Position(mapSize, mapSize));
-        panel.add(new MapRenderer(new Game()));
-        add(panel);
+        MainMenuPanel starterPanel = new MainMenuPanel((cardName) -> { changeCardAction(cardName); });
+        addCardPanel(starterPanel);
+        addCardPanel(new StartGameMenuPanel((cardName) -> { changeCardAction(cardName); }));
+        addCardPanel(new GamePanel((cardName) -> { changeCardAction(cardName); }));
         setVisible(true);
+        changeCardAction(starterPanel.getViewName());
+    }
+    
+    private void addCardPanel(CardPanel panel)
+    {
+        cardPanels.put(panel.getViewName(), panel);
+        add(panel, panel.getViewName());
+    }
+    
+    private void changeCardAction(String cardName)
+    {
+        if(currentPanel != null)
+        {
+            currentPanel.onCardNotShown();
+        }
+        currentPanel = cardPanels.get(cardName);
+        currentPanel.onCardShow();
+        cl.show(getContentPane(), cardName);
+        this.requestFocusInWindow();
     }
 }
