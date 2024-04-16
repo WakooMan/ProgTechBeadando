@@ -9,39 +9,31 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.function.Consumer;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import labirinth.model.gamestates.MainMenu;
 import labirinth.view.CardPanel;
 
 /**
  *
  * @author vitya
  */
-public class MainMenuPanel extends CardPanel {
+public class MainMenuPanel extends CardPanel<MainMenu> {
 
     private final JButton startGame;
     private final JButton scoreList;
     private final JButton exitGame;
+    private ActionListener startGameAction;
+    private ActionListener scoreListAction;
+    private ActionListener exitGameAction;
     
-    public MainMenuPanel(Consumer<String> changeCard)
+    public MainMenuPanel()
     {
-        super(changeCard);
+        super();
         setBackground(Color.BLACK);
         startGame = new JButton("START GAME");
-        startGame.addActionListener((e)-> 
-        {
-           changeCard("StartGameMenu");
-        });
         scoreList = new JButton("SCORES");
-        scoreList.addActionListener((e) -> 
-        {
-            changeCard("StartGameMenu");
-        });
         exitGame = new JButton("EXIT GAME");
-        exitGame.addActionListener((e) -> 
-        {
-            System.exit(0);
-        });
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.gridy = 0;
@@ -55,17 +47,35 @@ public class MainMenuPanel extends CardPanel {
     }
     
     @Override
-    public void onCardShow() {
+    public void onCardShow(MainMenu gameState) {
+        startGameAction = (e)-> 
+        {
+           gameState.startGame();
+        };
+        scoreListAction =(e) -> 
+        {
+            //
+        };
+        exitGameAction = (e) -> 
+        {
+            gameState.exitGame();
+        };
         
+        startGame.addActionListener(startGameAction);
+        scoreList.addActionListener(scoreListAction);
+        exitGame.addActionListener(exitGameAction);
     }
 
     @Override
     public void onCardNotShown() {
+        startGame.removeActionListener(startGameAction);
+        scoreList.removeActionListener(scoreListAction);
+        exitGame.removeActionListener(exitGameAction);
     }
 
     @Override
     public String getViewName() {
-        return "MainMenu";
+        return MainMenu.class.getName();
     }
     
     private void modifyButton(JButton button, GridBagConstraints c)
@@ -75,5 +85,4 @@ public class MainMenuPanel extends CardPanel {
         button.setFont(new Font("Arial", Font.PLAIN, 50)); // Set button font
         add(button, c); // Add button to the view
     }
-    
 }

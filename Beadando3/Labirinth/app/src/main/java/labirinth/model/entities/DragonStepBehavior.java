@@ -2,9 +2,8 @@ package labirinth.model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import labirinth.model.ObjectCompositionUtils;
 import labirinth.model.utilities.IRandomGenerator;
-import labirinth.model.utilities.IRandomGeneratorFactory;
-import labirinth.model.utilities.RandomGeneratorFactory;
 
 public class DragonStepBehavior extends StepBehavior {
 
@@ -14,8 +13,7 @@ public class DragonStepBehavior extends StepBehavior {
 
   public DragonStepBehavior(Dragon dragon) {
       super(dragon);
-      IRandomGeneratorFactory factory = new RandomGeneratorFactory();
-      randomGenerator = factory.create();
+      randomGenerator = ObjectCompositionUtils.getDefaultRandomGenerator();
       this.currentDirection = getRandomDirection();
   }
 

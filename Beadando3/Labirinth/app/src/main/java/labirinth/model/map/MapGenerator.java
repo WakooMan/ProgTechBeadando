@@ -1,16 +1,14 @@
 package labirinth.model.map;
 
+import labirinth.model.ObjectCompositionUtils;
 import labirinth.model.utilities.IRandomGenerator;
-import labirinth.model.utilities.IRandomGeneratorFactory;
-import labirinth.model.utilities.RandomGeneratorFactory;
 
 public class MapGenerator implements IMapGenerator {
   
   private final IRandomGenerator random;
     
   public MapGenerator() {
-      IRandomGeneratorFactory factory = new RandomGeneratorFactory();
-      random = factory.create();
+      random = ObjectCompositionUtils.getDefaultRandomGenerator();
   }
 
   @Override

@@ -4,30 +4,22 @@
  */
 package labirinth.view;
 
-import java.awt.CardLayout;
-import java.util.function.Consumer;
 import javax.swing.JPanel;
+import labirinth.model.gamestates.GameStateBase;
 
 /**
  *
  * @author vitya
+ * @param <T>
  */
-public abstract class CardPanel extends JPanel {
+public abstract class CardPanel<T extends GameStateBase> extends JPanel {
     
-    private final Consumer<String> changeCard;
-    
-    protected CardPanel(Consumer<String> changeCard)
+    protected CardPanel()
     {
         super();
-        this.changeCard = changeCard;
     }
     
-    protected void changeCard(String cardName)
-    {
-        changeCard.accept(cardName);
-    }
-    
-    public abstract void onCardShow();
+    public abstract void onCardShow(T gameState);
     public abstract void onCardNotShown();
     public abstract String getViewName();
     

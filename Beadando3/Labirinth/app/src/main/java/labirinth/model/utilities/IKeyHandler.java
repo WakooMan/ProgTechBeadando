@@ -1,6 +1,7 @@
 package labirinth.model.utilities;
+import java.awt.event.KeyListener;
 
-public interface IKeyHandler {
+public interface IKeyHandler extends KeyListener {
 
   public boolean isUpKeyDown();
 

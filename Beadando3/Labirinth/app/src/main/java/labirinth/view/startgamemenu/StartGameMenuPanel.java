@@ -10,36 +10,32 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
 import java.util.function.Consumer;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import labirinth.model.gamestates.StartGame;
 import labirinth.view.CardPanel;
 
 /**
  *
  * @author vitya
  */
-public class StartGameMenuPanel extends CardPanel {
+public class StartGameMenuPanel extends CardPanel<StartGame> {
 
     private final JButton start;
     private final JButton back;
+    private ActionListener startAction;
+    private ActionListener backAction;
     private final JTextField nameField;
     
-    public StartGameMenuPanel(Consumer<String> changeCard)
+    public StartGameMenuPanel()
     {
-        super(changeCard);
+        super();
         start = new JButton("START");
-        start.addActionListener((e) -> 
-        {
-            changeCard("Game");
-        });
         back = new JButton("BACK");
-        back.addActionListener((e) -> 
-        {
-            changeCard("MainMenu");
-        });
         nameField = new JTextField(20);
         modifyButton(start);
         modifyButton(back);
@@ -64,18 +60,34 @@ public class StartGameMenuPanel extends CardPanel {
     }
     
     @Override
-    public void onCardShow() {
-        
+    public void onCardShow(StartGame gameState) {
+        startAction = (e) -> 
+        {
+            gameState.startGame(nameField.getText());
+        };
+        backAction = (e) -> 
+        {
+            gameState.backToMainMenu();
+        };
+        start.addActionListener(startAction);
+        back.addActionListener(backAction);
     }
 
     @Override
     public void onCardNotShown() {
-        
+        if(startAction != null)
+        {
+            start.removeActionListener(startAction);
+        }
+        if(backAction != null)
+        {
+            back.removeActionListener(backAction);
+        }
     }
 
     @Override
     public String getViewName() {
-        return "StartGameMenu";
+        return StartGame.class.getName();
     }
     
     private void modifyButton(JButton button)

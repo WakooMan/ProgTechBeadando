@@ -4,13 +4,15 @@ import labirinth.model.entities.PlayerEntity;
 
 public class PlayerRepresentation {
 
+  private final String name;
   private PlayerEntity playerEntity;
 
   private final int mapVision;
 
   public int mapCount;
 
-  public PlayerRepresentation() {
+  public PlayerRepresentation(String name) {
+      this.name = name;
       this.mapVision = 3;
       this.mapCount = 0;
       this.playerEntity = null;
@@ -26,6 +28,11 @@ public class PlayerRepresentation {
 
   public int getMapVision() {
   return mapVision;
+  }
+  
+  public String getName()
+  {
+      return name;
   }
 
   public void increaseMapCount() {

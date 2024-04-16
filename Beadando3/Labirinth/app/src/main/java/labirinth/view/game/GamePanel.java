@@ -8,23 +8,21 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.function.Consumer;
 import javax.swing.BoxLayout;
-import labirinth.model.gamecontrol.Game;
+import labirinth.model.gamestates.PlayingGame;
 import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.Position;
-import labirinth.model.utilities.KeyHandlerFactory;
 import labirinth.view.CardPanel;
 
 /**
  *
  * @author vitya
  */
-public class GamePanel extends CardPanel {
+public class GamePanel extends CardPanel<PlayingGame> {
     
-    public GamePanel(Consumer<String> changeCard)
+    public GamePanel()
     {
-        super(changeCard);
+        super();
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBackground(Color.black);
         addComponentListener(new ComponentAdapter() 
@@ -38,8 +36,8 @@ public class GamePanel extends CardPanel {
     }
 
     @Override
-    public void onCardShow() {
-        add(new MapRenderer(new Game()));
+    public void onCardShow(PlayingGame gameState) {
+        add(new MapRenderer(gameState.getGame()));
     }
 
     @Override
@@ -49,7 +47,7 @@ public class GamePanel extends CardPanel {
 
     @Override
     public String getViewName() {
-        return "Game";
+        return PlayingGame.class.getName();
     }
     
 }

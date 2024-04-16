@@ -1,8 +1,7 @@
 package labirinth.model.entities;
 
+import labirinth.model.ObjectCompositionUtils;
 import labirinth.model.utilities.IKeyHandler;
-import labirinth.model.utilities.IKeyHandlerFactory;
-import labirinth.model.utilities.KeyHandlerFactory;
 
 /*
  */
@@ -12,8 +11,7 @@ public class PlayerStepBehavior extends StepBehavior {
 
   public PlayerStepBehavior(PlayerEntity player) {
       super(player);
-      IKeyHandlerFactory factory = new KeyHandlerFactory();
-      keyHandler = factory.createHandler();
+      keyHandler = ObjectCompositionUtils.getDefaultKeyHandler();
   }
 
   @Override

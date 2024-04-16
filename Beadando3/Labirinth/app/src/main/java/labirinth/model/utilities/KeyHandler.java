@@ -1,9 +1,8 @@
 package labirinth.model.utilities;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-public class KeyHandler implements IKeyHandler, KeyListener {
+public class KeyHandler implements IKeyHandler {
 
   private boolean m_IsUpKeyDown = false;
   private boolean m_IsDownKeyDown = false;

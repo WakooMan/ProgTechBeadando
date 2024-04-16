@@ -3,9 +3,12 @@ package labirinth.view;
 import java.awt.CardLayout;
 import java.util.HashMap;
 import javax.swing.JFrame;
+import labirinth.model.ObjectCompositionUtils;
+import labirinth.model.gamestates.GameStateBase;
+import labirinth.model.gamestates.GameStateMachine;
+import labirinth.model.gamestates.MainMenu;
 import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.Position;
-import labirinth.model.utilities.KeyHandlerFactory;
 import labirinth.view.game.GamePanel;
 import labirinth.view.mainmenu.MainMenuPanel;
 import labirinth.view.startgamemenu.StartGameMenuPanel;
@@ -13,11 +16,13 @@ import labirinth.view.startgamemenu.StartGameMenuPanel;
 public class MainWindow extends JFrame{
     private final CardLayout cl;
     private final HashMap<String, CardPanel> cardPanels;
+    private final GameStateMachine stateMachine;
     private CardPanel currentPanel;
     
     public MainWindow()
     {
         super();
+        this.stateMachine = new GameStateMachine();
         cardPanels = new HashMap<>();
         currentPanel = null;
         int mapSize = 800;
@@ -28,14 +33,17 @@ public class MainWindow extends JFrame{
         setResizable(true);
         cl = new CardLayout();
         setLayout(cl);
-        addKeyListener(new KeyHandlerFactory().createListener());
+        addKeyListener(ObjectCompositionUtils.getDefaultKeyHandler());
         MapConfiguration.getInstance().setMapSize(new Position(mapSize, mapSize));
-        MainMenuPanel starterPanel = new MainMenuPanel((cardName) -> { changeCardAction(cardName); });
-        addCardPanel(starterPanel);
-        addCardPanel(new StartGameMenuPanel((cardName) -> { changeCardAction(cardName); }));
-        addCardPanel(new GamePanel((cardName) -> { changeCardAction(cardName); }));
+        addCardPanel(new MainMenuPanel());
+        addCardPanel(new StartGameMenuPanel());
+        addCardPanel(new GamePanel());
+        this.stateMachine.addGameStateListener((gameState) -> 
+        {
+            changeCardAction(gameState);
+        });
+        stateMachine.changeState(new MainMenu(stateMachine));
         setVisible(true);
-        changeCardAction(starterPanel.getViewName());
     }
     
     private void addCardPanel(CardPanel panel)
@@ -44,15 +52,15 @@ public class MainWindow extends JFrame{
         add(panel, panel.getViewName());
     }
     
-    private void changeCardAction(String cardName)
+    private void changeCardAction(GameStateBase gameState)
     {
         if(currentPanel != null)
         {
             currentPanel.onCardNotShown();
         }
-        currentPanel = cardPanels.get(cardName);
-        currentPanel.onCardShow();
-        cl.show(getContentPane(), cardName);
+        currentPanel = cardPanels.get(gameState.getClass().getName());
+        currentPanel.onCardShow(gameState);
+        cl.show(getContentPane(), gameState.getClass().getName());
         this.requestFocusInWindow();
     }
 }

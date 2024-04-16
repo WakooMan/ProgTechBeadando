@@ -32,9 +32,9 @@ public class Game {
   
   private Dragon dragon;
 
-  public Game() {
+  public Game(String playerName) {
         this.dragon = null;
-        this.playerRepresentation = new PlayerRepresentation();
+        this.playerRepresentation = new PlayerRepresentation(playerName);
         this.steppers = new ArrayList<>();
         this.gameListeners = new ArrayList<>();
         IMapGeneratorFactory factory = new MapGeneratorFactory();
