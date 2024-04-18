@@ -4,34 +4,27 @@
  */
 package labirinth.view.game;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JComponent;
-import javax.swing.Timer;
 import labirinth.model.gamecontrol.Game;
-import labirinth.model.map.MapConfiguration;
+import labirinth.model.gamecontrol.IGameListener;
 
 /**
  *
  * @author vitya
  */
-public class MapRenderer extends JComponent implements ActionListener {
+public class MapRenderer extends JComponent implements IGameListener {
     private int x;        
     private final Game game;
-    private final GameListener listener;
-    private final int dms;
+    private IDrawable playerDrawer;
+    private IDrawable dragonDrawer;
+    private IDrawable mapDrawer;
+    private IDrawable sightDrawer;
+    private int dms;
     
     public MapRenderer(Game game) {
-        dms = 1000/60;
-        Timer timer = new Timer(dms, this);
         this.game = game;
-        listener = new GameListener(timer, game);
-        this.game.addGameListener(listener);
-        game.startGame();
-        timer.start();
         x = 0;
     }
 
@@ -39,20 +32,31 @@ public class MapRenderer extends JComponent implements ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-        listener.getMapDrawer().draw(dms, g2);
-        listener.getDragonDrawer().draw(dms, g2);
-        listener.getPlayerDrawer().draw(dms, g2);
-        listener.getSightDrawer().draw(dms, g2);
+        mapDrawer.draw(dms, g2);
+        dragonDrawer.draw(dms, g2);
+        playerDrawer.draw(dms, g2);
+        sightDrawer.draw(dms, g2);
+    }
+    
+    @Override
+    public void onGameOver() { 
+    }
+
+    @Override
+    public void onGameStarted() {
+        playerDrawer = new EntityDrawer(new PlayerAnimation(game.getPlayerRepresentation().getPlayerEntity()));
+        dragonDrawer = new EntityDrawer(new DragonAnimation(game.getDragon()));
+        mapDrawer = new MapDrawer(() -> game.getMap());
+        sightDrawer = new SightDrawer(game.getPlayerRepresentation().getPlayerEntity());
     }
 
     private void update() {
         this.x++;    
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        game.onTick();
+    public void onTick(int dms) {
+        this.dms = dms;
         update();
-        repaint();      
+        repaint();   
     }
 }

@@ -25,4 +25,9 @@ public class PlayingGame extends GameStateBase {
         return game;
     }
     
+    public void onGameOver()
+    {
+        this.stateMachine.changeState(new GameOver(stateMachine, game));
+    }
+    
 }

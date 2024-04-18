@@ -20,6 +20,8 @@ import labirinth.view.CardPanel;
  */
 public class GamePanel extends CardPanel<PlayingGame> {
     
+    private GameController controller;
+    
     public GamePanel()
     {
         super();
@@ -37,12 +39,15 @@ public class GamePanel extends CardPanel<PlayingGame> {
 
     @Override
     public void onCardShow(PlayingGame gameState) {
-        add(new MapRenderer(gameState.getGame()));
+        controller = new GameController(gameState);
+        add(controller.getMapRenderer());
+        controller.startGame();
     }
 
     @Override
     public void onCardNotShown() {
         removeAll();
+        controller = null;
     }
 
     @Override

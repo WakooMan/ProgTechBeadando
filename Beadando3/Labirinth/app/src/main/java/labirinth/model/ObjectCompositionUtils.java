@@ -8,8 +8,11 @@ import labirinth.model.utilities.IKeyHandler;
 import labirinth.model.utilities.IKeyHandlerFactory;
 import labirinth.model.utilities.IRandomGenerator;
 import labirinth.model.utilities.IRandomGeneratorFactory;
+import labirinth.model.utilities.IScoreHandler;
+import labirinth.model.utilities.IScoreHandlerFactory;
 import labirinth.model.utilities.KeyHandlerFactory;
 import labirinth.model.utilities.RandomGeneratorFactory;
+import labirinth.model.utilities.ScoreHandlerFactory;
 
 /**
  *
@@ -18,6 +21,7 @@ import labirinth.model.utilities.RandomGeneratorFactory;
 public class ObjectCompositionUtils {
     private static IKeyHandler keyHandler;
     private static IRandomGenerator randomGenerator;
+    private static IScoreHandler scoreHandler;
     
     public static IKeyHandler getDefaultKeyHandler()
     {
@@ -37,5 +41,15 @@ public class ObjectCompositionUtils {
             randomGenerator = factory.create();
         }
         return randomGenerator;
+    }
+    
+    public static IScoreHandler getDefaultScoreHandler()
+    {
+        if(scoreHandler == null)
+        {
+            IScoreHandlerFactory factory = new ScoreHandlerFactory();
+            scoreHandler = factory.create();
+        }
+        return scoreHandler;
     }
 }

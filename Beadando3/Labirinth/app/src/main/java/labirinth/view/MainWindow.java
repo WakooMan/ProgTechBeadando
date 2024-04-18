@@ -10,6 +10,7 @@ import labirinth.model.gamestates.MainMenu;
 import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.Position;
 import labirinth.view.game.GamePanel;
+import labirinth.view.gameover.GameOverPanel;
 import labirinth.view.mainmenu.MainMenuPanel;
 import labirinth.view.startgamemenu.StartGameMenuPanel;
 
@@ -38,6 +39,7 @@ public class MainWindow extends JFrame{
         addCardPanel(new MainMenuPanel());
         addCardPanel(new StartGameMenuPanel());
         addCardPanel(new GamePanel());
+        addCardPanel(new GameOverPanel());
         this.stateMachine.addGameStateListener((gameState) -> 
         {
             changeCardAction(gameState);
