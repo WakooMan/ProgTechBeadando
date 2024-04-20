@@ -27,7 +27,7 @@ public class ScoreHandler implements IScoreHandler {
             
             if(conn == null)
             {
-                Class.forName("com.mysql.jbdc.Driver");
+                Class.forName("com.mysql.jdbc.Driver");
                 conn = new MysqlConnectionPoolDataSource();
                 conn.setServerName("localhost");
                 conn.setPort(3306);
@@ -39,6 +39,7 @@ public class ScoreHandler implements IScoreHandler {
         }
         catch(ClassNotFoundException | SQLException ex)
         {
+            System.out.println(ex.getMessage());
             conn = null;
             return null;
         }
@@ -66,12 +67,14 @@ public class ScoreHandler implements IScoreHandler {
         Connection connection = getConnection();
         if(shouldInsertPlayer(connection, playerName, score))
         {
-            String insertion = "INSERT INTO scores VALUES(?,?)";
+            System.out.println("valami");
+            String insertion = "INSERT INTO scores VALUES(NULL,?,?)";
             try(PreparedStatement statement = connection.prepareStatement(insertion))
             {
                 statement.setString(1, playerName);
                 statement.setInt(2, score);
                 statement.addBatch();
+                System.out.println("valami2");
                 statement.executeBatch();
             }
         }
@@ -89,6 +92,7 @@ public class ScoreHandler implements IScoreHandler {
             {
                 if(res.getInt(2) >= score)
                 {
+                    System.out.println("false");
                     return false;
                 }
                 String deletion = "DELETE FROM scores WHERE Name=?";
@@ -98,10 +102,11 @@ public class ScoreHandler implements IScoreHandler {
                     statement2.addBatch();
                     statement2.executeBatch();
                 }
+                System.out.println("true");
                 return true;
             }
         }
-        
+        System.out.println("true");
         return true;
     }
     
