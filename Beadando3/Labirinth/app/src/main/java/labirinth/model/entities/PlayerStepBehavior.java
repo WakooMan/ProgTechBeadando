@@ -13,7 +13,7 @@ public class PlayerStepBehavior extends StepBehavior {
       super(player);
       keyHandler = ObjectCompositionUtils.getDefaultKeyHandler();
   }
-
+  
   @Override
   protected Direction getDirection() {
     if(keyHandler.isUpKeyDown())
