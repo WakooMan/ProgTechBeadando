@@ -21,10 +21,12 @@ public class MapRenderer extends JComponent implements IGameListener {
     private IDrawable dragonDrawer;
     private IDrawable mapDrawer;
     private IDrawable sightDrawer;
+    private final IDrawable timeDrawer;
     private int dms;
     
     public MapRenderer(Game game) {
         this.game = game;
+        timeDrawer = new TimeDrawer();
         x = 0;
     }
 
@@ -36,6 +38,7 @@ public class MapRenderer extends JComponent implements IGameListener {
         dragonDrawer.draw(dms, g2);
         playerDrawer.draw(dms, g2);
         sightDrawer.draw(dms, g2);
+        timeDrawer.draw(dms, g2);
     }
     
     @Override

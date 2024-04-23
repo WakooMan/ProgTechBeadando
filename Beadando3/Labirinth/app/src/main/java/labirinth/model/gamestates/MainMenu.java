@@ -17,6 +17,11 @@ public class MainMenu extends GameStateBase {
     public void startGame() {
         this.stateMachine.changeState(new StartGame(stateMachine));
     }
+    
+    public void scoresList()
+    {
+        this.stateMachine.changeState(new Scores(stateMachine));
+    }
 
     public void exitGame() {
         System.exit(0);

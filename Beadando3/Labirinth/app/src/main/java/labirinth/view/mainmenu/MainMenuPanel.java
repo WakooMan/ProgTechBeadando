@@ -54,7 +54,7 @@ public class MainMenuPanel extends CardPanel<MainMenu> {
         };
         scoreListAction =(e) -> 
         {
-            //
+            gameState.scoresList();
         };
         exitGameAction = (e) -> 
         {

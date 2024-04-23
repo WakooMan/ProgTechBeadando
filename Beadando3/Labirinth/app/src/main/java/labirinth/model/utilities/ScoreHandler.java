@@ -33,7 +33,7 @@ public class ScoreHandler implements IScoreHandler {
                 conn.setPort(3306);
                 conn.setDatabaseName("labirinth");
                 conn.setUser("tanulo");
-                conn.setPassword("asd123");
+                conn.setPassword("asdasd123*");
             }
             return conn.getPooledConnection().getConnection();
         }
@@ -51,11 +51,11 @@ public class ScoreHandler implements IScoreHandler {
         List<ScoreDto> result = new ArrayList<>();
         try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE))
         {
-            String query = "SELECT * FROM scores";
+            String query = "SELECT * FROM scores ORDER BY MapCount DESC";
             ResultSet res = statement.executeQuery(query);
             while(res.next())
             {
-                result.add(new ScoreDto(res.getString(1), res.getInt(2)));
+                result.add(new ScoreDto(res.getString(2), res.getInt(3)));
             }
         }
         

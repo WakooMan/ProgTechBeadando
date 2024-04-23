@@ -67,4 +67,10 @@ public final class ScoreDto {
         return hash;
     }
     
+    @Override
+    public String toString()
+    {
+        return playerName + " - " + score;
+    }
+    
 }
