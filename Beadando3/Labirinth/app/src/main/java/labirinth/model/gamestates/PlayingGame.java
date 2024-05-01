@@ -5,6 +5,8 @@
 package labirinth.model.gamestates;
 
 import java.sql.SQLException;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import labirinth.model.ObjectCompositionUtils;
 import labirinth.model.gamecontrol.Game;
 import labirinth.model.utilities.IScoreHandler;
@@ -38,6 +40,10 @@ public class PlayingGame extends GameStateBase {
         catch(SQLException ex)
         {
             System.out.println(ex.getMessage());
+            JOptionPane optionPane = new JOptionPane("Error happened during saving scores!",JOptionPane.WARNING_MESSAGE);
+            JDialog dialog = optionPane.createDialog("Warning!");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
         }
         this.stateMachine.changeState(new GameOver(stateMachine, game));
     }

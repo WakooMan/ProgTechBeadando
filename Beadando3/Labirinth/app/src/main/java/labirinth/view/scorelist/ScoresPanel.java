@@ -11,7 +11,9 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import labirinth.model.gamestates.Scores;
 import labirinth.model.utilities.ScoreDto;
 import labirinth.view.CardPanel;
@@ -66,7 +68,11 @@ public class ScoresPanel extends CardPanel<Scores> {
         }
         catch(SQLException ex)
         {
-            
+            System.out.println(ex.getMessage());
+            JOptionPane optionPane = new JOptionPane("Could not get scores from the database!",JOptionPane.WARNING_MESSAGE);
+            JDialog dialog = optionPane.createDialog("Warning!");
+            dialog.setAlwaysOnTop(true);
+            dialog.setVisible(true);
         }
     }
 
