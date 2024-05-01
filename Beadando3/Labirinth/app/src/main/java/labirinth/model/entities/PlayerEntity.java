@@ -26,10 +26,4 @@ public class PlayerEntity extends Entity {
   public void setPlayerEntityListener(IPlayerEntityListener playerEntityListener) {
       this.playerEntityListener = playerEntityListener;
   }
-
-    @Override
-    public void onEntitySteppedNearby(Entity entity) {
-        die();
-    }
-
 }

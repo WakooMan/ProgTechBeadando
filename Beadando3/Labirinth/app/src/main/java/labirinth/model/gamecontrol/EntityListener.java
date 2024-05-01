@@ -7,7 +7,6 @@ package labirinth.model.gamecontrol;
 import labirinth.model.entities.Entity;
 import labirinth.model.entities.IEntityListener;
 import labirinth.model.map.Block;
-import labirinth.model.map.Position;
 import labirinth.model.map.Rectangle;
 
 /**
@@ -34,14 +33,6 @@ public class EntityListener implements IEntityListener {
             if(entity == game.getPlayerRepresentation().getPlayerEntity() && newBlock == game.getMap().getWinBlock())
             {
                 game.getPlayerRepresentation().getPlayerEntity().win();
-            }
-
-            for(Block block : game.getMap().getNeighbors(newBlock))
-            {
-                if(block.getEntity() != null)
-                {
-                    block.getEntity().onEntitySteppedNearby(entity);
-                }
             }
         }
     }

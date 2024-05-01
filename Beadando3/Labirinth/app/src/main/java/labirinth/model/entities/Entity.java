@@ -92,8 +92,6 @@ public abstract class Entity implements IEntityStepper {
       this.position = position;
   }
   
-  public abstract void onEntitySteppedNearby(Entity entity);
-  
   public void die() {}
 
   public void initialize(Block block, IPositionValidator positionValidator, IEntityListener entityListener) {

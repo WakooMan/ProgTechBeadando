@@ -25,6 +25,7 @@ public class Game {
   private final IMapGenerator mapGenerator;
   private final IPositionValidator positionValidator;
   private final IEntityListener entityListener;
+  private final DistanceListener distanceListener;
 
   private final List<IEntityStepper> steppers;
   
@@ -37,6 +38,7 @@ public class Game {
         this.playerRepresentation = new PlayerRepresentation(playerName);
         this.steppers = new ArrayList<>();
         this.gameListeners = new ArrayList<>();
+        this.distanceListener = new DistanceListener(this);
         IMapGeneratorFactory factory = new MapGeneratorFactory();
         this.mapGenerator = factory.create();
         positionValidator = new PositionValidator(this);
@@ -109,6 +111,7 @@ public class Game {
       for(IEntityStepper stepper : steppers)
       {
           stepper.step();
+          distanceListener.listen();
       }
   }
   

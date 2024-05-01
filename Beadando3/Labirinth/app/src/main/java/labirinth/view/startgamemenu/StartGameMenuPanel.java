@@ -6,16 +6,15 @@ package labirinth.view.startgamemenu;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
-import java.util.function.Consumer;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 import labirinth.model.gamestates.StartGame;
 import labirinth.view.CardPanel;
 
@@ -30,6 +29,7 @@ public class StartGameMenuPanel extends CardPanel<StartGame> {
     private ActionListener startAction;
     private ActionListener backAction;
     private final JTextField nameField;
+    private static final String STR_REGEX_PATTERN = "^[A-Za-z0-9.]{1,255}$";
     
     public StartGameMenuPanel()
     {
@@ -37,6 +37,22 @@ public class StartGameMenuPanel extends CardPanel<StartGame> {
         start = new JButton("START");
         back = new JButton("BACK");
         nameField = new JTextField(20);
+        setDefaultState();
+        nameField.getDocument().addDocumentListener(new JTextFieldListener(nameField, (field) -> 
+        {
+            String player = field.getText();
+            if(player.length() >= 3 && player.matches(STR_REGEX_PATTERN))
+            {
+                field.setBorder(new LineBorder(Color.green, 1));
+                start.setEnabled(true);
+            }
+            else
+            {
+                field.setBorder(new LineBorder(Color.red, 1));
+                start.setEnabled(false);
+            }
+            
+        }));
         modifyButton(start);
         modifyButton(back);
         modifyTextField(nameField);
@@ -56,7 +72,6 @@ public class StartGameMenuPanel extends CardPanel<StartGame> {
         gbc.gridx = 1;
         panel.add(start, gbc);
         add(panel);
-        
     }
     
     @Override
@@ -83,6 +98,7 @@ public class StartGameMenuPanel extends CardPanel<StartGame> {
         {
             back.removeActionListener(backAction);
         }
+        setDefaultState();
     }
 
     @Override
@@ -103,6 +119,13 @@ public class StartGameMenuPanel extends CardPanel<StartGame> {
         textField.setBackground(Color.gray); // Set button background color
         textField.setFont(new Font("Arial", Font.PLAIN, 40)); // Set button font
         textField.setForeground(Color.BLACK);
+    }
+    
+    private void setDefaultState()
+    {
+        nameField.setText("");
+        nameField.setBorder(new LineBorder(Color.red, 1));
+        start.setEnabled(false);
     }
     
 }

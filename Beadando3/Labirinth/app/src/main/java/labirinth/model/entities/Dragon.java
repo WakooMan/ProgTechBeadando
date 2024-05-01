@@ -8,10 +8,4 @@ public class Dragon extends Entity {
       super(new ArrayList<IEntityBehavior>());
       this.stepBehavior = new DragonStepBehavior(this);
   }
-
-    @Override
-    public void onEntitySteppedNearby(Entity entity) {
-        die();
-    }
-
 }

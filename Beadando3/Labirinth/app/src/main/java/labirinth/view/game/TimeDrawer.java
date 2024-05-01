@@ -4,10 +4,11 @@
  */
 package labirinth.view.game;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import labirinth.model.map.MapConfiguration;
 
 /**
  *
@@ -45,11 +46,12 @@ public class TimeDrawer implements IDrawable {
                 }
             }
         }
+        int sizey = MapConfiguration.getInstance().getMapSize().getY() * 3 / 100;
         graphics.setColor(Color.green);
         graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
         RenderingHints.VALUE_ANTIALIAS_ON);
-        graphics.setStroke(new BasicStroke(10));
-        graphics.drawString(hour + ":" + minute + ":" + seconds + ":" + ms, 10, 10);
+        graphics.setFont(new Font("Arial", Font.PLAIN, sizey));
+        graphics.drawString(hour + ":" + minute + ":" + seconds + ":" + ms, 0, sizey);
     }
     
 }
