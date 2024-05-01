@@ -5,37 +5,64 @@ import java.util.List;
 import labirinth.model.ObjectCompositionUtils;
 import labirinth.model.utilities.IRandomGenerator;
 
+/**
+ * DragonStepBehavior represents the behavior of a dragon entity when it steps.
+ * It extends the StepBehavior class.
+ */
 public class DragonStepBehavior extends StepBehavior {
 
-  private final IRandomGenerator randomGenerator;
+    // The random number generator used to determine the direction
+    private final IRandomGenerator randomGenerator;
 
-  private Direction currentDirection;
+    // The current direction of movement
+    private Direction currentDirection;
 
-  public DragonStepBehavior(Dragon dragon) {
-      super(dragon);
-      randomGenerator = ObjectCompositionUtils.getDefaultRandomGenerator();
-      this.currentDirection = getRandomDirection();
-  }
+    /**
+     * Constructs a DragonStepBehavior with the given dragon entity.
+     * @param dragon The dragon entity associated with this behavior.
+     */
+    public DragonStepBehavior(Dragon dragon) {
+        super(dragon);
+        // Get the default random generator
+        randomGenerator = ObjectCompositionUtils.getDefaultRandomGenerator();
+        // Initialize the current direction to a random direction
+        this.currentDirection = getRandomDirection();
+    }
 
-  @Override
-  protected Direction getDirection() {
-      return currentDirection;
-  }
+    /**
+     * Retrieves the direction of the dragon's step.
+     * @return The direction of the step.
+     */
+    @Override
+    protected Direction getDirection() {
+        return currentDirection;
+    }
 
-  @Override
-  protected void onMoveFailed() {
-      this.currentDirection = getRandomDirection();
-  }
+    /**
+     * Handles the case when the dragon's move fails.
+     * Generates a new random direction for the dragon.
+     */
+    @Override
+    protected void onMoveFailed() {
+        this.currentDirection = getRandomDirection();
+    }
   
-  private Direction getRandomDirection()
-  {
-      List<Direction> directions = new ArrayList<>();
-      directions.add(Direction.Up);
-      directions.add(Direction.Down);
-      directions.add(Direction.Right);
-      directions.add(Direction.Left);
-      directions.remove(currentDirection);
-      return directions.get(randomGenerator.generate(0, directions.size() - 1));
-  }
-
+    /**
+     * Generates a random direction for the dragon.
+     * @return A random direction.
+     */
+    private Direction getRandomDirection() {
+        List<Direction> directions = new ArrayList<>();
+        // Add all directions
+        directions.add(Direction.Up);
+        directions.add(Direction.Down);
+        directions.add(Direction.Right);
+        directions.add(Direction.Left);
+        // Remove the current direction
+        directions.remove(currentDirection);
+        // Generate a random index within the range of available directions
+        int randomIndex = randomGenerator.generate(0, directions.size() - 1);
+        // Return the direction at the random index
+        return directions.get(randomIndex);
+    }
 }

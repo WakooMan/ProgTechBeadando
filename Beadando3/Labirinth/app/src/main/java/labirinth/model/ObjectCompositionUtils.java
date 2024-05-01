@@ -1,21 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.model;
 
-import labirinth.model.utilities.IKeyHandler;
-import labirinth.model.utilities.IKeyHandlerFactory;
-import labirinth.model.utilities.IRandomGenerator;
-import labirinth.model.utilities.IRandomGeneratorFactory;
-import labirinth.model.utilities.IScoreHandler;
-import labirinth.model.utilities.IScoreHandlerFactory;
-import labirinth.model.utilities.KeyHandlerFactory;
-import labirinth.model.utilities.RandomGeneratorFactory;
-import labirinth.model.utilities.ScoreHandlerFactory;
+import labirinth.model.utilities.*;
 
 /**
- *
+ * Utility class for managing object composition in the labyrinth model.
+ * Provides default implementations for key handling, random number generation,
+ * and score handling.
+ * This class follows the Singleton pattern for providing default instances of
+ * composition objects.
+ * 
  * @author vitya
  */
 public class ObjectCompositionUtils {
@@ -23,30 +16,45 @@ public class ObjectCompositionUtils {
     private static IRandomGenerator randomGenerator;
     private static IScoreHandler scoreHandler;
     
-    public static IKeyHandler getDefaultKeyHandler()
-    {
-        if(keyHandler == null)
-        {
+    /**
+     * Returns the default key handler instance.
+     * If not already instantiated, creates a new instance using the
+     * KeyHandlerFactory.
+     * 
+     * @return Default key handler instance
+     */
+    public static IKeyHandler getDefaultKeyHandler() {
+        if(keyHandler == null) {
             IKeyHandlerFactory factory = new KeyHandlerFactory();
             keyHandler = factory.create();
         }
         return keyHandler;
     }
     
-    public static IRandomGenerator getDefaultRandomGenerator()
-    {
-        if(randomGenerator == null)
-        {
+    /**
+     * Returns the default random number generator instance.
+     * If not already instantiated, creates a new instance using the
+     * RandomGeneratorFactory.
+     * 
+     * @return Default random number generator instance
+     */
+    public static IRandomGenerator getDefaultRandomGenerator() {
+        if(randomGenerator == null) {
             IRandomGeneratorFactory factory = new RandomGeneratorFactory();
             randomGenerator = factory.create();
         }
         return randomGenerator;
     }
     
-    public static IScoreHandler getDefaultScoreHandler()
-    {
-        if(scoreHandler == null)
-        {
+    /**
+     * Returns the default score handler instance.
+     * If not already instantiated, creates a new instance using the
+     * ScoreHandlerFactory.
+     * 
+     * @return Default score handler instance
+     */
+    public static IScoreHandler getDefaultScoreHandler() {
+        if(scoreHandler == null) {
             IScoreHandlerFactory factory = new ScoreHandlerFactory();
             scoreHandler = factory.create();
         }

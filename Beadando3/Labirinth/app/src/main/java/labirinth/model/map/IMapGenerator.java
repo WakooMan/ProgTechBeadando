@@ -1,7 +1,14 @@
 package labirinth.model.map;
 
+/**
+ * The IMapGenerator interface defines a method for generating a map.
+ */
 public interface IMapGenerator {
 
-  public Map generateMap();
-
+    /**
+     * Generates a map.
+     *
+     * @return The generated map.
+     */
+    Map generateMap();
 }

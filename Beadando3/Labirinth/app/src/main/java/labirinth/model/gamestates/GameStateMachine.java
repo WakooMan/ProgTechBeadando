@@ -1,37 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.model.gamestates;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author vitya
+ * The GameStateMachine class represents a state machine for managing game states in the labyrinth game.
  */
 public class GameStateMachine {
-    private GameStateBase currentState;
-    private final List<IGameStateListener> gameStateListeners;
+    private GameStateBase currentState; // The current state of the game
+    private final List<IGameStateListener> gameStateListeners; // List of listeners for game state changes
     
-    public GameStateMachine()
-    {
+    /**
+     * Constructs a new GameStateMachine object.
+     */
+    public GameStateMachine() {
         this.gameStateListeners = new ArrayList<>();
         this.currentState = null;
     }
     
-    public void addGameStateListener(IGameStateListener listener)
-    {
+    /**
+     * Adds a listener for game state changes.
+     * 
+     * @param listener The listener to add.
+     */
+    public void addGameStateListener(IGameStateListener listener) {
         gameStateListeners.add(listener);
     }
     
-    public void changeState(GameStateBase newState)
-    {
+    /**
+     * Changes the current state of the game to the specified new state.
+     * Notifies all registered listeners about the state change.
+     * 
+     * @param newState The new state of the game.
+     */
+    public void changeState(GameStateBase newState) {
         currentState = newState;
-        for(IGameStateListener listener : gameStateListeners)
-        {
+        for(IGameStateListener listener : gameStateListeners) {
             listener.onGameStateChanged(currentState);
         }
     }
 }
+

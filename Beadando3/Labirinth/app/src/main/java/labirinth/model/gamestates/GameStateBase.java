@@ -1,18 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.model.gamestates;
 
 /**
- *
- * @author vitya
+ * The GameStateBase class is an abstract base class for game states in the labyrinth game.
  */
 public abstract class GameStateBase {
-    protected final GameStateMachine stateMachine;
+    protected final GameStateMachine stateMachine; // The state machine managing game states
     
-    protected GameStateBase(GameStateMachine stateMachine)
-    {
+    /**
+     * Constructs a GameStateBase object with the specified state machine.
+     * 
+     * @param stateMachine The GameStateMachine managing the game states.
+     */
+    protected GameStateBase(GameStateMachine stateMachine) {
         this.stateMachine = stateMachine;
     }
 }
+

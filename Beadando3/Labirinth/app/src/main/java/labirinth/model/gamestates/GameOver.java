@@ -1,47 +1,66 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.model.gamestates;
 
 import labirinth.model.gamecontrol.Game;
 
 /**
- *
- * @author vitya
+ * The GameOver class represents the game state when the game is over. It extends the
+ * GameStateBase class.
  */
 public class GameOver extends GameStateBase {
-    
-    private final Game game; 
-    
+
+    private final Game game; // The game instance associated with the game over state
+
+    /**
+     * Constructs a GameOver object with the specified state machine and game instance.
+     * 
+     * @param stateMachine The GameStateMachine managing the game states.
+     * @param game         The Game instance associated with the game over state.
+     */
     public GameOver(GameStateMachine stateMachine, Game game) {
         super(stateMachine);
         this.game = game;
     }
-    
-    public String getGameOverMessage()
-    {
+
+    /**
+     * Retrieves the message indicating that the game is over.
+     * 
+     * @return The message indicating that the game is over.
+     */
+    public String getGameOverMessage() {
         return "Game is over!";
     }
-    
-    public String getCompletedMapsMessage()
-    {
+
+    /**
+     * Retrieves the message indicating the number of completed maps.
+     * 
+     * @return The message indicating the number of completed maps.
+     */
+    public String getCompletedMapsMessage() {
         return "Completed maps: " + this.game.getPlayerRepresentation().getMapCount();
     }
-    
-    public Game getGame()
-    {
+
+    /**
+     * Retrieves the game instance associated with the game over state.
+     * 
+     * @return The game instance associated with the game over state.
+     */
+    public Game getGame() {
         return game;
     }
-    
-    public void GoToMenu()
-    {
+
+    /**
+     * Changes the game state to the main menu state.
+     */
+    public void goToMenu() {
         this.stateMachine.changeState(new MainMenu(stateMachine));
     }
-    
-    public void GoToScores()
-    {
+
+    /**
+     * Changes the game state to the scores state.
+     */
+    public void goToScores() {
         this.stateMachine.changeState(new Scores(stateMachine));
     }
     
 }
+

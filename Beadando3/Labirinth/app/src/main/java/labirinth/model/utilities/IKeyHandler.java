@@ -1,14 +1,39 @@
 package labirinth.model.utilities;
+
 import java.awt.event.KeyListener;
 
+/**
+ * Interface for handling keyboard input.
+ * Extends KeyListener interface to provide methods for checking the status of directional keys.
+ */
 public interface IKeyHandler extends KeyListener {
 
-  public boolean isUpKeyDown();
+    /**
+     * Checks if the up arrow key is currently pressed.
+     *
+     * @return True if the up arrow key is pressed, false otherwise.
+     */
+    public boolean isUpKeyDown();
 
-  public boolean isDownKeyDown();
+    /**
+     * Checks if the down arrow key is currently pressed.
+     *
+     * @return True if the down arrow key is pressed, false otherwise.
+     */
+    public boolean isDownKeyDown();
 
-  public boolean isRightKeyDown();
+    /**
+     * Checks if the right arrow key is currently pressed.
+     *
+     * @return True if the right arrow key is pressed, false otherwise.
+     */
+    public boolean isRightKeyDown();
 
-  public boolean isLeftKeyDown();
+    /**
+     * Checks if the left arrow key is currently pressed.
+     *
+     * @return True if the left arrow key is pressed, false otherwise.
+     */
+    public boolean isLeftKeyDown();
 
 }

@@ -1,51 +1,54 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.model.map;
 
 import labirinth.model.entities.Direction;
 
 /**
- *
- * @author vitya
+ * The CellWall class represents a wall in a labyrinth cell.
  */
 public class CellWall {
     
+    // Static instances representing walls in different directions
     public static final CellWall Up = new CellWall(Direction.Up);
     public static final CellWall Down = new CellWall(Direction.Down);
     public static final CellWall Left = new CellWall(Direction.Left);
     public static final CellWall Right = new CellWall(Direction.Right);
     
-    static 
-    {
+    static {
+        // Set the opposite walls for each direction
         Up.setOpposite(Down);
         Down.setOpposite(Up);
         Right.setOpposite(Left);
         Left.setOpposite(Right);
     }
     
-    private CellWall opposite;
-    private final Direction direction;
+    private CellWall opposite; // Opposite wall
+    private final Direction direction; // Direction of the wall
     
-    private CellWall(Direction direction)
-    {
+    // Private constructor
+    private CellWall(Direction direction) {
         this.direction = direction;
     }
     
-    public CellWall getOpposite()
-    {
+    /**
+     * Gets the opposite wall.
+     * 
+     * @return The opposite wall.
+     */
+    public CellWall getOpposite() {
         return opposite;
     }
     
-    private void setOpposite(CellWall opposite)
-    {
+    // Private method to set the opposite wall
+    private void setOpposite(CellWall opposite) {
         this.opposite = opposite;
     }
     
-    public Direction getDirection()
-    {
+    /**
+     * Gets the direction of the wall.
+     * 
+     * @return The direction of the wall.
+     */
+    public Direction getDirection() {
         return direction;
     }
-    
 }

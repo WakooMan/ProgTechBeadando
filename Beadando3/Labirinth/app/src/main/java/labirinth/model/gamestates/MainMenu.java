@@ -1,30 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.model.gamestates;
 
 /**
- *
- * @author vitya
+ * The MainMenu class represents the main menu game state in the labyrinth game.
+ * It extends the GameStateBase class.
  */
 public class MainMenu extends GameStateBase {
 
+    /**
+     * Constructs a MainMenu object with the specified GameStateMachine.
+     * 
+     * @param stateMachine The GameStateMachine controlling the game states.
+     */
     public MainMenu(GameStateMachine stateMachine) {
         super(stateMachine);
     }
 
+    /**
+     * Starts the game by changing the game state to StartGame.
+     */
     public void startGame() {
         this.stateMachine.changeState(new StartGame(stateMachine));
     }
     
+    /**
+     * Switches to the scores list game state.
+     */
     public void scoresList()
     {
         this.stateMachine.changeState(new Scores(stateMachine));
     }
 
+    /**
+     * Exits the game.
+     */
     public void exitGame() {
         System.exit(0);
     }
-    
 }
+

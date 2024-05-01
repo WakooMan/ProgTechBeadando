@@ -51,11 +51,11 @@ public class GameOverMessage extends JPanel {
     {
         backToMenu.addActionListener((e) ->
         {
-            gameState.GoToMenu();
+            gameState.goToMenu();
         });
         scoresList.addActionListener((e) ->
         {
-            gameState.GoToScores();
+            gameState.goToScores();
         });
         addComponentListener(new ComponentAdapter() 
         {

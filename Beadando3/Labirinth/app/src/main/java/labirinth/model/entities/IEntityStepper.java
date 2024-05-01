@@ -1,7 +1,12 @@
 package labirinth.model.entities;
 
+/**
+ * IEntityStepper is an interface for entities that can perform a step action.
+ */
 public interface IEntityStepper {
 
-  public void step();
-
+    /**
+     * Performs a step action.
+     */
+    void step();
 }

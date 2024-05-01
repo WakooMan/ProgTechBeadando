@@ -1,12 +1,29 @@
 package labirinth.model.entities;
 
+/**
+ * Enum representing directions in a labyrinth.
+ * Provides constants for four cardinal directions: Up, Right, Down, and Left.
+ * These constants can be used to represent movement directions within the labyrinth.
+ */
 public enum Direction {
 
-  Up,
+    /**
+     * Represents movement upward.
+     */
+    Up,
 
-  Right,
+    /**
+     * Represents movement to the right.
+     */
+    Right,
 
-  Down,
+    /**
+     * Represents movement downward.
+     */
+    Down,
 
-  Left,
+    /**
+     * Represents movement to the left.
+     */
+    Left,
 }

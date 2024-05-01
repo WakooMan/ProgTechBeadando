@@ -15,6 +15,9 @@ import labirinth.model.map.IMapGeneratorFactory;
 import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.MapGeneratorFactory;
 
+/**
+ * The Game class represents the main game control logic, including managing the player, map, entities, and game listeners.
+ */
 public class Game {
 
   private final PlayerRepresentation playerRepresentation;
@@ -33,6 +36,11 @@ public class Game {
   
   private Dragon dragon;
 
+  /**
+   * Constructs a new Game instance with the specified player name.
+   * 
+   * @param playerName The name of the player.
+   */
   public Game(String playerName) {
         this.dragon = null;
         this.playerRepresentation = new PlayerRepresentation(playerName);
@@ -52,19 +60,37 @@ public class Game {
         });
   }
 
+  /**
+   * Gets the current map of the game.
+   * 
+   * @return The current map.
+   */
   public Map getMap() {
   return map;
   }
 
+  /**
+   * Gets the player representation in the game.
+   * 
+   * @return The player representation.
+   */
   public PlayerRepresentation getPlayerRepresentation() {
   return playerRepresentation;
   }
 
+  /**
+   * Adds a game listener to the game.
+   * 
+   * @param gameListener The game listener to add.
+   */
   public void addGameListener(IGameListener gameListener)
   {
       gameListeners.add(gameListener);
   }
   
+  /**
+   * Starts the game by initializing the player entity and the map.
+   */
   public void startGame()
   {
     PlayerEntity playerEntity = new PlayerEntity();
@@ -103,6 +129,9 @@ public class Game {
     steppers.add(entity);
   }
 
+  /**
+   * Performs game logic on each tick of the game loop.
+   */
   public void onTick() {
       if(wonMaze)
       {
@@ -115,6 +144,11 @@ public class Game {
       }
   }
   
+  /**
+   * Gets the dragon entity in the game.
+   * 
+   * @return The dragon entity.
+   */
   public Dragon getDragon()
   {
       return dragon;

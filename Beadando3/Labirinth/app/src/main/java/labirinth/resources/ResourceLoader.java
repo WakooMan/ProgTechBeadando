@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.resources;
 
 import java.awt.Image;
@@ -11,20 +7,30 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 /**
- *
- * @author vitya
+ * Utility class for loading resources such as images.
  */
 public class ResourceLoader {
-    public static InputStream loadResource(String resName)
-    {
+
+    /**
+     * Loads a resource as an InputStream.
+     *
+     * @param resName The name of the resource.
+     * @return An InputStream representing the loaded resource.
+     */
+    public static InputStream loadResource(String resName) {
         return ResourceLoader.class.getClassLoader().getResourceAsStream(resName);
     }
     
-    public static Image loadImage(String resName) throws IOException
-    {
+    /**
+     * Loads an image resource.
+     *
+     * @param resName The name of the image resource.
+     * @return The loaded Image object.
+     * @throws IOException if the image resource cannot be loaded.
+     */
+    public static Image loadImage(String resName) throws IOException {
         URL url = ResourceLoader.class.getClassLoader().getResource(resName);
-        if(url == null)
-        {
+        if (url == null) {
             throw new IOException("File Not Found!");
         }
         return ImageIO.read(url);

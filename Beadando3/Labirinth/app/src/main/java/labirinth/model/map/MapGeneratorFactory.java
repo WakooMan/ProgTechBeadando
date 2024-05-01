@@ -1,13 +1,23 @@
 package labirinth.model.map;
 
+/**
+ * The MapGeneratorFactory class creates instances of MapGenerator.
+ */
 public class MapGeneratorFactory implements IMapGeneratorFactory {
 
-  public MapGeneratorFactory() {
-  }
+    /**
+     * Constructs a MapGeneratorFactory object.
+     */
+    public MapGeneratorFactory() {
+    }
 
-  @Override
-  public IMapGenerator create() {
-  return new MapGenerator();
-  }
-
+    /**
+     * Creates a new instance of MapGenerator.
+     *
+     * @return A new instance of MapGenerator.
+     */
+    @Override
+    public IMapGenerator create() {
+        return new MapGenerator();
+    }
 }
