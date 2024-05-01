@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.gameover;
 
 import java.awt.Color;
@@ -24,52 +20,57 @@ import labirinth.view.game.MapDrawer;
 import labirinth.view.game.PlayerAnimation;
 
 /**
- *
- * @author vitya
+ * Panel for displaying the game over screen.
  */
 public class GameOverPanel extends CardPanel<GameOver> {
+
     private GameOverMessage gameOverMessage;
     private IDrawable playerDrawer;
     private IDrawable dragonDrawer;
     private IDrawable mapDrawer;
-    
-    public GameOverPanel()
-    {
+
+    /**
+     * Constructs a new GameOverPanel.
+     */
+    public GameOverPanel() {
         super();
         setLayout(new GridBagLayout());
         setBackground(Color.black);
-        addComponentListener(new ComponentAdapter() 
-        {
+        addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent evt) {
-            Component c = (Component)evt.getSource();
-            MapConfiguration.getInstance().setMapSize(new Position((int)(c.getWidth() * 0.99), c.getHeight()));
-            if(gameOverMessage != null)
-            {
-                gameOverMessage.setSize(new Dimension(c.getWidth()/100 * 40, c.getHeight()/100 * 20));
-            }
+                Component c = (Component) evt.getSource();
+                MapConfiguration.getInstance().setMapSize(new Position((int)(c.getWidth() * 0.99), c.getHeight()));
+                if (gameOverMessage != null) {
+                    gameOverMessage.setSize(new Dimension(c.getWidth() / 100 * 40, c.getHeight() / 100 * 20));
+                }
             }
         });
     }
-    
+
+    /**
+     * Paints the components of the panel.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D)g;
-        if(mapDrawer != null)
-        {
+        Graphics2D g2 = (Graphics2D) g;
+        if (mapDrawer != null) {
             mapDrawer.draw(0, g2);
         }
-        if(dragonDrawer != null)
-        {
+        if (dragonDrawer != null) {
             dragonDrawer.draw(0, g2);
         }
-        if(playerDrawer != null)
-        {
+        if (playerDrawer != null) {
             playerDrawer.draw(0, g2);
         }
     }
-    
+
+    /**
+     * Callback method invoked when the game over card is shown.
+     * 
+     * @param gameState The game over state providing necessary information.
+     */
     @Override
     public void onCardShow(GameOver gameState) {
         gameOverMessage = new GameOverMessage(gameState);
@@ -79,9 +80,12 @@ public class GameOverPanel extends CardPanel<GameOver> {
         repaint();
         GridBagConstraints gbc = new GridBagConstraints();
         add(gameOverMessage, gbc);
-        gameOverMessage.setSize(new Dimension(getWidth()/100 * 40, getHeight()/100 * 20));
+        gameOverMessage.setSize(new Dimension(getWidth() / 100 * 40, getHeight() / 100 * 20));
     }
-    
+
+    /**
+     * Callback method invoked when the game over card is not shown.
+     */
     @Override
     public void onCardNotShown() {
         removeAll();
@@ -91,6 +95,11 @@ public class GameOverPanel extends CardPanel<GameOver> {
         gameOverMessage = null;
     }
 
+    /**
+     * Gets the name of the view.
+     * 
+     * @return The name of the view.
+     */
     @Override
     public String getViewName() {
         return GameOver.class.getName();

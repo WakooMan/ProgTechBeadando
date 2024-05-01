@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.Color;
@@ -12,14 +8,18 @@ import labirinth.model.map.Position;
 import labirinth.model.map.Rectangle;
 
 /**
- *
- * @author vitya
+ * Draws the sight range for the player entity on the game map.
  */
 public class SightDrawer implements IDrawable {
 
     private final PlayerEntity entity;
     private final MapConfiguration config;
     
+    /**
+     * Constructs a SightDrawer object for the specified player entity.
+     *
+     * @param entity The player entity for which the sight range is drawn.
+     */
     public SightDrawer(PlayerEntity entity)
     {
         this.entity = entity;
@@ -47,7 +47,5 @@ public class SightDrawer implements IDrawable {
                 }
             }
         }
-        
     }
-    
 }

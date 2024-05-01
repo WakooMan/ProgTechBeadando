@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.event.ActionEvent;
@@ -11,8 +7,7 @@ import javax.swing.Timer;
 import labirinth.model.gamecontrol.IGameListener;
 
 /**
- *
- * @author vitya
+ * Handles the ticking mechanism for the game, triggering actions at regular intervals.
  */
 public class Ticker implements ActionListener, IGameListener {
 
@@ -20,6 +15,11 @@ public class Ticker implements ActionListener, IGameListener {
     private final int dms;
     private final Consumer<Integer> onTickAction;
     
+    /**
+     * Constructs a Ticker object with the specified action to be performed on each tick.
+     *
+     * @param onTickAction The action to be performed on each tick, accepting the time passed since the last tick.
+     */
     public Ticker(Consumer<Integer> onTickAction)
     {
         dms = 1000/60;
@@ -27,12 +27,13 @@ public class Ticker implements ActionListener, IGameListener {
         this.onTickAction = onTickAction;
     }
     
-    
+    /**
+     * Starts the ticker.
+     */
     public void start()
     {
         timer.start();
     }
-    
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -47,5 +48,4 @@ public class Ticker implements ActionListener, IGameListener {
     @Override
     public void onGameStarted() {
     }
-    
 }

@@ -15,12 +15,20 @@ import labirinth.view.mainmenu.MainMenuPanel;
 import labirinth.view.scorelist.ScoresPanel;
 import labirinth.view.startgamemenu.StartGameMenuPanel;
 
+/**
+ * Main window of the game application.
+ * Manages different card panels for displaying various game states using a CardLayout.
+ */
 public class MainWindow extends JFrame{
     private final CardLayout cl;
     private final HashMap<String, CardPanel> cardPanels;
     private final GameStateMachine stateMachine;
     private CardPanel currentPanel;
     
+    /**
+     * Constructs the main window of the game application.
+     * Initializes the GUI components and sets up the game state machine.
+     */
     public MainWindow()
     {
         super();
@@ -50,12 +58,22 @@ public class MainWindow extends JFrame{
         setVisible(true);
     }
     
+    /**
+     * Adds a card panel to the main window.
+     * 
+     * @param panel The card panel to add.
+     */
     private void addCardPanel(CardPanel panel)
     {
         cardPanels.put(panel.getViewName(), panel);
         add(panel, panel.getViewName());
     }
     
+    /**
+     * Changes the currently displayed card panel based on the game state.
+     * 
+     * @param gameState The current game state.
+     */
     private void changeCardAction(GameStateBase gameState)
     {
         if(currentPanel != null)

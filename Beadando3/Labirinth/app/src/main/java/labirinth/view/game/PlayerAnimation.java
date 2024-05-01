@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.util.HashMap;
@@ -9,11 +5,15 @@ import labirinth.model.entities.Direction;
 import labirinth.model.entities.PlayerEntity;
 
 /**
- *
- * @author vitya
+ * Manages the animation for the player entity based on its direction.
  */
 public class PlayerAnimation extends EntityAnimation {
 
+    /**
+     * Constructs a PlayerAnimation object for the specified player entity.
+     *
+     * @param entity The player entity for which animation is managed.
+     */
     public PlayerAnimation(PlayerEntity entity) {
         super(entity, new HashMap<>()
         {{

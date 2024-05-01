@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.scorelist;
 
 import java.awt.Color;
@@ -19,8 +15,9 @@ import labirinth.model.utilities.ScoreDto;
 import labirinth.view.CardPanel;
 
 /**
- *
- * @author vitya
+ * Panel for displaying the scores.
+ * This panel shows the top scores and provides a button to return to the main menu.
+ * It handles retrieving scores from the database and displaying them in a list.
  */
 public class ScoresPanel extends CardPanel<Scores> {
 
@@ -28,8 +25,11 @@ public class ScoresPanel extends CardPanel<Scores> {
     private final ScoreList scoreList;
     private ActionListener menuAction;
     
-    public ScoresPanel()
-    {
+    /**
+     * Constructs a new ScoresPanel.
+     * Initializes the components and sets up the layout.
+     */
+    public ScoresPanel() {
         super();
         setBackground(Color.BLACK);
         menuButton = new JButton("Menu");
@@ -53,29 +53,36 @@ public class ScoresPanel extends CardPanel<Scores> {
         modifyButton(menuButton, gbc);
     }
     
+    /**
+     * Callback method invoked when the scores card is shown.
+     * Retrieves scores from the database and updates the score list.
+     * Handles exceptions if scores cannot be retrieved.
+     * 
+     * @param gameState The Scores state providing necessary information.
+     */
     @Override
     public void onCardShow(Scores gameState) {
-        menuAction = (e) ->
-        {
+        menuAction = (e) -> {
             gameState.BackToMenu();
         };
         menuButton.addActionListener(menuAction);
-        try{
-        for(ScoreDto score : gameState.getScores())
-        {
-            scoreList.addScore(score);
-        }
-        }
-        catch(SQLException ex)
-        {
+        try {
+            for (ScoreDto score : gameState.getScores()) {
+                scoreList.addScore(score);
+            }
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            JOptionPane optionPane = new JOptionPane("Could not get scores from the database!",JOptionPane.WARNING_MESSAGE);
+            JOptionPane optionPane = new JOptionPane("Could not get scores from the database!", JOptionPane.WARNING_MESSAGE);
             JDialog dialog = optionPane.createDialog("Warning!");
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);
         }
     }
 
+    /**
+     * Callback method invoked when the scores card is not shown.
+     * Removes action listeners and clears the score list.
+     */
     @Override
     public void onCardNotShown() {
         menuButton.removeActionListener(menuAction);
@@ -83,13 +90,23 @@ public class ScoresPanel extends CardPanel<Scores> {
         scoreList.clear();
     }
 
+    /**
+     * Gets the name of the view.
+     * 
+     * @return The name of the view.
+     */
     @Override
     public String getViewName() {
         return Scores.class.getName();
     }
     
-    private void modifyButton(JButton button, GridBagConstraints c)
-    {
+    /**
+     * Modifies the appearance of a button.
+     * 
+     * @param button The button to modify.
+     * @param c The constraints to apply.
+     */
+    private void modifyButton(JButton button, GridBagConstraints c) {
         // Set button size
         button.setBackground(Color.gray); // Set button background color
         button.setFont(new Font("Arial", Font.PLAIN, 20)); // Set button font

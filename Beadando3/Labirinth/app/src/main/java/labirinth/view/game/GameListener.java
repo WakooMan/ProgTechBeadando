@@ -1,19 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import labirinth.model.gamecontrol.IGameListener;
 import labirinth.model.gamestates.PlayingGame;
 
 /**
- *
- * @author vitya
+ * Listener for game events.
  */
 public class GameListener implements IGameListener {
     private final PlayingGame gameState;
     
+    /**
+     * Constructs a GameListener object for the specified game state.
+     *
+     * @param gameState The playing game state associated with this listener.
+     */
     public GameListener(PlayingGame gameState)
     {
         this.gameState = gameState;

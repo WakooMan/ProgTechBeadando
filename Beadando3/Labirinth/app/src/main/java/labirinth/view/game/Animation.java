@@ -1,15 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.Graphics2D;
 import java.util.List;
 
 /**
- *
- * @author vitya
+ * Represents an animation composed of a sequence of frames.
  */
 public class Animation {
     private final List<IAnimationFrame> frames;
@@ -17,6 +12,12 @@ public class Animation {
     private int deltams;
     private IAnimationFrame currentFrame;
     
+    /**
+     * Constructs an Animation object.
+     *
+     * @param frames The list of frames that make up the animation.
+     * @param ms The duration of each frame in milliseconds.
+     */
     public Animation(List<IAnimationFrame> frames, int ms)
     {
         this.frames = frames;
@@ -25,6 +26,12 @@ public class Animation {
         currentFrame = frames.get(0);
     }
     
+    /**
+     * Executes the animation on each tick.
+     *
+     * @param dms The time elapsed since the last tick in milliseconds.
+     * @param graphics The graphics context to render the animation.
+     */
     public void onTick(int dms, Graphics2D graphics)
     {
         currentFrame.DoFrame(graphics);
@@ -36,6 +43,9 @@ public class Animation {
         }
     }
     
+    /**
+     * Resets the animation to its initial state.
+     */
     public void clear()
     {
         deltams = 0;

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.Graphics;
@@ -11,8 +7,7 @@ import labirinth.model.gamecontrol.Game;
 import labirinth.model.gamecontrol.IGameListener;
 
 /**
- *
- * @author vitya
+ * Renders the game map and entities on the screen.
  */
 public class MapRenderer extends JComponent implements IGameListener {
     private int x;        
@@ -24,6 +19,11 @@ public class MapRenderer extends JComponent implements IGameListener {
     private final IDrawable timeDrawer;
     private int dms;
     
+    /**
+     * Constructs a MapRenderer object with the specified game.
+     *
+     * @param game The game instance.
+     */
     public MapRenderer(Game game) {
         this.game = game;
         timeDrawer = new TimeDrawer();
@@ -57,6 +57,11 @@ public class MapRenderer extends JComponent implements IGameListener {
         this.x++;    
     }
 
+    /**
+     * Invoked on each game tick to update the rendering.
+     *
+     * @param dms The time passed since the last tick.
+     */
     public void onTick(int dms) {
         this.dms = dms;
         update();

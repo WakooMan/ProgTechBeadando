@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.mainmenu;
 
 import java.awt.Color;
@@ -15,8 +11,8 @@ import labirinth.model.gamestates.MainMenu;
 import labirinth.view.CardPanel;
 
 /**
- *
- * @author vitya
+ * Panel for displaying the main menu.
+ * This panel provides buttons for starting the game, accessing the scores, and exiting the game.
  */
 public class MainMenuPanel extends CardPanel<MainMenu> {
 
@@ -27,8 +23,11 @@ public class MainMenuPanel extends CardPanel<MainMenu> {
     private ActionListener scoreListAction;
     private ActionListener exitGameAction;
     
-    public MainMenuPanel()
-    {
+    /**
+     * Constructs a new MainMenuPanel.
+     * Initializes the components and sets up the layout.
+     */
+    public MainMenuPanel() {
         super();
         setBackground(Color.BLACK);
         startGame = new JButton("START GAME");
@@ -46,18 +45,21 @@ public class MainMenuPanel extends CardPanel<MainMenu> {
         modifyButton(exitGame, c);
     }
     
+    /**
+     * Callback method invoked when the main menu card is shown.
+     * Assigns actions to the buttons for starting the game, accessing the scores, and exiting the game.
+     * 
+     * @param gameState The MainMenu state providing necessary information.
+     */
     @Override
     public void onCardShow(MainMenu gameState) {
-        startGameAction = (e)-> 
-        {
+        startGameAction = (e)-> {
            gameState.startGame();
         };
-        scoreListAction =(e) -> 
-        {
+        scoreListAction =(e) -> {
             gameState.scoresList();
         };
-        exitGameAction = (e) -> 
-        {
+        exitGameAction = (e) -> {
             gameState.exitGame();
         };
         
@@ -66,6 +68,10 @@ public class MainMenuPanel extends CardPanel<MainMenu> {
         exitGame.addActionListener(exitGameAction);
     }
 
+    /**
+     * Callback method invoked when the main menu card is not shown.
+     * Removes action listeners from the buttons.
+     */
     @Override
     public void onCardNotShown() {
         startGame.removeActionListener(startGameAction);
@@ -73,13 +79,23 @@ public class MainMenuPanel extends CardPanel<MainMenu> {
         exitGame.removeActionListener(exitGameAction);
     }
 
+    /**
+     * Gets the name of the view.
+     * 
+     * @return The name of the view.
+     */
     @Override
     public String getViewName() {
         return MainMenu.class.getName();
     }
     
-    private void modifyButton(JButton button, GridBagConstraints c)
-    {
+    /**
+     * Modifies the appearance of a button.
+     * 
+     * @param button The button to modify.
+     * @param c The constraints to apply.
+     */
+    private void modifyButton(JButton button, GridBagConstraints c) {
         button.setPreferredSize(new Dimension(800, 200)); // Set button size
         button.setBackground(Color.gray); // Set button background color
         button.setFont(new Font("Arial", Font.PLAIN, 50)); // Set button font

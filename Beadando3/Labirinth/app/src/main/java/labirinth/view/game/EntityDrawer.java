@@ -1,20 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.Graphics2D;
 
 /**
- *
- * @author vitya
+ * Represents a drawable entity that can be drawn on a graphics context.
  */
 public class EntityDrawer implements IDrawable {
 
     private final EntityAnimation animation;
     
     
+    /**
+     * Constructs an EntityDrawer object with the specified animation.
+     *
+     * @param animation The animation associated with this entity drawer.
+     */
     public EntityDrawer(EntityAnimation animation)
     {
         this.animation = animation;

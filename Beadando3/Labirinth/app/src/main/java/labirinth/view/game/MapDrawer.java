@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.BasicStroke;
@@ -11,9 +7,7 @@ import java.awt.Image;
 import java.io.IOException;
 import java.util.function.Supplier;
 import labirinth.model.entities.Direction;
-import labirinth.model.entities.PlayerEntity;
 import labirinth.model.map.Block;
-import labirinth.model.map.CellPosition;
 import labirinth.model.map.Map;
 import labirinth.model.map.MapConfiguration;
 import labirinth.model.map.Position;
@@ -21,8 +15,7 @@ import labirinth.model.map.Rectangle;
 import labirinth.resources.ResourceLoader;
 
 /**
- *
- * @author vitya
+ * Responsible for drawing the map on the screen.
  */
 public class MapDrawer implements IDrawable {
 
@@ -30,12 +23,17 @@ public class MapDrawer implements IDrawable {
     private Image horizontalWall;
     private Image verticalWall;
     
+    /**
+     * Constructs a MapDrawer object with the specified function to get the map.
+     *
+     * @param getMapFunction The function to get the map.
+     */
     public MapDrawer(Supplier<Map> getMapFunction)
     {
         this.getMapFunction = getMapFunction;
         try{
-        horizontalWall = ResourceLoader.loadImage("walls/HorizontalWall.png");
-        verticalWall = ResourceLoader.loadImage("walls/VerticalWall.png");
+            horizontalWall = ResourceLoader.loadImage("walls/HorizontalWall.png");
+            verticalWall = ResourceLoader.loadImage("walls/VerticalWall.png");
         }
         catch(IOException ex)
         {

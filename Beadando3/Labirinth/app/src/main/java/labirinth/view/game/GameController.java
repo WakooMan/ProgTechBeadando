@@ -1,15 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import labirinth.model.gamecontrol.Game;
 import labirinth.model.gamestates.PlayingGame;
 
 /**
- *
- * @author vitya
+ * Controller for managing the game logic and rendering.
  */
 public class GameController{
     
@@ -18,6 +13,11 @@ public class GameController{
     private final Ticker ticker;
     private final Game game;
     
+    /**
+     * Constructs a GameController object for the specified game state.
+     *
+     * @param gameState The playing game state associated with this controller.
+     */
     public GameController(PlayingGame gameState)
     {
         game = gameState.getGame();
@@ -33,12 +33,20 @@ public class GameController{
         game.addGameListener(gameListener);
     }
     
+    /**
+     * Starts the game and the ticker.
+     */
     public void startGame()
     {
         game.startGame();
         ticker.start();
     }
     
+    /**
+     * Gets the map renderer associated with this controller.
+     *
+     * @return The map renderer.
+     */
     public MapRenderer getMapRenderer()
     {
         return mapRenderer;

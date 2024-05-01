@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.Color;
@@ -15,13 +11,15 @@ import labirinth.model.map.Position;
 import labirinth.view.CardPanel;
 
 /**
- *
- * @author vitya
+ * Panel for displaying the game screen.
  */
 public class GamePanel extends CardPanel<PlayingGame> {
     
     private GameController controller;
     
+    /**
+     * Constructs a GamePanel object.
+     */
     public GamePanel()
     {
         super();

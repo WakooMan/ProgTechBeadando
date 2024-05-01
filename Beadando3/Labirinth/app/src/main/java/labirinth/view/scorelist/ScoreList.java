@@ -1,26 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.scorelist;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import labirinth.model.utilities.ScoreDto;
 
 /**
- *
- * @author Viktor
+ * Panel for displaying a list of scores.
  */
 public class ScoreList extends JPanel {
  
@@ -30,16 +19,19 @@ public class ScoreList extends JPanel {
     private final JButton[] scoreLabels;
     
     
-    public ScoreList(int height)
-    {
+    /**
+     * Constructs a new ScoreList panel with a specified height.
+     * 
+     * @param height The height of the score list.
+     */
+    public ScoreList(int height) {
         super(new GridLayout(height, 2));
         this.setBackground(Color.gray);
         this.height = height;
         nameLabels = new JButton[height];
         scoreLabels = new JButton[height];
         currentHeight = 0;
-        for(int i=0;i< height; i++)
-        {
+        for (int i = 0; i < height; i++) {
             Font font = new Font("Arial", Font.PLAIN, 30);
             JButton playerLabel = new JButton("");
             playerLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 5));
@@ -56,18 +48,23 @@ public class ScoreList extends JPanel {
         }
     }
     
-    public void addScore(ScoreDto score)
-    {
-        if(currentHeight < height)
-        {
+    /**
+     * Adds a score to the score list.
+     * 
+     * @param score The score to be added.
+     */
+    public void addScore(ScoreDto score) {
+        if (currentHeight < height) {
             nameLabels[currentHeight].setText(score.getPlayerName());
             scoreLabels[currentHeight].setText(Integer.toString(score.getScore()));
             currentHeight++;
         }
     }
     
-    public void clear()
-    {
+    /**
+     * Clears the score list.
+     */
+    public void clear() {
         removeAll();
         currentHeight = 0;
     }

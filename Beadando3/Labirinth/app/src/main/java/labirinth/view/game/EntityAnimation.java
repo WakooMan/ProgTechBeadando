@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.Graphics2D;
@@ -10,8 +6,7 @@ import labirinth.model.entities.Direction;
 import labirinth.model.entities.Entity;
 
 /**
- *
- * @author vitya
+ * Abstract class representing the animation for an entity.
  */
 public abstract class EntityAnimation {
     private final HashMap<Direction, Animation> idleAnimations;
@@ -19,15 +14,27 @@ public abstract class EntityAnimation {
     private final Entity entity;
     private Animation currentAnimation;
     
+    /**
+     * Constructs an EntityAnimation object for the specified entity.
+     *
+     * @param entity The entity associated with this animation.
+     * @param idleAnimations The animations for the entity when it is idle.
+     * @param moveAnimations The animations for the entity when it is moving.
+     */
     protected EntityAnimation(Entity entity, HashMap<Direction, Animation> idleAnimations, HashMap<Direction, Animation> moveAnimations)
     {
-        //TODO: make abstract class and derived playerAnimation class
         this.entity = entity;
         this.idleAnimations = idleAnimations;
         this.moveAnimations = moveAnimations;
         currentAnimation = (entity.isMoving())? moveAnimations.get(entity.getDirection()) : idleAnimations.get(entity.getDirection());
     }
     
+    /**
+     * Updates the animation on each tick.
+     *
+     * @param dms The time elapsed since the last tick in milliseconds.
+     * @param graphics The graphics context to render the animation.
+     */
     public void onTick(int dms, Graphics2D graphics)
     {
         HashMap<Direction, Animation> animations;

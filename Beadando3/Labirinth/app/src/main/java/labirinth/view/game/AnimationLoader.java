@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package labirinth.view.game;
 
 import java.awt.Image;
@@ -12,10 +8,18 @@ import labirinth.model.entities.Entity;
 import labirinth.resources.ResourceLoader;
 
 /**
- *
- * @author vitya
+ * Utility class for loading animations.
  */
 public class AnimationLoader {
+    
+    /**
+     * Loads an animation for the specified entity.
+     *
+     * @param entity The entity associated with the animation.
+     * @param animation The base name of the animation resource files.
+     * @param ms The duration of each frame in milliseconds.
+     * @return The loaded Animation object.
+     */
     public static Animation loadAnimation(Entity entity, String animation, int ms)
     {
         List<IAnimationFrame> frames = new ArrayList<>();
