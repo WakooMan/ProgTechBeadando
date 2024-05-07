@@ -9,8 +9,7 @@ import labirinth.model.gamecontrol.IGameListener;
 /**
  * Renders the game map and entities on the screen.
  */
-public class MapRenderer extends JComponent implements IGameListener {
-    private int x;        
+public class MapRenderer extends JComponent implements IGameListener {       
     private final Game game;
     private IDrawable playerDrawer;
     private IDrawable dragonDrawer;
@@ -27,7 +26,6 @@ public class MapRenderer extends JComponent implements IGameListener {
     public MapRenderer(Game game) {
         this.game = game;
         timeDrawer = new TimeDrawer();
-        x = 0;
     }
 
     @Override
@@ -53,10 +51,6 @@ public class MapRenderer extends JComponent implements IGameListener {
         sightDrawer = new SightDrawer(game.getPlayerRepresentation().getPlayerEntity());
     }
 
-    private void update() {
-        this.x++;    
-    }
-
     /**
      * Invoked on each game tick to update the rendering.
      *
@@ -64,7 +58,6 @@ public class MapRenderer extends JComponent implements IGameListener {
      */
     public void onTick(int dms) {
         this.dms = dms;
-        update();
         repaint();   
     }
 }

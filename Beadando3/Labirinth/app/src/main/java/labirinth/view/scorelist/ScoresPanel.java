@@ -63,7 +63,7 @@ public class ScoresPanel extends CardPanel<Scores> {
     @Override
     public void onCardShow(Scores gameState) {
         menuAction = (e) -> {
-            gameState.BackToMenu();
+            gameState.backToMenu();
         };
         menuButton.addActionListener(menuAction);
         try {

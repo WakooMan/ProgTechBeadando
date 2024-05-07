@@ -26,7 +26,7 @@ public class AnimationFrame implements IAnimationFrame {
     }
     
     @Override
-    public void DoFrame(Graphics2D graphics) {
+    public void doFrame(Graphics2D graphics) {
         Rectangle rect = entity.getPosition();
         graphics.drawImage(image, rect.getUpperLeftPoint().getX(), rect.getUpperLeftPoint().getY(), rect.getWidth(), rect.getHeight(), (img, infoflags, nx, ny, w, h) -> false);
     }

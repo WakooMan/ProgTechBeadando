@@ -12,5 +12,5 @@ public interface IAnimationFrame {
      *
      * @param graphics The graphics context to render the frame.
      */
-    void DoFrame(Graphics2D graphics);
+    void doFrame(Graphics2D graphics);
 }

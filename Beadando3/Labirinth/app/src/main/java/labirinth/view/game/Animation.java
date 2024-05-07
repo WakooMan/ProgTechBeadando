@@ -34,7 +34,7 @@ public class Animation {
      */
     public void onTick(int dms, Graphics2D graphics)
     {
-        currentFrame.DoFrame(graphics);
+        currentFrame.doFrame(graphics);
         deltams += dms;
         if(deltams > ms)
         {

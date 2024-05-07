@@ -27,7 +27,7 @@ public class Scores extends GameStateBase {
     /**
      * Switches the game state back to the main menu.
      */
-    public void BackToMenu() {
+    public void backToMenu() {
         this.stateMachine.changeState(new MainMenu(stateMachine));
     }
     
