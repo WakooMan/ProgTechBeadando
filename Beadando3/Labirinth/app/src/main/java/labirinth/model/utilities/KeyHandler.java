@@ -49,9 +49,13 @@ public class KeyHandler implements IKeyHandler {
         // Set the corresponding key flag to true when pressed
         switch(e.getKeyCode()) {
             case KeyEvent.VK_UP -> m_IsUpKeyDown = true;
+            case KeyEvent.VK_W -> m_IsUpKeyDown = true;
             case KeyEvent.VK_DOWN -> m_IsDownKeyDown = true;
+            case KeyEvent.VK_S -> m_IsDownKeyDown = true;
             case KeyEvent.VK_LEFT -> m_IsLeftKeyDown = true;
+            case KeyEvent.VK_A -> m_IsLeftKeyDown = true;
             case KeyEvent.VK_RIGHT -> m_IsRightKeyDown = true;
+            case KeyEvent.VK_D -> m_IsRightKeyDown = true;
         }
     }
 
@@ -60,9 +64,13 @@ public class KeyHandler implements IKeyHandler {
         // Set the corresponding key flag to false when released
         switch(e.getKeyCode()) {
             case KeyEvent.VK_UP -> m_IsUpKeyDown = false;
+            case KeyEvent.VK_W -> m_IsUpKeyDown = false;
             case KeyEvent.VK_DOWN -> m_IsDownKeyDown = false;
+            case KeyEvent.VK_S -> m_IsDownKeyDown = false;
             case KeyEvent.VK_LEFT -> m_IsLeftKeyDown = false;
+            case KeyEvent.VK_A -> m_IsLeftKeyDown = false;
             case KeyEvent.VK_RIGHT -> m_IsRightKeyDown = false;
+            case KeyEvent.VK_D -> m_IsRightKeyDown = false;
         }
     }
 }
