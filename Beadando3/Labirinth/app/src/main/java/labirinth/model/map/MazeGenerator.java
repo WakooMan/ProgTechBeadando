@@ -106,7 +106,7 @@ public class MazeGenerator {
         int dirCount = 0;
         for (Direction dir : dirs) {
             // Get the position of the neighboring cell in each direction
-			CellPosition nPos = pos.getCellPosition(dir);
+            CellPosition nPos = pos.getCellPosition(dir);
             // Check if the neighboring cell position is valid and not visited
             if(nPos == null || cell.getWall(dir) != null || visited[nPos.getI()][nPos.getJ()])
             {
@@ -115,7 +115,7 @@ public class MazeGenerator {
 			dirCount++;
             // Recursively count roads starting from the neighboring cell
             countRoadsBetween(count, visited, nPos, destination, positions);
-		}
+	}
         // If there are no valid neighboring cells, add the current position to the list of positions
         if(dirCount == 0)
         {
