@@ -65,7 +65,10 @@ public class ScoreList extends JPanel {
      * Clears the score list.
      */
     public void clear() {
-        removeAll();
+         for (int i = 0; i < height; i++) {
+            nameLabels[i].setText("");
+            scoreLabels[i].setText("");
+        }
         currentHeight = 0;
     }
     

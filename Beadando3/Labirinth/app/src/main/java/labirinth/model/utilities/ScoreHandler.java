@@ -59,13 +59,11 @@ public class ScoreHandler implements IScoreHandler {
     public void addScore(String playerName, int score) throws SQLException {
         Connection connection = getConnection();
         if (shouldInsertPlayer(connection, playerName, score)) {
-            System.out.println("valami");
             String insertion = "INSERT INTO scores VALUES(NULL,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(insertion)) {
-                statement.setString(1, playerName);
+                statement.setString(1, playerName.toLowerCase());
                 statement.setInt(2, score);
                 statement.addBatch();
-                System.out.println("valami2");
                 statement.executeBatch();
             }
         }
